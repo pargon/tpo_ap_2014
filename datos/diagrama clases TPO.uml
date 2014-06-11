@@ -5988,7 +5988,7 @@
 <XPD:REF name="Owner">iHgOUd2AskSnNoLVAaGytQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Attributes[4]" type="UMLAttribute" guid="hatmUMhRxUamI8WLLbfPIAAA">
-<XPD:ATTR name="Name" type="string">ptjeDescuento</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">cond_venta</XPD:ATTR>
 <XPD:ATTR name="Visibility" type="UMLVisibilityKind">vkPrivate</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">float</XPD:ATTR>
 <XPD:REF name="Owner">iHgOUd2AskSnNoLVAaGytQAA</XPD:REF>
