@@ -3,8 +3,14 @@ package model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import util.PersistentObject;
 
+@Entity
+@Table(name="movimientostock")
 public class MovimientoStock extends PersistentObject {
 
 	/**
@@ -13,9 +19,13 @@ public class MovimientoStock extends PersistentObject {
 	private static final long serialVersionUID = 1L;
 	
 	private Date fecha;
+	
+	@OneToOne
 	private Rodamiento rodamiento;
+	private String origen;
+	private String destino;
 	private int cantidad;
-	private String tipoMov;
+	
 	public Date getFecha() {
 		return fecha;
 	}
@@ -34,12 +44,29 @@ public class MovimientoStock extends PersistentObject {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+	
+	public String getOrigen() {
+		return origen;
+	}
+	public void setOrigen(String origen) {
+		this.origen = origen;
+	}
+	public String getDestino() {
+		return destino;
+	}
+	public void setDestino(String destino) {
+		this.destino = destino;
+	}
 	public String getTipoMov() {
-		return tipoMov;
+		if (cantidad == 0)
+			return "Elimina";
+		else
+			if (cantidad > 0)
+				return "Ingresa";
+			else
+				return "Egresa";
 	}
-	public void setTipoMov(String tipoMov) {
-		this.tipoMov = tipoMov;
-	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

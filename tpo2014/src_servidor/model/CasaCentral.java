@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -21,7 +23,8 @@ public class CasaCentral extends PersistentObject{
 	private float ganancia;
 	private float cond_venta;
 
-	public void AltaRodamiento(){
+	// precondicion: el archivo xml debe tener los cambios, así como los valores en negativo para descontar o dar de baja
+	public void AdministraRodamiento(){
 		
 		// obtiene xml y llena objeto para alta
 		MovimientoStock mov = LlenarObjetoDesdeXML();
@@ -35,7 +38,7 @@ public class CasaCentral extends PersistentObject{
 
 	private MovimientoStock LlenarObjetoDesdeXML() {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Hacer lectura xml LlenarObjetoDesdeXML");
 		/*
 		 * 
 		 * 
@@ -48,6 +51,26 @@ public class CasaCentral extends PersistentObject{
 		 * 
 		 * 
 		 */
-		return null;
+		// lee archivo xml
+				
+		// por cada item del arhivo, es un rodamiento con cantidad
+		// cantidad a sumar o descontar, si 0 se elimina
+		int cant = 0;
+		// fecha de hoy
+		java.util.Date fecha = new Date();
+		Rodamiento rod = new Rodamiento();
+		String ori = "Proveedor";
+		String des = "CPR";
+		
+		//
+		//	
+		MovimientoStock mov = new MovimientoStock();
+		mov.setCantidad(cant);
+		mov.setFecha(fecha);
+		mov.setRodamiento(rod);
+		mov.setOrigen(ori);
+		mov.setDestino(des);
+		
+		return mov;
 	}
 }

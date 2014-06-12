@@ -23,6 +23,7 @@ public class Test {
 	
 	
 	public static void main(String[] args) {
+		
 		Cliente c = new Cliente();
 		c.setCuit("2132131");
 		c.setRazonSocial("Razon SRL");
