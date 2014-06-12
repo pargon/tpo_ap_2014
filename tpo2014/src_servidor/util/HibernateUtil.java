@@ -32,6 +32,7 @@ public class HibernateUtil
 			config.addAnnotatedClass(ItemCotizacion.class);
 			config.addAnnotatedClass(Factura.class);
 			config.addAnnotatedClass(Remito.class);
+			config.addAnnotatedClass(CasaCentral.class);
 			
 			sessionFactory = config.buildSessionFactory();
 		}
