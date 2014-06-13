@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -20,8 +21,9 @@ public class Remito extends PersistentObject{
 	
 	
 	private Date fecha;
-	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	//@OneToOne(cascade=CascadeType.ALL)
+	//@PrimaryKeyJoinColumn
+	@ManyToOne
 	private Cliente cliente;
 	@OneToOne(cascade=CascadeType.ALL)
 	@PrimaryKeyJoinColumn
