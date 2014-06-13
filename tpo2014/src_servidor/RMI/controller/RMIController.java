@@ -2,11 +2,15 @@ package RMI.controller;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Date;
+import java.util.List;
 
 import beans.BeansCliente;
+import beans.BeansFactura;
 import Interfaz.InterfazRMI;
 import model.Cliente;
 import model.ClienteSRV;
+import model.FacturaSRV;
 
 public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 
@@ -42,6 +46,14 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		eliminaCliente = ClienteSRV.getinstancia().buscarClientes("Jorge y Cia 222", "20-30734253-222").get(0);
 		ClienteSRV.getinstancia().borrarCliente(eliminaCliente);
 		return true;
+	}
+
+	@Override
+	public List<BeansFactura> ventaRodamiento(Date fecha, String fhventa) throws RemoteException {
+		System.out.println("Ejecuta Venta de Rodamientos");
+		List<BeansFactura> facturas = FacturaSRV.getinstancia().Facturar(fecha, fhventa);
+		
+		return facturas;
 	}
 
 }
