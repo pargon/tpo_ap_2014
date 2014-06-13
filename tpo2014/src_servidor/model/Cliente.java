@@ -19,8 +19,7 @@ public class Cliente extends PersistentObject{
 	private Float porcentajeDesc;
 	private String telefono;
 	
-	
-	
+		
 	public Cliente() {
 	}
 	public String getCuit() {
