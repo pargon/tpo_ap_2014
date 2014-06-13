@@ -30,7 +30,7 @@ public class CotizacionRodamientoSRV {
 		for (BeansItemCotizacionRodamiento beanItemCotizacionRodamiento : beanItemCotizacionRodamientos) {
 			ItemCotizacion itemCotizacion = new ItemCotizacion();
 			itemCotizacion.setCantidad(beanItemCotizacionRodamiento.getCantidad());
-			Rodamiento r = RodamientoSRV.getInstancia().fromBean(beanItemCotizacionRodamiento.getBeanitemsRodamiento().getBeanRodamiento());
+			Rodamiento r = RodamientoSRV.getinstancia().fromBean(beanItemCotizacionRodamiento.getBeanitemsRodamiento().getBeanRodamiento());
 			ItemRodamiento it = new ItemRodamiento();
 			it.setPrecio(beanItemCotizacionRodamiento.getBeanitemsRodamiento().getPrecio());
 			it.setRodamiento(r);

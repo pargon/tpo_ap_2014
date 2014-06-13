@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 
 import beans.BeansFactura;
+import beans.BeansRemito;
 
 public class RemitosSRV {
 
@@ -17,9 +18,9 @@ public class RemitosSRV {
 	
 	public Remito fromBean(BeansRemito beanRemito) {
 		Remito remito = new Remito();
-		remito.setCliente(beanRemito.cliente);		
-		remito.setCotizacion(beanRemito.cotizacion);
-		remito.setFecha(beanRemito.fecha);			
+		remito.setCliente(ClienteSRV.getinstancia().fromBean(beanRemito.getCliente()));		
+		remito.setCotizacion(CotizacionRodamientoSRV.getinstancia().fromBean(beanRemito.getCotizacion()));
+		remito.setFecha(beanRemito.getFecha());			
 		return remito;
 	}
 

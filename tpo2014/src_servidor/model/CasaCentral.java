@@ -32,7 +32,7 @@ public class CasaCentral extends PersistentObject{
 		Rodamiento rod = mov.getRodamiento();
 		
 		// persiste en DB
-		RodamientoSRV.getInstancia().persistir(rod);
+		RodamientoSRV.getinstancia().persistir(rod);
 		MovimientoStockSRV.getInstancia().persistir(mov);
 	}
 
@@ -68,8 +68,8 @@ public class CasaCentral extends PersistentObject{
 		mov.setCantidad(cant);
 		mov.setFecha(fecha);
 		mov.setRodamiento(rod);
-		mov.setOrigen(ori);
-		mov.setDestino(des);
+//		mov.setOrigen(ori);
+//		mov.setDestino(des);
 		
 		return mov;
 	}

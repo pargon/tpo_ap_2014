@@ -22,8 +22,6 @@ public class FacturaSRV {
 		factura.setFecha(beanFactura.getFecha());
 		factura.setNroFactura(beanFactura.getNroFactura());
 		factura.setTotal(beanFactura.getTotal());
-		List<Remito> remitos = RemitosSRV.getinstancia().fromBean(beanFactura.getFecha());		
-		factura.setRemitos(remitos);
 		return factura;
 	}
 
@@ -31,9 +29,8 @@ public class FacturaSRV {
 		return HibernateFacturaDAO.getInstancia().guardarFactura(factura);
 	}
 	
-	public List<BeansFactura> Facturar(Date fecha, String fhventa) {
-		return HibernateFacturaDAO.getInstancia().Facturar(fecha, fhventa);
+	public List<BeansFactura> Facturar(Date fecha, int idCliente) {
+		return HibernateFacturaDAO.getInstancia().Facturar(fecha, idCliente);
 	}
-	
-	
+		
 }

@@ -62,8 +62,4 @@ public class RodamientoSRV {
 	public void actualizarRodamiento (Rodamiento rNuevo){
 		HibernateRodamientoDAO.getInstancia().actualizarRodamiento(rNuevo);
 	}
-	
-
-	
-
 }

@@ -1,14 +1,20 @@
 package hbt.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import util.HibernateUtil;
+import model.CotizacionRodamiento;
 import model.Factura;
+import model.ItemCotizacion;
+import model.Remito;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.mapping.Array;
 
 import beans.BeansFactura;
 
@@ -39,11 +45,32 @@ public class HibernateFacturaDAO {
 		}
 	}
 	
-	public List<BeansFactura> Facturar(Date fecha, String fhventa)
+	public List<BeansFactura> Facturar(Date fecha, int idCliente)
 	{
 		try{
-			List<BeansFactura> facturas = null;
-			return facturas;
+			//Obtengo los remitos que no estan facturados para un cliente			
+			Session session = sf.openSession();
+			Query query = session.createQuery("from remitos as rem where rem.id not in (select fm.idremito from fac_rem as fm) AND rem.cliente.id = :cliente_id");
+			query.setParameter("cliente_id", idCliente);
+			List<Remito> remitos = query.list();
+			
+			float total;
+			//Por cada remito que pertenece a un cliente se lo asocia a una misma factura
+			for (Remito remito : remitos) {
+				List<ItemCotizacion> it = remito.getCotizacion().getItemsCotizacion();
+				for (ItemCotizacion itemCotizacion : it) {
+					total = itemCotizacion.getCantidad() * itemCotizacion.getItemRodamiento().getPrecio() + total;
+				}
+			}
+
+			
+			
+			BeansFactura f = new BeansFactura();
+			f.setFecha(fecha);
+			f.setRemitos(remitos);
+			f.setTotal(total);
+			List<BeansFactura> facturas = new ArrayList<BeansFactura>();
+			return facturas.add(f);
 		}
 		catch(HibernateException e){
 			e.printStackTrace();

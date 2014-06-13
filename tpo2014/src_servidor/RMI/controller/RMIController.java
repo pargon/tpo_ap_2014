@@ -49,9 +49,9 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 	}
 
 	@Override
-	public List<BeansFactura> ventaRodamiento(Date fecha, String fhventa) throws RemoteException {
+	public List<BeansFactura> ventaRodamiento(Date fecha, int idCliente) throws RemoteException {
 		System.out.println("Ejecuta Venta de Rodamientos");
-		List<BeansFactura> facturas = FacturaSRV.getinstancia().Facturar(fecha, fhventa);
+		List<BeansFactura> facturas = FacturaSRV.getinstancia().Facturar(fecha, idCliente);
 		
 		return facturas;
 	}
