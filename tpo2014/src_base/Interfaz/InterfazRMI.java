@@ -17,5 +17,5 @@ public interface InterfazRMI extends Remote {
 
 	
 	//--Metodos de Venta de Rodamientos--//
-	public abstract List<BeansFactura> ventaRodamiento(Date fecha, String fhventa) throws RemoteException;
+	public abstract List<BeansFactura> ventaRodamiento(Date fecha, int idCliente) throws RemoteException;
 }
