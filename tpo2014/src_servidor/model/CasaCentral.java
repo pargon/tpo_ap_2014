@@ -1,3 +1,4 @@
+
 package model;
 
 import java.util.Date;
@@ -32,7 +33,7 @@ public class CasaCentral extends PersistentObject{
 		Rodamiento rod = mov.getRodamiento();
 		
 		// persiste en DB
-		RodamientoSRV.getinstancia().persistir(rod);
+		RodamientoSRV.getinstancia().guardar(rod);
 		MovimientoStockSRV.getInstancia().persistir(mov);
 	}
 
