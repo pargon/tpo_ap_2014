@@ -120,4 +120,5 @@ public class HibernateRodamientoDAO {
 		session.getTransaction().commit();
 		session.close();
 	}
+
 }
