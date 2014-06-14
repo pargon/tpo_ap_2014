@@ -7,6 +7,7 @@ import java.util.List;
 
 import beans.BeansCliente;
 import beans.BeansFactura;
+import beans.BeansRemito;
 
 public interface InterfazRMI extends Remote {
 
@@ -17,5 +18,5 @@ public interface InterfazRMI extends Remote {
 
 	
 	//--Metodos de Venta de Rodamientos--//
-	public abstract List<BeansFactura> ventaRodamiento(Date fecha, int idCliente) throws RemoteException;
+	public abstract BeansFactura ventaRodamiento(List<BeansRemito> beansremitos) throws RemoteException;
 }

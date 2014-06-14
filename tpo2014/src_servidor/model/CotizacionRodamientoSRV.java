@@ -1,5 +1,6 @@
 package model;
 
+import hbt.dao.HibernateClientesDAO;
 import hbt.dao.HibernateCotizacionRodamientoDAO;
 
 import java.util.ArrayList;
@@ -52,5 +53,9 @@ public class CotizacionRodamientoSRV {
 			e.toString();
 			return null;
 		}
+	}
+	
+	public void guardar(CotizacionRodamiento c) {
+		HibernateCotizacionRodamientoDAO.getInstancia().guardarCotizacion(c);
 	}
 }

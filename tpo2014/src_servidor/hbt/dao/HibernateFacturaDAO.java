@@ -1,14 +1,18 @@
 package hbt.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import util.HibernateUtil;
+import model.ClienteSRV;
 import model.CotizacionRodamiento;
 import model.Factura;
 import model.ItemCotizacion;
 import model.Remito;
+import net.sourceforge.jtds.jdbc.DateTime;
+import beans.*;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -44,38 +48,68 @@ public class HibernateFacturaDAO {
 			return false;
 		}
 	}
-	
-	public List<BeansFactura> Facturar(Date fecha, int idCliente)
+
+	public boolean guardarRemito(Remito r) {
+		try {
+			Session session = sf.openSession();
+			session.beginTransaction();
+			session.persist(r);
+			session.flush();
+			session.getTransaction().commit();
+			session.close();
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public BeansFactura Facturar(List<BeansRemito> beansremitos)
 	{
 		try{
-			//Obtengo los remitos que no estan facturados para un cliente			
-			Session session = sf.openSession();
-			Query query = session.createQuery("from remitos as rem where rem.id not in (select fm.idremito from fac_rem as fm) AND rem.cliente.id = :cliente_id");
-			query.setParameter("cliente_id", idCliente);
-			List<Remito> remitos = query.list();
 			
-			float total;
-			//Por cada remito que pertenece a un cliente se lo asocia a una misma factura
-			for (Remito remito : remitos) {
-				List<ItemCotizacion> it = remito.getCotizacion().getItemsCotizacion();
-				for (ItemCotizacion itemCotizacion : it) {
-					total = itemCotizacion.getCantidad() * itemCotizacion.getItemRodamiento().getPrecio() + total;
+			float total = 0;
+			for (BeansRemito beansremito : beansremitos) {
+				List<BeansItemCotizacionRodamiento> it = beansremito.getCotizacion().getBeanitemsCotizacion();
+				for (BeansItemCotizacionRodamiento beansitemCotizacion : it) {
+					total = beansitemCotizacion.getCantidad() * beansitemCotizacion.getBeanitemsRodamiento().getPrecio() + total;
 				}
 			}
 
-			
-			
 			BeansFactura f = new BeansFactura();
-			f.setFecha(fecha);
-			f.setRemitos(remitos);
+			f.setFecha(Calendar.getInstance().getTime());
+			f.setRemitos(beansremitos);
 			f.setTotal(total);
-			List<BeansFactura> facturas = new ArrayList<BeansFactura>();
-			return facturas.add(f);
+			return f;
 		}
 		catch(HibernateException e){
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public List<BeansRemito> buscarRemitoPendientesFacturacion(int idcliente) {
+		Session session = sf.openSession();
+		Query query = session.createQuery("from remitos as rem where rem.id not in (select fm.idremito from fac_rem as fm) AND rem.cliente_id := cliente_id");
+		query.setParameter("cliente_id", idcliente);
+		List<Remito> remitos = new ArrayList<Remito>();
+		remitos = query.list();
+		
+		List<BeansRemito> beansremitos = new ArrayList<BeansRemito>();		
+		for (Remito remito : remitos) {
+			BeansRemito beansremito = new BeansRemito();	
+			//Creo BeansCliente en base al remito
+			BeansCliente beansCliente = new BeansCliente();
+			beansCliente.setContacto(remito.getCliente().getContacto());
+			beansCliente.setCuit(remito.getCliente().getCuit());
+			beansCliente.setPorcentajeDesc(remito.getCliente().getPorcentajeDesc());
+			beansCliente.setRazonSocial(remito.getCliente().getRazonSocial());
+			beansCliente.setTelefono(remito.getCliente().getTelefono());
+			beansremito.setCliente(beansCliente);
+			beansremitos.add(beansremito);
+		}
+		
+		return beansremitos;
 	}
 
 }

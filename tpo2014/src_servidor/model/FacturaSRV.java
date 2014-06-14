@@ -5,6 +5,7 @@ import java.util.List;
 
 import hbt.dao.HibernateFacturaDAO;
 import beans.BeansFactura;
+import beans.BeansRemito;
 
 public class FacturaSRV {
 	
@@ -29,8 +30,8 @@ public class FacturaSRV {
 		return HibernateFacturaDAO.getInstancia().guardarFactura(factura);
 	}
 	
-	public List<BeansFactura> Facturar(Date fecha, int idCliente) {
-		return HibernateFacturaDAO.getInstancia().Facturar(fecha, idCliente);
+	public BeansFactura Facturar(List<BeansRemito> beansremitos) {
+		return HibernateFacturaDAO.getInstancia().Facturar(beansremitos);
 	}
 		
 }

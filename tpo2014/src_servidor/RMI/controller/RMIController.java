@@ -7,10 +7,12 @@ import java.util.List;
 
 import beans.BeansCliente;
 import beans.BeansFactura;
+import beans.BeansRemito;
 import Interfaz.InterfazRMI;
 import model.Cliente;
 import model.ClienteSRV;
 import model.FacturaSRV;
+import model.Remito;
 
 public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 
@@ -49,9 +51,9 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 	}
 
 	@Override
-	public List<BeansFactura> ventaRodamiento(Date fecha, int idCliente) throws RemoteException {
+	public BeansFactura ventaRodamiento(List<BeansRemito> beansremitos) throws RemoteException {
 		System.out.println("Ejecuta Venta de Rodamientos");
-		List<BeansFactura> facturas = FacturaSRV.getinstancia().Facturar(fecha, idCliente);
+		BeansFactura facturas = FacturaSRV.getinstancia().Facturar(beansremitos);
 		
 		return facturas;
 	}

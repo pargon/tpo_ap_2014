@@ -1,5 +1,8 @@
 package model;
 
+import hbt.dao.HibernateClientesDAO;
+import hbt.dao.HibernateFacturaDAO;
+
 import java.util.List;
 
 import beans.BeansFactura;
@@ -22,6 +25,15 @@ public class RemitosSRV {
 		remito.setCotizacion(CotizacionRodamientoSRV.getinstancia().fromBean(beanRemito.getCotizacion()));
 		remito.setFecha(beanRemito.getFecha());			
 		return remito;
+	}
+
+	public void guardar(Remito r) {
+		HibernateFacturaDAO.getInstancia().guardarRemito(r);
+	}
+
+	
+	public List<BeansRemito> BuscarRemitosPendientesFacturacion(int idcliente) {		
+		return HibernateFacturaDAO.getInstancia().buscarRemitoPendientesFacturacion(idcliente);
 	}
 
 }
