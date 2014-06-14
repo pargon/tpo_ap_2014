@@ -23,7 +23,7 @@ public class Remito extends PersistentObject{
 	private Date fecha;
 	//@OneToOne(cascade=CascadeType.ALL)
 	//@PrimaryKeyJoinColumn
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Cliente cliente;
 	@OneToOne(cascade=CascadeType.ALL)
 	@PrimaryKeyJoinColumn

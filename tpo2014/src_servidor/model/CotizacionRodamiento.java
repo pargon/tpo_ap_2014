@@ -19,7 +19,7 @@ public class CotizacionRodamiento implements Serializable{
  	private List<ItemCotizacion> itemsCotizacion = new ArrayList<ItemCotizacion>();
 	private Date fechaCotizacion;
 	private Date fechaVencimiento;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Cliente cliente;
 	private Integer activa;
 	

@@ -68,18 +68,19 @@ public class HibernateFacturaDAO {
 	{
 		try{
 			
-			float total = 0;
+			float total = 1000;
 			for (BeansRemito beansremito : beansremitos) {
-				List<BeansItemCotizacionRodamiento> it = beansremito.getCotizacion().getBeanitemsCotizacion();
-				for (BeansItemCotizacionRodamiento beansitemCotizacion : it) {
-					total = beansitemCotizacion.getCantidad() * beansitemCotizacion.getBeanitemsRodamiento().getPrecio() + total;
-				}
+//				List<BeansItemCotizacionRodamiento> it = beansremito.getCotizacion().getBeanitemsCotizacion();
+//				for (BeansItemCotizacionRodamiento beansitemCotizacion : it) {
+					//total = beansitemCotizacion.getCantidad() * beansitemCotizacion.getBeanitemsRodamiento().getPrecio() + total;
+//				}
 			}
 
 			BeansFactura f = new BeansFactura();
 			f.setFecha(Calendar.getInstance().getTime());
 			f.setRemitos(beansremitos);
 			f.setTotal(total);
+			f.setNroFactura(10215);		
 			return f;
 		}
 		catch(HibernateException e){
@@ -90,8 +91,9 @@ public class HibernateFacturaDAO {
 
 	public List<BeansRemito> buscarRemitoPendientesFacturacion(int idcliente) {
 		Session session = sf.openSession();
-		Query query = session.createQuery("from remitos as rem where rem.id not in (select fm.idremito from fac_rem as fm) AND rem.cliente_id := cliente_id");
-		query.setParameter("cliente_id", idcliente);
+		//Query query = session.createQuery("from Remito as rem where rem.id not in (select fm.idremito from Factura.fac_rem as fm) AND rem.Cliente.cliente_id =: cliente_id");
+		//query.setParameter("cliente_id", idcliente); 
+		Query query = session.createQuery("from Remito");
 		List<Remito> remitos = new ArrayList<Remito>();
 		remitos = query.list();
 		
