@@ -102,10 +102,8 @@ public class Server {
 	private static void escribirXML(BeansFactura facturas) {
 		Element factura = new Element("Factura");
 		Document doc = new Document(factura);
-	    doc.setRootElement(factura);
-		factura.setAttribute(new Attribute("Numero", facturas.getNroFactura().toString()));
+	    factura.setAttribute(new Attribute("Numero", facturas.getNroFactura().toString()));
 
-	    
 	    Element Fechas = new Element("Fechas");
 	    Fechas.addContent(new Element("Emision").setText(facturas.getFecha().toString()));
 	    Fechas.addContent(new Element("Vencimiento").setText(facturas.getFecha().toString()));
@@ -118,21 +116,44 @@ public class Server {
 	    doc.getRootElement().addContent(Cliente);
 	    
 	    Element CondicionesDeVenta = new Element("CondicionesDeVenta");
-	    Document doc2 = new Document(CondicionesDeVenta);
-	    doc2.setRootElement(CondicionesDeVenta);
+	    doc.getRootElement().addContent(CondicionesDeVenta);
 	    
 	    Element PagoContado = new Element("PagoContado");
 	    PagoContado.addContent(new Element("Descuento").setText(facturas.getRemitos().get(0).getCliente().getCuit()));
-	    doc2.getRootElement().addContent(Cliente);
 	    
-	    doc.getRootElement().addContent(CondicionesDeVenta);
-	    // new XMLOutputter().output(doc, System.out);
+	    Element Financiamiento = new Element("Financiación");
+	    Financiamiento.addContent(new Element("CantidadDias").setText("30"));
+	    Financiamiento.addContent(new Element("Recargo").setText("30"));
+	    
+	    CondicionesDeVenta.addContent(PagoContado);
+	    CondicionesDeVenta.addContent(Financiamiento);
+
+	    Element Referencia = new Element("Referencia");
+	    doc.getRootElement().addContent(Referencia);
+
+	    Element Remito = new Element("Remito");
+	    Remito.addContent(new Element("Numero").setText("23123"));
+	    Remito.addContent(new Element("Fecha").setText("fecha"));
+	    Referencia.addContent(Remito);
+	    
+
+	    Element Rodamientos = new Element("Rodamientos");
+	    Element Item = new Element("Item");
+	    Item.setAttribute(new Attribute("Serie", "Numero de serie"));
+	    Item.addContent(new Element("Sufijo").setText("23123"));
+	    Item.addContent(new Element("Marca").setText("Marca fabricante"));
+	    Item.addContent(new Element("Origen").setText("Pais de fabricación"));
+	    Item.addContent(new Element("Precio").setText("Precio sin iva"));
+	    Item.addContent(new Element("Cantidad").setText("Cantidad de unidades"));
+	    Rodamientos.addContent(Item);
+	    Referencia.addContent(Rodamientos);
+	   
         XMLOutputter xmlOutput = new XMLOutputter();
  
         // display nice nice
         xmlOutput.setFormat(Format.getPrettyFormat());
         try {
-			xmlOutput.output(doc, new FileWriter("c:\\file.xml"));
+			xmlOutput.output(doc, new FileWriter("e:\\file.xml"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
