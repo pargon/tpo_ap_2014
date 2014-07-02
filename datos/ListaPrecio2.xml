@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- LISTA DE PRECIOS -->
+<ListaPrecios numero="2">
+<Proveedor>
+<Cuil>2</Cuil>
+<RazonSocial>SantoSRL</RazonSocial>
+</Proveedor>
+<CondicionesDeVenta>
+<PagoContado>
+<Descuento>20</Descuento>
+</PagoContado>
+<Financiacion>
+<Dias>30</Dias>
+<Recargo>10</Recargo>
+</Financiacion>
+<Financiacion>
+<Dias>60</Dias>
+<Recargo>20</Recargo>
+</Financiacion>
+<Financiacion>
+<Dias>90</Dias>
+<Recargo>30</Recargo>
+</Financiacion>
+</CondicionesDeVenta>
+<Rodamientos>
+<Item>
+<Codigo>3</Codigo>
+<Marca>SDK</Marca>
+<Origen>Suiza</Origen>
+<Tipo>Rodillo</Tipo>
+<Medida>0.6</Medida>
+<Caracteristica>124</Caracteristica>
+<Precio>55.00</Precio>
+<Cantidad>100</Cantidad>
+</Item>
+<Item>
+<Codigo>4</Codigo>
+<Marca>Bones</Marca>
+<Origen>Holanda</Origen>
+<Tipo>Bolilla</Tipo>
+<Medida>0.8</Medida>
+<Caracteristica>457</Caracteristica>
+<Precio>85.00</Precio>
+<Cantidad>100</Cantidad>
+</Item>
+</Rodamientos>
+</ListaPrecios>
