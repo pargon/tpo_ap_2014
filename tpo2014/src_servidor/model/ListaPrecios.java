@@ -22,11 +22,18 @@ public class ListaPrecios implements Serializable {
 	@ManyToOne
 	private Proveedor proveedor;
 	private int descuento;
+        private int cantidad;
 	private List<Map<Integer,Float>> financiacion;
 	
 	
 	
-	
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
 	
 	public int getDescuento() {
 		return descuento;
