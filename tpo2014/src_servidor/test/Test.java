@@ -10,15 +10,19 @@ import java.util.List;
 import java.util.Map;
 
 import model.Cliente;
+import model.CotizacionRodamiento;
 import model.Factura;
 import model.ItemCotizacion;
 import model.ItemRodamiento;
+import model.Marca;
+import model.Marca.MarcaId;
 import model.OrdenCompra;
 import model.OrdenPedido;
 import model.OrdenPedidoSRV;
 import model.Proveedor;
 import model.Remito;
 import model.Rodamiento;
+import model.Rodamiento.RodamientoId;
 
 
 public class Test {
@@ -69,6 +73,34 @@ public class Test {
 		}catch(Exception e)
 		{	e.printStackTrace();}
 		
+		CotizacionRodamiento cot = new CotizacionRodamiento();
+		cot.setFechaCotizacion(new Date());
+		List<ItemRodamiento> lrod = new ArrayList<ItemRodamiento>();
+		Rodamiento rod = new Rodamiento();
+		ItemRodamiento irod = new ItemRodamiento();
+		Proveedor prv = new Proveedor();
+		RodamientoId rodid = new RodamientoId();
+		Marca marc = new Marca();
+		MarcaId mId = new MarcaId();
+		mId.setDescripcion("marcadesc");
+		mId.setPais("argen");
+		
+		marc.setMarcaId(mId);
+		rodid.setCodigo("codigo1");
+		rodid.setMarca(marc);
+		rod.setRodamientoId(rodid);
+		prv.setCuit("1234455");
+		prv.setRazonSocial("el mas");
+		
+		irod.setCantidad(1);
+		irod.setPrecio(12);
+		irod.setRodamiento(rod);
+		irod.setProveedor(prv);
+		
+		lrod.add(irod);
+		
+		cot.setItemsRodamiento(lrod);
+		HibernateDAO.getInstancia().persistir(cot);
 		
 		ocompra();
 		
@@ -76,7 +108,6 @@ public class Test {
 	}
 
 	private static void ocompra() {
-		
 		
 		List<OrdenPedido> lop;
 		List<OrdenCompra> loc = new ArrayList<OrdenCompra>();
@@ -88,33 +119,38 @@ public class Test {
 		
 		// recorre las ordenes de pedido pendientes
 		for(OrdenPedido op: lop){
-			List<ItemCotizacion> lro = op.getListaRod();
+			List<ItemRodamiento> lro = op.getListaRod();
 			
 			// recorre los rodamientos
-			for(ItemCotizacion itrod: lro){
-				Proveedor pr = itrod.getListaPrecios().getProveedor();
+			for(ItemRodamiento itrod: lro){
+				Proveedor pr = itrod.getProveedor();
 				boolean entro = false;
 							
 				// busca si esta el proveedor cargado en alguna OC
 				for(OrdenCompra oc: loc){
-					if(oc.getProveedor() == itrod.getListaPrecios().getProveedor()){
-						oc.agregaItems(itrod.getItemRodamiento() );
+					if(oc.getProveedor() == itrod.getProveedor()) {
+						oc.agregarOPedido(op);
+						oc.agregaItems(itrod );
 						entro = true;
 					}							
 				}
 				//si no existia la crea con el rodamiento como primero
 				if(!entro){
-					OrdenCompra oc2 = new OrdenCompra();
-					oc2.setFecha(fecha);
-					oc2.setProveedor(pr);
-					oc2.agregaItems(itrod.getItemRodamiento() );
-					loc.add(oc2);
+					OrdenCompra oc = new OrdenCompra();
+					oc.setFecha(fecha);
+					oc.setProveedor(pr);
+					oc.agregarOPedido(op);
+					oc.agregaItems(itrod );
+					loc.add(oc);
 				}
 			}		
 		}
 		
 		// persiste las OC
 		for(OrdenCompra oc: loc){
+			
+			// quedan pendientes de recepción de mercadería
+			oc.setEstado("PEN");
 			HibernateDAO.getInstancia().persistir(oc);
 			
 			/*

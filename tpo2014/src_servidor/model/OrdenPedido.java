@@ -16,7 +16,10 @@ public class OrdenPedido extends PersistentObject {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Date fecha;
+	
+	@OneToOne(cascade=CascadeType.ALL)
 	private Cliente cliente;
+	
 	private String estado;
 	
 	@OneToOne(cascade=CascadeType.ALL)
@@ -58,7 +61,7 @@ public class OrdenPedido extends PersistentObject {
 		this.cot = cot;
 	}
 
-	public List<ItemCotizacion> getListaRod() {
+	public List<ItemRodamiento> getListaRod() {
 
 		return cot.getItemsRodamiento();
 	}

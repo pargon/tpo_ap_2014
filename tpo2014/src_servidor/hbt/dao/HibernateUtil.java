@@ -30,13 +30,14 @@ public class HibernateUtil
 			config.addAnnotatedClass(Proveedor.class);
 			config.addAnnotatedClass(OrdenCompra.class);
 			config.addAnnotatedClass(CotizacionRodamiento.class);
-			config.addAnnotatedClass(ItemCotizacion.class);
+			
 			config.addAnnotatedClass(Factura.class);
 			config.addAnnotatedClass(Remito.class);
 			config.addAnnotatedClass(CasaCentral.class);
 			config.addAnnotatedClass(MovimientoStock.class);
 			config.addAnnotatedClass(OrdenPedido.class);
-			
+			config.addAnnotatedClass(SolicitudCotizacion.class);
+			config.addAnnotatedClass(ItemSolicitudCotizacion.class);
 			
 			sessionFactory = config.buildSessionFactory();
 		}

@@ -8,7 +8,6 @@ import java.util.List;
 import model.ClienteSRV;
 import model.CotizacionRodamiento;
 import model.Factura;
-import model.ItemCotizacion;
 import model.Remito;
 import net.sourceforge.jtds.jdbc.DateTime;
 import beans.*;

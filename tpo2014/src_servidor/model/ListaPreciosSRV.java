@@ -65,7 +65,7 @@ public class ListaPreciosSRV {
 	    	File xmlFile = new File(archivos.get(j) );
 		    ListaPrecios lista = new ListaPrecios();
 		    Proveedor prov = new Proveedor();
-		    
+		     
 		    try
 		    {
 		        //Se crea el documento a traves del archivo
@@ -97,6 +97,7 @@ public class ListaPreciosSRV {
 		        	listaMapas.add(mapa);
 		        }
 		        lista.setFinanciacion(listaMapas);
+		        
 		        //System.out.println(lista.getFinanciacion().toString());
 		        Element rod = rootNode.getChild("Rodamientos");
 		        List items =rod.getChildren("Item");
@@ -135,7 +136,7 @@ public class ListaPreciosSRV {
 		        System.out.println("***********************Lista "+j+"*************************");
 		        System.out.println("Descuento: "+lista.getDescuento());
 		        System.out.println("Id: "+lista.getId());
-		        System.out.println("Financiacion: "+lista.getFinanciacion().toString());
+		        //System.out.println("Financiacion: "+lista.getFinanciacion().toString());
 		        System.out.println("Proveedor: "+lista.getProveedor().getRazonSocial());
 		        System.out.println("ItemsRod: Precio= "+lista.getItemsRodamiento().get(0).getPrecio()+" Marca= "+lista.getItemsRodamiento().get(0).getRodamiento().getRodamientoId().getMarca().getMarcaId().getDescripcion());
 		        

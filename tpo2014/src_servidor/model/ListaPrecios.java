@@ -22,28 +22,17 @@ public class ListaPrecios implements Serializable {
 	@ManyToOne
 	private Proveedor proveedor;
 	private int descuento;
-	private List<Map<Integer,Float>> financiacion;
+	private int financiacion_dias;
+	private int financiacion_dto;
 	
 
 	
 	public int getDescuento() {
 		return descuento;
 	}
-
 	public void setDescuento(int descuento) {
 		this.descuento = descuento;
 	}
-
-
-
-	public List<Map<Integer, Float>> getFinanciacion() {
-		return financiacion;
-	}
-
-	public void setFinanciacion(List<Map<Integer, Float>> financiacion) {
-		this.financiacion = financiacion;
-	}
-
 	public ListaPrecios() {
 		this.itemsRodamiento = new ArrayList<ItemRodamiento>();
 	}
@@ -75,5 +64,9 @@ public class ListaPrecios implements Serializable {
 	public void agregarItemRodamiento(ItemRodamiento itr){
 		this.itemsRodamiento.add(itr);
 	}
+	
+	public void setFinanciacion(List<Map<Integer,Float>> financiacion) {
+	}
+	
 	
 }
