@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import RMI.controller.RMIController;
 import model.Cliente;
 import model.CotizacionRodamiento;
 import model.Factura;
@@ -117,9 +118,16 @@ public class Test {
 		
 		HibernateDAO.getInstancia().persistir(op);
 		
+		try {
+			new RMIController().crearOrdenPedido(1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		ocompra();
 		
-		//recepcionMercaderia(1);
+		recepcionMercaderia(1);
 		
 		System.exit(0);
 	}
@@ -186,7 +194,7 @@ public class Test {
 		OrdenCompra oc = OrdenCompraSRV.getinstancia().confimarRec(idOrdenCompra);
 
 		// crea remitos para ODV
-		Remito rem;
+		
 		Date fecha = new Date();
 		
 		// recorre los pedidos de la OC
@@ -194,10 +202,17 @@ public class Test {
 		for(OrdenPedido op: peds){
 			
 			// crea remitos en funcion de la OC para ser enviados a la ODV
-			rem = new Remito();
+			Remito rem = new Remito();
 			rem.setCliente(op.getCliente());
 			rem.setFecha(fecha);
-			rem.setItems(oc.getItemsOC());
+			
+			List<ItemRodamiento> lro =oc.getItemsOC();
+			List<ItemRodamiento> lro2 = new ArrayList<ItemRodamiento>(); 
+			for(ItemRodamiento itr: lro){
+				lro2.add(itr);
+			}
+			rem.setItems(lro2);
+			
 			
 			HibernateDAO.getInstancia().persistir(rem);
 			

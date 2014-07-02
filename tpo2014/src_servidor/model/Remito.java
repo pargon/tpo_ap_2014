@@ -2,6 +2,7 @@ package model;
 
 import hbt.dao.PersistentObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,8 +29,9 @@ public class Remito extends PersistentObject{
 	private Cliente cliente;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	private List<ItemRodamiento> items;
+	private List<ItemRodamiento> items = new ArrayList<ItemRodamiento>();
 	
+	private String estado;
 	
 	public Date getFecha() {
 		return fecha;
@@ -48,6 +50,12 @@ public class Remito extends PersistentObject{
 	}
 	public void setItems(List<ItemRodamiento> items) {
 		this.items = items;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	
 	

@@ -16,8 +16,7 @@ public class OrdenCompra {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	@OneToMany
-	@PrimaryKeyJoinColumn
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<ItemRodamiento> itemsOC;
 	
 	private Date fecha;
