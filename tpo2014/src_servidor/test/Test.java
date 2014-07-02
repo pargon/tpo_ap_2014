@@ -15,6 +15,7 @@ import model.Factura;
 import model.ItemCotizacion;
 import model.ItemRodamiento;
 import model.Marca;
+import model.OrdenCompraSRV;
 import model.Marca.MarcaId;
 import model.OrdenCompra;
 import model.OrdenPedido;
@@ -73,6 +74,7 @@ public class Test {
 		}catch(Exception e)
 		{	e.printStackTrace();}
 		
+		// alta cotizacion
 		CotizacionRodamiento cot = new CotizacionRodamiento();
 		cot.setFechaCotizacion(new Date());
 		List<ItemRodamiento> lrod = new ArrayList<ItemRodamiento>();
@@ -102,7 +104,22 @@ public class Test {
 		cot.setItemsRodamiento(lrod);
 		HibernateDAO.getInstancia().persistir(cot);
 		
+		// alta orden de pedido
+		OrdenPedido op =  new OrdenPedido();
+		Cliente cli = new Cliente();
+		cli.setCuit("33444555");
+		cli.setRazonSocial("el cli");
+		
+		op.setCliente(cli);
+		op.setCot(cot);
+		op.setEstado("PEN");
+		op.setFecha(new Date());
+		
+		HibernateDAO.getInstancia().persistir(op);
+		
 		ocompra();
+		
+		recepcionMercaderia(1);
 		
 		System.exit(0);
 	}
@@ -143,7 +160,9 @@ public class Test {
 					oc.agregaItems(itrod );
 					loc.add(oc);
 				}
-			}		
+			}	
+			
+			op.setEstado("OC");
 		}
 		
 		// persiste las OC
@@ -160,6 +179,37 @@ public class Test {
 			 */
 		}
 	}
+	
+	
+	public static void recepcionMercaderia(int idOrdenCompra) {
+		// confirma la recepcion de la OC
+		OrdenCompra oc = OrdenCompraSRV.getinstancia().confimarRec(idOrdenCompra);
+
+		// crea remitos para ODV
+		Remito rem;
+		Date fecha = new Date();
+		
+		// recorre los pedidos de la OC
+		List<OrdenPedido> peds = oc.getPedidos();
+		for(OrdenPedido op: peds){
+			
+			// crea remitos en funcion de la OC para ser enviados a la ODV
+			rem = new Remito();
+			rem.setCliente(op.getCliente());
+			rem.setFecha(fecha);
+			rem.setItems(oc.getItemsOC());
+			
+			HibernateDAO.getInstancia().persistir(rem);
+			
+			/*
+			 * persistir en xml los remitos
+			 * 
+			 * 			
+			 */
+			
+		}
+	}
+	
 }
 
 

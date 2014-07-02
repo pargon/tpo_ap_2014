@@ -1,10 +1,12 @@
 package model;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+
 
 @Entity
 @Table(name="ordenCompra")
@@ -30,6 +32,12 @@ public class OrdenCompra {
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	private List<OrdenPedido> pedidos;
+	
+	
+	public OrdenCompra(){
+		itemsOC = new ArrayList<ItemRodamiento>();
+		pedidos = new ArrayList<OrdenPedido>();
+	}
 	
 	
 	public Integer getId() {
