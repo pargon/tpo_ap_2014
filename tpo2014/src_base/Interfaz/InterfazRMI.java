@@ -26,6 +26,8 @@ public interface InterfazRMI extends Remote {
 	public abstract void crearOrdenCompra() throws RemoteException;
 	//--Recepción Mercaderia--//
 	public abstract void recepcionMercaderia(int idOrdenCompra) throws RemoteException;
+	//--Orden de pedido--//
+	public abstract void crearOrdenPedido(int idCotizacion) throws RemoteException;
 		
 	
 	public abstract int guardarSolicitudCotizacion(BeanSolicitudCotizacion beanSolicitudCotizacion) throws RemoteException;

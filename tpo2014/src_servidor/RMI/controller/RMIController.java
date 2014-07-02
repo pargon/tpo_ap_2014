@@ -214,6 +214,18 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			
 		}
 	}
+
+	@Override
+	public void crearOrdenPedido(int idCotizacion) throws RemoteException {
+		CotizacionRodamiento cr = (CotizacionRodamiento) HibernateDAO.getInstancia().get(CotizacionRodamiento.class, idCotizacion);
+		OrdenPedido op = new OrdenPedido();
+		op.setCliente(cr.getSolicitudCotizacion().getCliente());
+		op.setCot(cr);
+		op.setEstado("PEN");
+		op.setFecha(new Date());
+		HibernateDAO.getInstancia().persistir(op);
+		
+	}
 }
 	
 
