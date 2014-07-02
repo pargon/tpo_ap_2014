@@ -14,7 +14,7 @@ public class OrdenCompra {
 	private Integer id;
 	@OneToMany
 	@PrimaryKeyJoinColumn
-	private List<ItemOC> itemsOC;
+	private List<ItemRodamiento> itemsOC;
 	private Date fecha;
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn 
@@ -31,10 +31,10 @@ public class OrdenCompra {
 	public Date getFecha() {
 		return fecha;
 	}
-	public List<ItemOC> getItemsOC() {
+	public List<ItemRodamiento> getItemsOC() {
 		return itemsOC;
 	}
-	public void setItemsOC(List<ItemOC> itemsOC) {
+	public void setItemsOC(List<ItemRodamiento> itemsOC) {
 		this.itemsOC = itemsOC;
 	}
 	public void setFecha(Date fecha) {
@@ -51,6 +51,10 @@ public class OrdenCompra {
 	}
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
+	}
+	public void agregaItems(ItemRodamiento it) {
+		if(!itemsOC.contains(it))
+			itemsOC.add(it);
 	}
 	
 }

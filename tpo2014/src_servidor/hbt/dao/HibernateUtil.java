@@ -28,7 +28,6 @@ public class HibernateUtil
 			config.addAnnotatedClass(RodamientoId.class);
 			config.addAnnotatedClass(Marca.class);
 			config.addAnnotatedClass(Proveedor.class);
-			config.addAnnotatedClass(ItemOC.class);
 			config.addAnnotatedClass(OrdenCompra.class);
 			config.addAnnotatedClass(CotizacionRodamiento.class);
 			config.addAnnotatedClass(ItemCotizacion.class);

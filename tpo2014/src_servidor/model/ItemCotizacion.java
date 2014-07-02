@@ -16,7 +16,6 @@ public class ItemCotizacion implements Serializable{
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(referencedColumnName="id")
 	private ItemRodamiento itemRodamiento;
-	private Integer cantidad;
 	@OneToOne
 	private ListaPrecios listaPrecios;
 
@@ -27,10 +26,10 @@ public class ItemCotizacion implements Serializable{
 		this.itemRodamiento = itemRodamiento;
 	}
 	public Integer getCantidad() {
-		return cantidad;
+		return itemRodamiento.getCantidad();
 	}
 	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
+		itemRodamiento.setCantidad(cantidad);
 	}
 	public ListaPrecios getListaPrecios() {
 		return listaPrecios;

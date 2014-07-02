@@ -1,11 +1,13 @@
 package test;
 
 import hbt.dao.HibernateDAO;
+import hbt.dao.HibernetCasaDAO;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import model.Cliente;
 import model.Factura;
@@ -74,39 +76,54 @@ public class Test {
 	}
 
 	private static void ocompra() {
-		// retornar proveeedor-item
 		
 		
+		List<OrdenPedido> lop;
+		List<OrdenCompra> loc = new ArrayList<OrdenCompra>();
 		
+		// recorre ordenes de pedido pendientes
 		
-			// recorre ordenes de pedido pendientes
-			List<OrdenPedido> lop;
-			List<Proveedor> lpr = new ArrayList<Proveedor>();
+		lop = OrdenPedidoSRV.getinstancia().getListaPendientes();	
+		Date fecha = new java.util.Date();
+		
+		// recorre las ordenes de pedido pendientes
+		for(OrdenPedido op: lop){
+			List<ItemCotizacion> lro = op.getListaRod();
 			
-			lop = OrdenPedidoSRV.getinstancia().getListaPendientes();	
-			OrdenCompra oc;
-			Date fecha = new java.util.Date();
-			
-			// recorre las ordenes de pedido pendientes
-			for(OrdenPedido op: lop){
-				List<ItemCotizacion> lro = op.getListaRod();
-				
-				// recorre los rodamientos y guarda rodamiento-proveedor
-				for(ItemCotizacion itrod: lro){
-					Proveedor pr = itrod.getListaPrecios().getProveedor();
-			
-					// guarda proveedor
-					if (lpr.indexOf(pr) == 0){
-						lpr.add(pr);
-						oc = new OrdenCompra();
-						oc.setFecha(fecha);
-					}
+			// recorre los rodamientos
+			for(ItemCotizacion itrod: lro){
+				Proveedor pr = itrod.getListaPrecios().getProveedor();
+				boolean entro = false;
+							
+				// busca si esta el proveedor cargado en alguna OC
+				for(OrdenCompra oc: loc){
+					if(oc.getProveedor() == itrod.getListaPrecios().getProveedor()){
+						oc.agregaItems(itrod.getItemRodamiento() );
+						entro = true;
+					}							
 				}
-				
-			}
-			; 
+				//si no existia la crea con el rodamiento como primero
+				if(!entro){
+					OrdenCompra oc2 = new OrdenCompra();
+					oc2.setFecha(fecha);
+					oc2.setProveedor(pr);
+					oc2.agregaItems(itrod.getItemRodamiento() );
+					loc.add(oc2);
+				}
+			}		
+		}
+		
+		// persiste las OC
+		for(OrdenCompra oc: loc){
+			HibernateDAO.getInstancia().persistir(oc);
+			
+			/*
+			 * persistir en xml de proveedor y lista de precios
+			 * 
+			 * 			
+			 */
+		}
 	}
-
 }
 
 
