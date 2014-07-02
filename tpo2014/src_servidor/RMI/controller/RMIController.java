@@ -96,29 +96,29 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		List<ListaPrecios> lprecios = new ListaPreciosSRV().getinstancia().getListas(archivos);
 		List<ItemRodamiento> lraux = new ArrayList<ItemRodamiento>();
 		List<ItemSolicitudCotizacion> liscaux = solicitudCotizacion.getItemsSolicitudCotizacion();
-		for(ListaPrecios lp : lprecios){
-			List<ItemRodamiento> irs = lp.getItemsRodamiento();
-			for(int i=0;i<liscaux.size();i++){
+		
+		for(int i=0;i<liscaux.size();i++){
+			
+			//el id de itemRoda se tiene q generar automaticamente
+			ItemRodamiento itemRoda = new ItemRodamiento();
+			itemRoda.setRodamiento(liscaux.get(i).getRodamiento());
+			itemRoda.setCantidad(liscaux.get(i).getCantidad());
+			itemRoda.setPrecio(0);
+			
+			lraux.add(itemRoda);
+			
+			for(ListaPrecios lp : lprecios){
+				List<ItemRodamiento> irs = lp.getItemsRodamiento();
+					
+
 				for(int j=0;j<irs.size();j++){
-					if(liscaux.get(i).getRodamiento().getRodamientoId().getCodigo() == irs.get(j).getRodamiento().getRodamientoId().getCodigo()){
+					if(liscaux.get(i).getRodamiento().getRodamientoId().getCodigo().equals( irs.get(j).getRodamiento().getRodamientoId().getCodigo() )){
 						
-						//el id de itemRoda se tiene q generar automaticamente
-						ItemRodamiento itemRoda = new ItemRodamiento();
-						itemRoda.setRodamiento(liscaux.get(i).getRodamiento());
-						itemRoda.setPrecio(irs.get(j).getPrecio());
-						itemRoda.setCantidad(liscaux.get(i).getCantidad());
-						itemRoda.setProveedor(irs.get(j).getProveedor());
-						//ItemCotizacion itcot = new ItemCotizacion();
-						//itcot.setItemRodamiento(itemRoda);
 						
-						//si es la primera vez que colecto los items no los puedo comparar, los agrego directamente
-						if(lraux.get(j) == null)
-							lraux.add(itemRoda);
-						else
-							if(itemRoda.getPrecio() < lraux.get(i).getPrecio()){
-								lraux.get(i).setPrecio(itemRoda.getPrecio());
-								lraux.get(i).setProveedor(itemRoda.getProveedor());
-							}
+						if(itemRoda.getPrecio() > irs.get(j).getPrecio() || itemRoda.getPrecio() == 0){
+							lraux.get(i).setPrecio(irs.get(j).getPrecio());
+							lraux.get(i).setProveedor(irs.get(j).getProveedor());
+						}
 						j=irs.size();
 						
 						
@@ -153,7 +153,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 							
 				// busca si esta el proveedor cargado en alguna OC
 				for(OrdenCompra oc: loc){
-					if(oc.getProveedor() == itrod.getListaPrecios().getProveedor()){
+					if(oc.getProveedor().equals( itrod.getListaPrecios().getProveedor())){
 						oc.agregarOPedido(op);
 						oc.agregaItems(itrod.getItemRodamiento() );
 						entro = true;

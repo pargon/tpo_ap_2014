@@ -1,5 +1,7 @@
 package test;
 
+import hbt.dao.HibernateDAO;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,17 +14,23 @@ import beans.BeanRodamiento;
 import beans.BeanSolicitudCotizacion;
 import beans.BeansCliente;
 import model.ListaPreciosSRV;
+import model.Marca;
+import model.Marca.MarcaId;
 
 public class TestNano {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		/*
-		List<String> archivos = new ArrayList<String>();
-		archivos.add("C:\\ListaPrecio1.xml");
-		archivos.add("C:\\ListaPrecio2.xml");
-		new ListaPreciosSRV().getinstancia().getListas(archivos);
-		*/
+		
+		Marca mar = new Marca();
+		MarcaId marid= new MarcaId();
+		marid.setDescripcion("SDK");
+		marid.setPais("Suecia");
+		mar.setMarcaId(marid);
+		HibernateDAO.getInstancia().persistir(mar);
+		System.out.println("marca");
+		
+		
 		BeanSolicitudCotizacion bsc = new BeanSolicitudCotizacion();
 		BeanItemSolicitudCotizacion bisc = new BeanItemSolicitudCotizacion();
 		BeansCliente bc = new BeansCliente();
@@ -33,12 +41,17 @@ public class TestNano {
 		bc.setTelefono("42064885");
 		bsc.setBeansCliente(bc);
 		bisc.setCantidad(5);
+		
 		BeanRodamiento br = new BeanRodamiento();
-		br.setCaracteristicas("Bolilla");
+		br.setTipo("Bolilla");
 		br.setCodigo("1");
+		br.setCaracteristicas("456");
+		
 		BeanMarca bm = new BeanMarca();
 		bm.setDescripcion("SDK");
 		bm.setPais("Suecia");
+		
+		
 		br.setBeanMarca(bm);
 		bisc.setBeanRodamiento(br);
 		List<BeanItemSolicitudCotizacion> blisc = new ArrayList<BeanItemSolicitudCotizacion>();

@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,13 +17,14 @@ public class ItemSolicitudCotizacion {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	@OneToOne
-	@JoinColumns({
+	@OneToOne(cascade=CascadeType.ALL)
+/*	@JoinColumns({
 		@JoinColumn(name="codigo", referencedColumnName="codigo", updatable = false),
 		@JoinColumn(name="descripcion", referencedColumnName="descripcion",  updatable = false),
 		@JoinColumn(name="pais", referencedColumnName="pais", updatable = false)
 		})
-	private Rodamiento rodamiento;
+*/	private Rodamiento rodamiento;
+	
 	private Integer cantidad;
 	
 	public Rodamiento getRodamiento() {

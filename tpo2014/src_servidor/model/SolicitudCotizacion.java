@@ -27,7 +27,7 @@ public class SolicitudCotizacion {
 	private List<ItemSolicitudCotizacion> itemsSolicitudCotizacion = new ArrayList<ItemSolicitudCotizacion>();
 	@Column(name="fecha",columnDefinition="Date")
 	private Date fecha;
-	@ManyToOne
+	@ManyToOne(cascade= CascadeType.ALL)
 	private Cliente cliente;
 	
 	public int getId() {
