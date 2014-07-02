@@ -12,7 +12,7 @@ public class BeanCotizacionRodamiento implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private int id;
- 	private List<BeanItemRodamiento> beanItemsRodamiento = new ArrayList<BeanItemRodamiento>();
+ 	private List<BeansItemRodamiento> beanItemsRodamiento = new ArrayList<BeansItemRodamiento>();
  	private BeanSolicitudCotizacion beanSolicitudCotizacion = new BeanSolicitudCotizacion();
 	private Date fechaCotizacion;
 	private int termino;
@@ -25,10 +25,10 @@ public class BeanCotizacionRodamiento implements Serializable{
 	
 	
 
-	public List<BeanItemRodamiento> getBeanItemsRodamiento() {
+	public List<BeansItemRodamiento> getBeanItemsRodamiento() {
 		return beanItemsRodamiento;
 	}
-	public void setBeanItemsRodamiento(List<BeanItemRodamiento> beanItemsRodamiento) {
+	public void setBeanItemsRodamiento(List<BeansItemRodamiento> beanItemsRodamiento) {
 		this.beanItemsRodamiento = beanItemsRodamiento;
 	}
 	public int getDescuento() {

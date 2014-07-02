@@ -1,7 +1,5 @@
 package hbt.dao;
 
-import util.HibernateUtil;
-
 import java.util.List;
 
 import model.ItemRodamiento;

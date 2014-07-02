@@ -1,7 +1,5 @@
 package hbt.dao;
 
-import util.HibernateUtil;
-
 import java.util.List;
 
 import model.ListaPrecios;
@@ -10,7 +8,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import beans.BeanListaPrecios;
 import beans.BeansListaPrecios;
 
 public class HibernateListaPreciosDAO {

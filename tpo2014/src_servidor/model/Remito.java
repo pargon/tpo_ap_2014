@@ -1,5 +1,7 @@
 package model;
 
+import hbt.dao.PersistentObject;
+
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -8,8 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
-import util.PersistentObject;
 
 @Entity
 @Table(name="remitos")

@@ -2,8 +2,6 @@ package hbt.dao;
 
 import java.util.List;
 
-import util.HibernateUtil;
-
 import model.Cliente;
 import model.Marca;
 import model.Rodamiento;

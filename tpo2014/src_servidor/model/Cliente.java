@@ -1,9 +1,9 @@
 package model;
+import hbt.dao.PersistentObject;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import util.PersistentObject;
 
 @Entity
 @Table(name="clientes")

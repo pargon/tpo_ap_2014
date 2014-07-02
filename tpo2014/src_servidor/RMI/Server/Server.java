@@ -17,7 +17,6 @@ import model.CotizacionRodamientoSRV;
 import model.FacturaSRV;
 import model.Remito;
 import model.RemitosSRV;
-import RMI.controller.*;
 import beans.*;
 import model.Cliente;
 import model.Factura;
@@ -27,6 +26,8 @@ import org.jdom2.Document;
 import org.jdom2.Element;             
 import org.jdom2.output.Format;       
 import org.jdom2.output.XMLOutputter; 
+
+import rmi.controller.*;
 
 //import com.thoughtworks.xstream.XStream;
 //import com.thoughtworks.xstream.io.xml.DomDriver;

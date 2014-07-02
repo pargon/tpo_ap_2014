@@ -7,8 +7,8 @@ import java.util.List;
 
 import beans.BeanCotizacionRodamiento;
 import beans.BeanItemCotizacion;
-import beans.BeanItemCotizacionRodamiento;
-import beans.BeanItemRodamiento;
+import beans.BeansItemCotizacionRodamiento;
+import beans.BeansItemRodamiento;
 import beans.BeanItemSolicitudCotizacion;
 import beans.BeanListaPrecios;
 import beans.BeanRodamiento;
@@ -28,17 +28,17 @@ public class CotizacionRodamientoSRV {
 		CotizacionRodamiento cotizacionRodamiento = new CotizacionRodamiento();
 		cotizacionRodamiento.setFechaCotizacion(beanCotizacionRodamiento.getFechaCotizacion());
 		cotizacionRodamiento.setTermino(beanCotizacionRodamiento.getTermino());
-		List<BeanItemCotizacionRodamiento>beanItemCotizacionRodamientos = beanCotizacionRodamiento.getBeanitemsCotizacion();
+		List<BeansItemCotizacionRodamiento>BeansItemCotizacionRodamientos = beanCotizacionRodamiento.getBeanitemsCotizacion();
 		List<ItemCotizacion> itemsCotizacion = new ArrayList<ItemCotizacion>();
-		for (BeanItemCotizacionRodamiento beanItemCotizacionRodamiento : beanItemCotizacionRodamientos) {
+		for (BeansItemCotizacionRodamiento BeansItemCotizacionRodamiento : BeansItemCotizacionRodamientos) {
 			ItemCotizacion itemCotizacion = new ItemCotizacion();
-			itemCotizacion.setCantidad(beanItemCotizacionRodamiento.getCantidad());
-			Rodamiento r = RodamientoSRV.getinstancia().fromBean(beanItemCotizacionRodamiento.getBeanitemsRodamiento().getBeanRodamiento());
+			itemCotizacion.setCantidad(BeansItemCotizacionRodamiento.getCantidad());
+			Rodamiento r = RodamientoSRV.getinstancia().fromBean(BeansItemCotizacionRodamiento.getBeanitemsRodamiento().getBeanRodamiento());
 			ItemRodamiento it = new ItemRodamiento();
-			it.setPrecio(beanItemCotizacionRodamiento.getBeanitemsRodamiento().getPrecio());
+			it.setPrecio(BeansItemCotizacionRodamiento.getBeanitemsRodamiento().getPrecio());
 			it.setRodamiento(r);
 			itemCotizacion.setItemRodamiento(it);
-			ListaPrecios listaPrecios = ListaPreciosSRV.getinstancia().fromBean(beanItemCotizacionRodamiento.getBeanListaPrecios());
+			ListaPrecios listaPrecios = ListaPreciosSRV.getinstancia().fromBean(BeansItemCotizacionRodamiento.getBeanListaPrecios());
 			itemCotizacion.setListaPrecios(listaPrecios);
 			itemsCotizacion.add(itemCotizacion);
 		}
@@ -73,13 +73,13 @@ public class CotizacionRodamientoSRV {
 		beanCotizacionRodamiento.setFechaCotizacion(cotizacionRodamiento.getFechaCotizacion());
 		beanCotizacionRodamiento.setTermino(cotizacionRodamiento.getTermino());
 		List<ItemCotizacion> itemCotizacionRodamientos = cotizacionRodamiento.getItemsCotizacion();
-		List<BeanItemCotizacionRodamiento> beanItemsCotizacion = new ArrayList<BeanItemCotizacionRodamiento>();
+		List<BeansItemCotizacionRodamiento> beanItemsCotizacion = new ArrayList<BeansItemCotizacionRodamiento>();
 		for (ItemCotizacion itemCotizacionRodamiento : itemCotizacionRodamientos) {
-			BeanItemCotizacionRodamiento beanitemCotizacion = new BeanItemCotizacionRodamiento();
+			BeansItemCotizacionRodamiento beanitemCotizacion = new BeansItemCotizacionRodamiento();
 			beanitemCotizacion.setCantidad(itemCotizacionRodamiento.getCantidad());
 			//Hacer RodamientoSRV.toBean
 			BeanRodamiento br = RodamientoSRV.getinstancia().toBean(itemCotizacionRodamiento.getItemRodamiento().getRodamiento());
-			BeanItemRodamiento bit = new BeanItemRodamiento();
+			BeansItemRodamiento bit = new BeansItemRodamiento();
 			bit.setPrecio(itemCotizacionRodamiento.getItemRodamiento().getPrecio());
 			bit.setBeanRodamiento(br);
 			beanitemCotizacion.setBeanitemsRodamiento(bit);

@@ -12,7 +12,7 @@ public class BeanSolicitudCotizacion implements Serializable{
 
 	private List<BeanItemSolicitudCotizacion> beanItemsSolicitudCotizacion = new ArrayList<BeanItemSolicitudCotizacion>();
 	private Date fecha;
-	private BeanCliente beanCliente;
+	private BeansCliente BeansCliente;
 
 	public int getId() {
 		return id;
@@ -33,11 +33,11 @@ public class BeanSolicitudCotizacion implements Serializable{
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public BeanCliente getBeanCliente() {
-		return beanCliente;
+	public BeansCliente getBeansCliente() {
+		return BeansCliente;
 	}
-	public void setBeanCliente(BeanCliente beanCliente) {
-		this.beanCliente = beanCliente;
+	public void setBeansCliente(BeansCliente BeansCliente) {
+		this.BeansCliente = BeansCliente;
 	}
 	
 	

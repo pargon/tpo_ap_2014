@@ -1,13 +1,13 @@
 
 package model;
 
+import hbt.dao.PersistentObject;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import util.PersistentObject;
 
 @Entity
 @Table(name="casa_central")

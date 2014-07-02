@@ -1,5 +1,7 @@
 package test;
 
+import hbt.dao.HibernateDAO;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,7 +9,6 @@ import java.util.List;
 import model.Cliente;
 import model.Factura;
 import model.Remito;
-import util.HibernateDAO;
 
 
 public class Test {

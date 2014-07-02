@@ -4,7 +4,6 @@ import hbt.dao.HibernateCotizacionRodamientoDAO;
 import hbt.dao.HibernateFacturaDAO;
 import hbt.dao.HibernateItemRodamientoDAO;
 import hbt.dao.HibernateSolicitudCotizacionDAO;
-import interfaz.TDAManejoDatos;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,7 +38,7 @@ import model.SolicitudCotizacion;
 import model.SolicitudCotizacionSRV;
 import model.Usuario;
 import model.UsuarioSRV;
-import beans.BeanCliente;
+import beans.BeansCliente;
 import beans.BeanCotizacionRodamiento;
 import beans.BeanFactura;
 import beans.BeanItemCotizacionRodamiento;
@@ -69,27 +68,27 @@ public class RMIController extends UnicastRemoteObject implements TDAManejoDatos
 	}
 
 	@Override
-	public boolean setCliente(BeanCliente beanCliente) throws RemoteException {
+	public boolean setCliente(BeansCliente BeansCliente) throws RemoteException {
 		System.out.println("Alta Cliente en Servidor!");
-		Cliente c = ClienteSRV.getinstancia().fromBean(beanCliente);
+		Cliente c = ClienteSRV.getinstancia().fromBean(BeansCliente);
 		System.out.println(c.getCuit());
 		ClienteSRV.getinstancia().guardar(c);
 		return true;
 	}
 	
 	@Override
-	public boolean updateCliente(BeanCliente beanCliente)
+	public boolean updateCliente(BeansCliente BeansCliente)
 			throws RemoteException {
 		System.out.println("Modif. Cliente en Servidor!");
-		Cliente c = ClienteSRV.getinstancia().fromBean(beanCliente);
+		Cliente c = ClienteSRV.getinstancia().fromBean(BeansCliente);
 		return ClienteSRV.getinstancia().actualizarCliente(c);
 	}
 
 	@Override
-	public boolean deleteCliente(BeanCliente beanCliente)
+	public boolean deleteCliente(BeansCliente BeansCliente)
 			throws RemoteException {
 		System.out.println("Baja Cliente en Servidor!");
-		Cliente cliente = ClienteSRV.getinstancia().fromBean(beanCliente);
+		Cliente cliente = ClienteSRV.getinstancia().fromBean(BeansCliente);
 		return ClienteSRV.getinstancia().borrarCliente(cliente);
 	}
 	
@@ -313,7 +312,7 @@ public class RMIController extends UnicastRemoteObject implements TDAManejoDatos
 		
 		beanCotizacionRodamiento.setBeanitemsCotizacion(listaBeanItemsCotizacionRodamiento);
 		beanCotizacionRodamiento.setFechaCotizacion(beanSolicitudCotizacion.getFecha());
-		beanCotizacionRodamiento.setBeanCliente(beanSolicitudCotizacion.getBeanCliente());
+		beanCotizacionRodamiento.setBeansCliente(beanSolicitudCotizacion.getBeansCliente());
 		beanCotizacionRodamiento.setActiva(1);
 		Date fechaVencimiento = beanSolicitudCotizacion.getFecha();    
 		Calendar cal = Calendar.getInstance();   
@@ -353,20 +352,20 @@ public class RMIController extends UnicastRemoteObject implements TDAManejoDatos
 		
 	}	
 	
-	public List<BeanCliente> getListaClientes()throws RemoteException{
+	public List<BeansCliente> getListaClientes()throws RemoteException{
 		System.out.println("Levantar clientes desde Servidor!");
-		List<BeanCliente> beanClientes = new ArrayList<BeanCliente>(); 
+		List<BeansCliente> BeansClientes = new ArrayList<BeansCliente>(); 
 		List<Cliente> clientes = ClienteSRV.getinstancia().levantarClientes();
 		for(Cliente cliente: clientes ){
-			BeanCliente beanCliente = new BeanCliente();
-			beanCliente.setContacto(cliente.getContacto());
-			beanCliente.setCuit(cliente.getCuit());
-			beanCliente.setPorcentajeDesc(cliente.getPorcentajeDesc());
-			beanCliente.setRazonSocial(cliente.getRazonSocial());
-			beanCliente.setTelefono(cliente.getTelefono());
-			beanClientes.add(beanCliente);
+			BeansCliente BeansCliente = new BeansCliente();
+			BeansCliente.setContacto(cliente.getContacto());
+			BeansCliente.setCuit(cliente.getCuit());
+			BeansCliente.setPorcentajeDesc(cliente.getPorcentajeDesc());
+			BeansCliente.setRazonSocial(cliente.getRazonSocial());
+			BeansCliente.setTelefono(cliente.getTelefono());
+			BeansClientes.add(BeansCliente);
 		}
-		return beanClientes;
+		return BeansClientes;
 	}
 	
 	
@@ -384,21 +383,21 @@ public class RMIController extends UnicastRemoteObject implements TDAManejoDatos
 	}
 
 	@Override
-	public List<BeanCliente> buscarClientesCriterios(String nombreCliente,
+	public List<BeansCliente> buscarClientesCriterios(String nombreCliente,
 			String cuitCliente) throws RemoteException {
 		
-		List<BeanCliente> beanClientes = new ArrayList<BeanCliente>(); 
+		List<BeansCliente> BeansClientes = new ArrayList<BeansCliente>(); 
 		List<Cliente> clientes = ClienteSRV.getinstancia().buscarClientes(nombreCliente,cuitCliente);
 		for(Cliente cliente: clientes ){
-			BeanCliente beanCliente = new BeanCliente();
-			beanCliente.setContacto(cliente.getContacto());
-			beanCliente.setCuit(cliente.getCuit());
-			beanCliente.setPorcentajeDesc(cliente.getPorcentajeDesc());
-			beanCliente.setRazonSocial(cliente.getRazonSocial());
-			beanCliente.setTelefono(cliente.getTelefono());
-			beanClientes.add(beanCliente);
+			BeansCliente BeansCliente = new BeansCliente();
+			BeansCliente.setContacto(cliente.getContacto());
+			BeansCliente.setCuit(cliente.getCuit());
+			BeansCliente.setPorcentajeDesc(cliente.getPorcentajeDesc());
+			BeansCliente.setRazonSocial(cliente.getRazonSocial());
+			BeansCliente.setTelefono(cliente.getTelefono());
+			BeansClientes.add(BeansCliente);
 		}
-		return beanClientes;
+		return BeansClientes;
 	}
 
 	@Override
@@ -422,13 +421,13 @@ public class RMIController extends UnicastRemoteObject implements TDAManejoDatos
 			beanCotizacionRodamiento.setId(cotizacion.getId());
 			
 			Cliente cliente = cotizacion.getCliente();
-			BeanCliente beanCliente = new BeanCliente();
-			beanCliente.setContacto(cliente.getContacto());
-			beanCliente.setCuit(cliente.getCuit());
-			beanCliente.setPorcentajeDesc(cliente.getPorcentajeDesc());
-			beanCliente.setRazonSocial(cliente.getRazonSocial());
-			beanCliente.setTelefono(cliente.getTelefono());
-			beanCotizacionRodamiento.setBeanCliente(beanCliente);
+			BeansCliente BeansCliente = new BeansCliente();
+			BeansCliente.setContacto(cliente.getContacto());
+			BeansCliente.setCuit(cliente.getCuit());
+			BeansCliente.setPorcentajeDesc(cliente.getPorcentajeDesc());
+			BeansCliente.setRazonSocial(cliente.getRazonSocial());
+			BeansCliente.setTelefono(cliente.getTelefono());
+			beanCotizacionRodamiento.setBeansCliente(BeansCliente);
 			
 			List<BeanItemCotizacionRodamiento> beanItemsCotizacion = new ArrayList<BeanItemCotizacionRodamiento>();
 			for (ItemCotizacion itemCotizacionRodamiento : cotizacion.getItemsCotizacion()) {
@@ -501,7 +500,7 @@ public class RMIController extends UnicastRemoteObject implements TDAManejoDatos
 			Float precio = beanItemCotizacionRodamiento.getBeanitemsRodamiento().getPrecio();
 			total += precio * cant;
 		}
-		beanFactura.setTotal(total*(1-(beanCotizacionRodamiento.getBeanCliente().getPorcentajeDesc()/100)));
+		beanFactura.setTotal(total*(1-(beanCotizacionRodamiento.getBeansCliente().getPorcentajeDesc()/100)));
 		beanFactura.setBeanCotizacion(beanCotizacionRodamiento);
 		
 		CotizacionRodamiento cotizacionRodamiento = CotizacionRodamientoSRV.getinstancia().fromBean(beanCotizacionRodamiento);

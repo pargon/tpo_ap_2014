@@ -22,7 +22,7 @@ private HibernateDAO hdao;
 	}
 	
 	public void guardarCotizacionRodamiento(CotizacionRodamiento cotizacion){
-		 hdao.getInstancia().persistirGenerico(cotizacion);
+		 hdao.getInstancia().persistir(cotizacion);
 	}
 
 }

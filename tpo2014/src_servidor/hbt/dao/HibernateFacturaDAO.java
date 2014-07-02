@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import util.HibernateUtil;
 import model.ClienteSRV;
 import model.CotizacionRodamiento;
 import model.Factura;

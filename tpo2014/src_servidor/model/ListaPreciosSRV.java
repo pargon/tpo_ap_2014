@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import beans.BeanListaPrecios;
+import beans.BeansListaPrecios;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class ListaPreciosSRV {
 		HibernateListaPreciosDAO.getInstancia().guardarListaPrecios(listaPrecios);		
 	}
 	
-	public ListaPrecios fromBean (BeanListaPrecios blp){
+	public ListaPrecios fromBean (BeansListaPrecios blp){
 		return HibernateListaPreciosDAO.getInstancia().fromBeanListasPrecios(blp);
 	}
 	
@@ -49,6 +49,7 @@ public class ListaPreciosSRV {
 	    SAXBuilder builder = new SAXBuilder();
 	    List<ListaPrecios> listaPosta = new ArrayList<ListaPrecios>();
 	    for(int j=0;j<archivos.size();j++){
+	    	
 		    //File xmlFile = new File( "C:\\ListaPrecio1.xml" );
 	    	File xmlFile = new File(archivos.get(j) );
 		    ListaPrecios lista = new ListaPrecios();
@@ -63,6 +64,7 @@ public class ListaPreciosSRV {
 		        Element rootNode = document.getRootElement();
 		        lista.setId(Integer.parseInt(rootNode.getAttributeValue("numero")));
 		        System.out.println(lista.getId());
+		        
 		        Element proveedor = rootNode.getChild("Proveedor");
 		        String cuil = proveedor.getChildTextTrim("Cuil");
 		        prov.setCuit(cuil);
