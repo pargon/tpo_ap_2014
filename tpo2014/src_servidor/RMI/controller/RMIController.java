@@ -130,7 +130,14 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		cotizacionRodamiento.setItemsRodamiento(lraux);
 		//Falta calcular el precio total...aunque en el xml no lo indica. Creo que lo sacamos a la mierda mejor...
 		
-		new HibernateCotizacionRodamientoDAO().guardarCotizacionRodamiento(cotizacionRodamiento);		
+		new HibernateCotizacionRodamientoDAO().guardarCotizacionRodamiento(cotizacionRodamiento);
+		
+		// guarda lista  
+	    for (ListaPrecios lpre: lprecios)
+	    	ListaPreciosSRV.getinstancia().guardarLista(lpre);
+
+		System.out.println("Crea Cotización: "+ cotizacionRodamiento.getId());
+		
 		return cotizacionRodamiento.getId();	
 	}
 	
@@ -145,18 +152,18 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		
 		// recorre las ordenes de pedido pendientes
 		for(OrdenPedido op: lop){
-			List<ItemCotizacion> lro = op.getListaRod();
+			List<ItemRodamiento> lro = op.getListaRod();
 			
 			// recorre los rodamientos
-			for(ItemCotizacion itrod: lro){
-				Proveedor pr = itrod.getListaPrecios().getProveedor();
+			for(ItemRodamiento itrod: lro){
+				Proveedor pr = itrod.getProveedor();
 				boolean entro = false;
 							
 				// busca si esta el proveedor cargado en alguna OC
 				for(OrdenCompra oc: loc){
-					if(oc.getProveedor().equals( itrod.getListaPrecios().getProveedor())){
+					if(oc.getProveedor() == itrod.getProveedor()) {
 						oc.agregarOPedido(op);
-						oc.agregaItems(itrod.getItemRodamiento() );
+						oc.agregaItems(itrod );
 						entro = true;
 					}							
 				}
@@ -166,10 +173,12 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 					oc.setFecha(fecha);
 					oc.setProveedor(pr);
 					oc.agregarOPedido(op);
-					oc.agregaItems(itrod.getItemRodamiento() );
+					oc.agregaItems(itrod );
 					loc.add(oc);
 				}
-			}		
+			}	
+			
+			op.setEstado("OC");
 		}
 		
 		// persiste las OC
@@ -179,6 +188,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			oc.setEstado("PEN");
 			HibernateDAO.getInstancia().persistir(oc);
 			
+			System.out.println("Crea O.Compra: " +oc.getId() + " Proveedor: "+ oc.getProveedor().getRazonSocial());
 			/*
 			 * persistir en xml de proveedor y lista de precios
 			 * 
@@ -192,7 +202,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		OrdenCompra oc = OrdenCompraSRV.getinstancia().confimarRec(idOrdenCompra);
 
 		// crea remitos para ODV
-		Remito rem;
+		
 		Date fecha = new Date();
 		
 		// recorre los pedidos de la OC
@@ -200,19 +210,34 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		for(OrdenPedido op: peds){
 			
 			// crea remitos en funcion de la OC para ser enviados a la ODV
-			rem = new Remito();
+			Remito rem = new Remito();
 			rem.setCliente(op.getCliente());
 			rem.setFecha(fecha);
-			rem.setItems(oc.getItemsOC());
+			
+			// copia detalle de la OC al remito 
+			List<ItemRodamiento> lro =oc.getItemsOC();
+			List<ItemRodamiento> lro2 = new ArrayList<ItemRodamiento>(); 
+			for(ItemRodamiento itr: lro){
+				ItemRodamiento nitr = new ItemRodamiento();
+				nitr.setCantidad(itr.getCantidad());
+				nitr.setPrecio(itr.getPrecio());
+				nitr.setProveedor(itr.getProveedor());
+				nitr.setRodamiento(itr.getRodamiento());
+				
+				lro2.add(nitr);
+			}
+			rem.setItems(lro2);
+			
 			
 			HibernateDAO.getInstancia().persistir(rem);
+			
+			System.out.println("Crea remito: " + rem.getId() + " Cliente: " + rem.getCliente().getRazonSocial());
 			
 			/*
 			 * persistir en xml los remitos
 			 * 
 			 * 			
-			 */
-			
+			 */			
 		}
 	}
 
@@ -225,6 +250,8 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		op.setEstado("PEN");
 		op.setFecha(new Date());
 		HibernateDAO.getInstancia().persistir(op);
+		
+		System.out.println("Crea O.Pedido: " + op.getId() + " Cliente: "+ op.getCliente().getRazonSocial());
 		
 	}
 
