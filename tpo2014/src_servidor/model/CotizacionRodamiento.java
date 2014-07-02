@@ -16,9 +16,10 @@ public class CotizacionRodamiento implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	
 	@OneToMany(cascade=CascadeType.ALL)
- 	//private List<ItemCotizacion> itemsCotizacion = new ArrayList<ItemCotizacion>();
-	private List<ItemRodamiento> itemsRodamiento = new ArrayList<ItemRodamiento>();
+	private List<ItemCotizacion> itemsCot = new ArrayList<ItemCotizacion>();
+	
 	@OneToOne
 	@PrimaryKeyJoinColumn
  	private SolicitudCotizacion solicitudCotizacion = new SolicitudCotizacion();
@@ -26,9 +27,6 @@ public class CotizacionRodamiento implements Serializable{
 	private int termino;
 	private Integer activa;
 	private float precioFinal;
-	//private int descuento;
-	//private int financiacionDias;
-	//private int recargo;
 
 	
 	
@@ -69,11 +67,11 @@ public class CotizacionRodamiento implements Serializable{
 	public void setActiva(Integer activa) {
 		this.activa = activa;
 	}
-	public List<ItemRodamiento> getItemsRodamiento() {
-		return itemsRodamiento;
+	public List<ItemCotizacion> getItemsRodamiento() {
+		return itemsCot;
 	}
-	public void setItemsRodamiento(List<ItemRodamiento> itemsRodamiento) {
-		this.itemsRodamiento = itemsRodamiento;
+	public void setItemsRodamiento(List<ItemCotizacion> itemsCot) {
+		this.itemsCot = itemsCot;
 	}
 	public float getPrecioFinal() {
 		return precioFinal;
@@ -81,27 +79,4 @@ public class CotizacionRodamiento implements Serializable{
 	public void setPrecioFinal(float precioFinal) {
 		this.precioFinal = precioFinal;
 	}
-	/*
-	public int getDescuento() {
-		return descuento;
-	}
-	public void setDescuento(int descuento) {
-		this.descuento = descuento;
-	}
-	public int getFinanciacionDias() {
-		return financiacionDias;
-	}
-	public void setFinanciacionDias(int financiacionDias) {
-		this.financiacionDias = financiacionDias;
-	}
-	public int getRecargo() {
-		return recargo;
-	}
-	public void setRecargo(int recargo) {
-		this.recargo = recargo;
-	}
-	*/
-
-	
-	
 }

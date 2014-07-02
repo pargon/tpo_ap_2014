@@ -19,12 +19,12 @@ import Interfaz.InterfazRMI;
 import model.Cliente;
 import model.ClienteSRV;
 import model.CotizacionRodamiento;
-import model.CotizacionRodamientoSRV;
 import model.FacturaSRV;
 import model.ItemRodamiento;
 import model.ItemSolicitudCotizacion;
 import model.ListaPrecios;
 import model.ListaPreciosSRV;
+import model.OrdenCompra;
 import model.OrdenPedido;
 import model.OrdenPedidoSRV;
 import model.Remito;
@@ -74,7 +74,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		
 		return facturas;
 	}
-
+	
 	@Override
 	public int guardarSolicitudCotizacion(BeanSolicitudCotizacion beanSolicitudCotizacion)
 	throws RemoteException {
@@ -117,19 +117,12 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		cotizacionRodamiento.setItemsRodamiento(lraux);
 		//Falta calcular el precio total...aunque en el xml no lo indica. Creo que lo sacamos a la mierda mejor...
 		
-		new HibernateCotizacionRodamientoDAO().guardarCotizacionRodamiento(cotizacionRodamiento);
-		//Falta tmb hacer el toBean
-		BeanCotizacionRodamiento beanCotizacionRodamiento = CotizacionRodamientoSRV.getinstancia().toBean(cotizacionRodamiento);
-		return 0;
-		
-		
+		new HibernateCotizacionRodamientoDAO().guardarCotizacionRodamiento(cotizacionRodamiento);		
+		return cotizacionRodamiento.getId();	
 	}
 	
 	public void crearOrdenCompra() throws RemoteException {
-		// recorre ordenes de pedido pendientes
-		List<OrdenPedido> lop;
-		lop = OrdenPedidoSRV.getinstancia().getLista();	
-		
+	
 	}
 
 

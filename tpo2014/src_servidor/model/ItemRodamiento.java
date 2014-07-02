@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,10 +23,9 @@ public class ItemRodamiento {
 		@JoinColumn(name="pais", referencedColumnName="pais", updatable = false)
 		})
 	private Rodamiento rodamiento;
-//	@ManyToMany
-//	private List<Proveedor> proveedores = new ArrayList<Proveedor>(); 
 	private float precio;
 	private int cantidad;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -38,18 +38,18 @@ public class ItemRodamiento {
 	public void setRodamiento(Rodamiento rodamiento) {
 		this.rodamiento = rodamiento;
 	}
-//	public List<Proveedor> getProveedores() {
-//		return proveedores;
-//	}
-//	public void setProveedores(List<Proveedor> proveedores) {
-//		this.proveedores = proveedores;
-//	}
 	public float getPrecio() {
 		return precio;
 	}
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
-	
+	public int getCantidad() {
+		return cantidad;
+	}
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
 	
 }

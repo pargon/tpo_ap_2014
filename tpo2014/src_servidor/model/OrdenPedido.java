@@ -3,6 +3,7 @@ package model;
 import hbt.dao.PersistentObject;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -55,6 +56,11 @@ public class OrdenPedido extends PersistentObject {
 
 	public void setCot(CotizacionRodamiento cot) {
 		this.cot = cot;
+	}
+
+	public List<ItemCotizacion> getListaRod() {
+
+		return cot.getItemsRodamiento();
 	}
 
 	

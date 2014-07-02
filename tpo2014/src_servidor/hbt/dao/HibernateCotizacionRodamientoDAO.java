@@ -2,8 +2,6 @@ package hbt.dao;
 
 import java.util.List;
 
-import hbt.HibernateDAO;
-import hbt.HibernateUtil;
 import model.Cliente;
 import model.CotizacionRodamiento;
 import model.SolicitudCotizacion;

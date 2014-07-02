@@ -1,6 +1,7 @@
 package RMI.Server;
 
 import Interfaz.InterfazRMI;
+import RMI.controller.RMIController;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,10 +14,8 @@ import java.util.List;
 
 import model.ClienteSRV;
 import model.CotizacionRodamiento;
-import model.CotizacionRodamientoSRV;
 import model.FacturaSRV;
 import model.Remito;
-import model.RemitosSRV;
 import beans.*;
 import model.Cliente;
 import model.Factura;
@@ -26,8 +25,6 @@ import org.jdom2.Document;
 import org.jdom2.Element;             
 import org.jdom2.output.Format;       
 import org.jdom2.output.XMLOutputter; 
-
-import rmi.controller.*;
 
 //import com.thoughtworks.xstream.XStream;
 //import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -78,8 +75,8 @@ public class Server {
 		c1.add(Calendar.DATE,25); //le suma 25 días
 		beansCotizacion.setFechaVencimiento(c1.getTime());
 
-		CotizacionRodamiento cotizacion = CotizacionRodamientoSRV.getinstancia().fromBean(beansCotizacion);
-		CotizacionRodamientoSRV.getinstancia().guardar(cotizacion);
+		//CotizacionRodamiento cotizacion = CotizacionRodamientoSRV.getinstancia().fromBean(beansCotizacion);
+		//CotizacionRodamientoSRV.getinstancia().guardar(cotizacion);
 		
 		//creo un remito para el cliente existente
 		System.out.println("Crea remito para un cliente existente");
@@ -87,13 +84,13 @@ public class Server {
 		beansremito.setCliente(nuevoClienteBeans);
 		beansremito.setCotizacion(beansCotizacion);
 		beansremito.setFecha(Calendar.getInstance().getTime());
-		Remito remito = RemitosSRV.getinstancia().fromBean(beansremito);
-		RemitosSRV.getinstancia().guardar(remito);
+		//Remito remito = RemitosSRV.getinstancia().fromBean(beansremito);
+		//RemitosSRV.getinstancia().guardar(remito);
 		
 		
 		System.out.println("Ejecuta Venta de rodamiento");
 		List<BeansRemito> remitos = new ArrayList<BeansRemito>();
-		remitos = RemitosSRV.getinstancia().BuscarRemitosPendientesFacturacion(cliente.getId());
+		//remitos = RemitosSRV.getinstancia().BuscarRemitosPendientesFacturacion(cliente.getId());
 		BeansFactura facturas = new BeansFactura();
 		facturas = FacturaSRV.getinstancia().Facturar(remitos);
 		escribirXML(facturas);

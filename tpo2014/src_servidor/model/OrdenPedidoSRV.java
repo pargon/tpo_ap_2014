@@ -20,10 +20,10 @@ public class OrdenPedidoSRV {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public List<OrdenPedido> getLista() {
+	public List<OrdenPedido> getListaPendientes() {
 
 		String sql = "from OrdenPedido where estado=:est ";
-		return (List<OrdenPedido>) HibernateOPedidoDAO.getInstancia().parametros(sql, "estado", "est");
+		return (List<OrdenPedido>) HibernateOPedidoDAO.getInstancia().parametros(sql, "est", "PEN");
 	}
 
 }

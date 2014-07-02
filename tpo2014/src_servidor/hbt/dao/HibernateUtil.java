@@ -1,6 +1,7 @@
 package hbt.dao;
 
 import model.*;
+import model.Rodamiento.RodamientoId;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -24,6 +25,7 @@ public class HibernateUtil
 			config.addAnnotatedClass(ListaPrecios.class);
 			config.addAnnotatedClass(ListaOfertas.class);
 			config.addAnnotatedClass(Rodamiento.class);
+			config.addAnnotatedClass(RodamientoId.class);
 			config.addAnnotatedClass(Marca.class);
 			config.addAnnotatedClass(Proveedor.class);
 			config.addAnnotatedClass(ItemOC.class);
@@ -34,6 +36,8 @@ public class HibernateUtil
 			config.addAnnotatedClass(Remito.class);
 			config.addAnnotatedClass(CasaCentral.class);
 			config.addAnnotatedClass(MovimientoStock.class);
+			config.addAnnotatedClass(OrdenPedido.class);
+			
 			
 			sessionFactory = config.buildSessionFactory();
 		}
