@@ -3,10 +3,12 @@ package model;
 import hbt.dao.PersistentObject;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -21,13 +23,13 @@ public class Remito extends PersistentObject{
 	
 	
 	private Date fecha;
-	//@OneToOne(cascade=CascadeType.ALL)
-	//@PrimaryKeyJoinColumn
+	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Cliente cliente;
-	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	private CotizacionRodamiento cotizacion;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<ItemRodamiento> items;
+	
 	
 	public Date getFecha() {
 		return fecha;
@@ -41,11 +43,12 @@ public class Remito extends PersistentObject{
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public CotizacionRodamiento getCotizacion() {
-		return cotizacion;
+	public List<ItemRodamiento> getItems() {
+		return items;
 	}
-	public void setCotizacion(CotizacionRodamiento cotizacion) {
-		this.cotizacion = cotizacion;
+	public void setItems(List<ItemRodamiento> items) {
+		this.items = items;
 	}
+	
 	
 }

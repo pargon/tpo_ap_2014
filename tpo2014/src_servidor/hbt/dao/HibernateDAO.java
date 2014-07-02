@@ -1,5 +1,6 @@
 package hbt.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.*;
@@ -48,6 +49,12 @@ public class HibernateDAO {
 		Session session = getSession();
 		List<?> lista = session.createQuery(query).setParameter(prmName, prm).list();
 		return lista;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public Object get (Class c, Object o) {
+		Session session = getSession();
+		return session.get(c, (Serializable) o);
 	}
 	
 }

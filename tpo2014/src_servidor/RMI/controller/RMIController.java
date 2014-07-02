@@ -27,6 +27,7 @@ import model.ItemSolicitudCotizacion;
 import model.ListaPrecios;
 import model.ListaPreciosSRV;
 import model.OrdenCompra;
+import model.OrdenCompraSRV;
 import model.OrdenPedido;
 import model.OrdenPedidoSRV;
 import model.Proveedor;
@@ -149,23 +150,28 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 				// busca si esta el proveedor cargado en alguna OC
 				for(OrdenCompra oc: loc){
 					if(oc.getProveedor() == itrod.getListaPrecios().getProveedor()){
+						oc.agregarOPedido(op);
 						oc.agregaItems(itrod.getItemRodamiento() );
 						entro = true;
 					}							
 				}
 				//si no existia la crea con el rodamiento como primero
 				if(!entro){
-					OrdenCompra oc2 = new OrdenCompra();
-					oc2.setFecha(fecha);
-					oc2.setProveedor(pr);
-					oc2.agregaItems(itrod.getItemRodamiento() );
-					loc.add(oc2);
+					OrdenCompra oc = new OrdenCompra();
+					oc.setFecha(fecha);
+					oc.setProveedor(pr);
+					oc.agregarOPedido(op);
+					oc.agregaItems(itrod.getItemRodamiento() );
+					loc.add(oc);
 				}
 			}		
 		}
 		
 		// persiste las OC
 		for(OrdenCompra oc: loc){
+			
+			// quedan pendientes de recepción de mercadería
+			oc.setEstado("PEN");
 			HibernateDAO.getInstancia().persistir(oc);
 			
 			/*
@@ -173,6 +179,35 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			 * 
 			 * 			
 			 */
+		}
+	}
+	
+	public void recepcionMercaderia(int idOrdenCompra) throws RemoteException {
+		// confirma la recepcion de la OC
+		OrdenCompra oc = OrdenCompraSRV.getinstancia().confimarRec(idOrdenCompra);
+
+		// crea remitos para ODV
+		Remito rem;
+		Date fecha = new Date();
+		
+		// recorre los pedidos de la OC
+		List<OrdenPedido> peds = oc.getPedidos();
+		for(OrdenPedido op: peds){
+			
+			// crea remitos en funcion de la OC para ser enviados a la ODV
+			rem = new Remito();
+			rem.setCliente(op.getCliente());
+			rem.setFecha(fecha);
+			rem.setItems(oc.getItemsOC());
+			
+			HibernateDAO.getInstancia().persistir(rem);
+			
+			/*
+			 * persistir en xml los remitos
+			 * 
+			 * 			
+			 */
+			
 		}
 	}
 }
