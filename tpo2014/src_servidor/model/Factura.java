@@ -13,15 +13,24 @@ public class Factura {
 	private Integer nroFactura;
 	private Date fecha;
 	private Float total;
-	
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private Cliente cliente;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="fac_rem",joinColumns=@JoinColumn(name="idFactura"),inverseJoinColumns=@JoinColumn(name="idRemito") )
 	//@JoinColumn(name="idRemi")
-	
 	private List<Remito> remitos = new ArrayList<Remito>();
 	private String estado;
 	
 	public Factura() {
+	}
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	public Integer getNroFactura() {
@@ -55,6 +64,10 @@ public class Factura {
 
 	public void setRemitos(List<Remito> remitos) {
 		this.remitos = remitos;
+	}
+	
+	public void setRemitoSolo(Remito remito){
+		this.remitos.add(remito);
 	}
 	
 		

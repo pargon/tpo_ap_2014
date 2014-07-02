@@ -20,6 +20,7 @@ import Interfaz.InterfazRMI;
 import model.Cliente;
 import model.ClienteSRV;
 import model.CotizacionRodamiento;
+import model.Factura;
 import model.FacturaSRV;
 import model.ItemCotizacion;
 import model.ItemRodamiento;
@@ -226,6 +227,52 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		HibernateDAO.getInstancia().persistir(op);
 		
 	}
+
+	@Override
+	public void facturar() throws RemoteException {
+		
+		List<Remito> lr;
+		boolean entro = false;
+		
+		// recorre remitos pendientes
+		String query = "Select r from Remito r where r.estado = 'PEN'";
+		lr = (List<Remito>) new HibernateDAO().getInstancia().getlista(query);	
+		Date fecha = new java.util.Date();
+		List<Factura> lfacturas = new ArrayList<Factura>();
+		// recorre los remitos pendientes
+		for(Remito remito: lr){
+			//primera vez
+			if(lfacturas.size() == 0){
+				Factura f = new Factura();
+				f.setCliente(remito.getCliente());
+				f.setFecha(new Date());
+				f.setRemitoSolo(remito);
+				lfacturas.add(f);
+			}
+			else
+			{
+				for(int i=0; i<lfacturas.size();i++){
+					if(lfacturas.get(i).getCliente().equals(remito.getCliente())){
+						lfacturas.get(i).setRemitoSolo(remito);
+						entro = true;
+					}
+				}
+				if(entro == false){
+					Factura f2 = new Factura();
+					f2.setCliente(remito.getCliente());
+					f2.setFecha(new Date());
+					f2.setRemitoSolo(remito);
+					lfacturas.add(f2);
+				}
+				entro = false;
+			}
+
+		}	
+		for(Factura f3 : lfacturas){
+			new HibernateDAO().getInstancia().persistir(f3);
+		}
+	}
+
 }
 	
 
