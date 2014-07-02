@@ -1,6 +1,6 @@
 package model;
 
-import hbt.dao.HibernateItemRodamientoDAO;
+
 import hbt.dao.HibernateListaPreciosDAO;
 
 import java.util.ArrayList;
@@ -12,7 +12,15 @@ import beans.BeansListaPrecios;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import model.Marca.MarcaId;
 import model.Rodamiento.RodamientoId;
@@ -21,6 +29,9 @@ import org.jdom2.Document;         // |
 import org.jdom2.Element;          // |\ Librerías
 import org.jdom2.JDOMException;    // |/ JDOM
 import org.jdom2.input.SAXBuilder; // |
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public class ListaPreciosSRV {
 	private static ListaPreciosSRV instancia;
@@ -99,6 +110,7 @@ public class ListaPreciosSRV {
 		        	String medida = item.getChildTextTrim("Medida");
 		        	String caract = item.getChildTextTrim("Caracteristica");
 		        	String precio = item.getChildTextTrim("Precio");
+			        String cant= item.getChildTextTrim("Cantidad");
 		        	Rodamiento roda = new Rodamiento();
 		        	roda.setCaracteristicas(caract);
 		        	roda.setMedida(Float.valueOf(medida));
@@ -135,5 +147,44 @@ public class ListaPreciosSRV {
 		    listaPosta.add(lista);
 	    }//del for archivos
 	return listaPosta;
+	}
+	
+	public void actualizarCantidad(String filepath, String codRod, int cantidad){
+	 try {
+			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+			Document doc = (Document) docBuilder.parse(filepath);
+	 
+			Element rootNode = doc.getRootElement();
+			Element Rodamiento = rootNode.getChild("Rodamientos");
+			List<Element> items = Rodamiento.getChildren("Item"); 
+	 
+			//loop por cada item
+			for(int i=0; i<items.size();i++){
+				Element it = items.get(i);
+			    if(it.getChild("Codigo").equals(codRod)){
+			    	Element cant = it.getChild("Cantidad");
+			    	cant.setText(Integer.toString(cantidad));
+			    }
+			}
+	 
+			// write the content into xml file
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			javax.xml.transform.Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource((Node) doc);
+			StreamResult result = new StreamResult(new File(filepath));
+			transformer.transform(source, result);
+	 
+			System.out.println("Done");
+	 
+		   } catch (ParserConfigurationException pce) {
+			pce.printStackTrace();
+		   } catch (TransformerException tfe) {
+			tfe.printStackTrace();
+		   } catch (IOException ioe) {
+			ioe.printStackTrace();
+		   } catch (SAXException sae) {
+			sae.printStackTrace();
+		   }
 	}
 }
