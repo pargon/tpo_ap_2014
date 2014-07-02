@@ -10,7 +10,7 @@ public class BeanItemSolicitudCotizacion implements Serializable{
 	private Integer id;
 	private BeanRodamiento beanRodamiento;
 	private Integer cantidad;
-	private float precio;
+	
 		
 	
 	public Integer getId() {
@@ -31,12 +31,7 @@ public class BeanItemSolicitudCotizacion implements Serializable{
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
-	public float getPrecio() {
-		return precio;
-	}
-	public void setPrecio(float precio) {
-		this.precio = precio;
-	}
+
 	
 	
 }

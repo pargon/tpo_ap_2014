@@ -119,7 +119,7 @@ public class Test {
 		
 		ocompra();
 		
-		recepcionMercaderia(1);
+		//recepcionMercaderia(1);
 		
 		System.exit(0);
 	}
