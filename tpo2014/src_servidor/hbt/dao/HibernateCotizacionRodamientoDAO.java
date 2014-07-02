@@ -2,15 +2,31 @@ package hbt.dao;
 
 import java.util.List;
 
-import util.HibernateUtil;
+import hbt.HibernateDAO;
+import hbt.HibernateUtil;
 import model.Cliente;
 import model.CotizacionRodamiento;
+import model.SolicitudCotizacion;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+public class HibernateCotizacionRodamientoDAO {
+	
+private HibernateDAO hdao;
+	
+	public HibernateCotizacionRodamientoDAO(){
+		
+	}
+	
+	public void guardarCotizacionRodamiento(CotizacionRodamiento cotizacion){
+		 hdao.getInstancia().persistirGenerico(cotizacion);
+	}
+
+}
+/*
 public class HibernateCotizacionRodamientoDAO {
 	private static HibernateCotizacionRodamientoDAO instancia = null;
 	private static SessionFactory sf = null;
@@ -65,3 +81,4 @@ public class HibernateCotizacionRodamientoDAO {
 	}
 	
 }
+*/
