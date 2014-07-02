@@ -1,4 +1,4 @@
-package util;
+package hbt.dao;
 
 import model.*;
 
