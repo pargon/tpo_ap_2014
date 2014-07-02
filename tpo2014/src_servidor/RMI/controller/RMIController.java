@@ -1,6 +1,7 @@
 package RMI.controller;
 
 import hbt.dao.HibernateCotizacionRodamientoDAO;
+import hbt.dao.HibernateOPedidoDAO;
 import hbt.dao.HibernateSolicitudCotizacionDAO;
 
 import java.rmi.RemoteException;
@@ -24,6 +25,8 @@ import model.ItemRodamiento;
 import model.ItemSolicitudCotizacion;
 import model.ListaPrecios;
 import model.ListaPreciosSRV;
+import model.OrdenPedido;
+import model.OrdenPedidoSRV;
 import model.Remito;
 import model.SolicitudCotizacion;
 import model.SolicitudCotizacionSRV;
@@ -73,7 +76,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 	}
 
 	@Override
-	public BeanCotizacionRodamiento guardarSolicitudCotizacion(BeanSolicitudCotizacion beanSolicitudCotizacion)
+	public int guardarSolicitudCotizacion(BeanSolicitudCotizacion beanSolicitudCotizacion)
 	throws RemoteException {
 		SolicitudCotizacion solicitudCotizacion = SolicitudCotizacionSRV.getinstancia().fromBean(beanSolicitudCotizacion);
 		new HibernateSolicitudCotizacionDAO().guardarSolicitudCotizacion(solicitudCotizacion);
@@ -117,12 +120,15 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		new HibernateCotizacionRodamientoDAO().guardarCotizacionRodamiento(cotizacionRodamiento);
 		//Falta tmb hacer el toBean
 		BeanCotizacionRodamiento beanCotizacionRodamiento = CotizacionRodamientoSRV.getinstancia().toBean(cotizacionRodamiento);
-		return beanCotizacionRodamiento;
+		return 0;
 		
 		
 	}
 	
 	public void crearOrdenCompra() throws RemoteException {
+		// recorre ordenes de pedido pendientes
+		List<OrdenPedido> lop;
+		lop = OrdenPedidoSRV.getinstancia().getLista();	
 		
 	}
 
