@@ -1,15 +1,35 @@
 package model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="itemSolicitudCotizacion")
 public class ItemSolicitudCotizacion {
 
-	private ItemRodamiento itemRodamiento;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
+	@OneToOne
+	@JoinColumns({
+		@JoinColumn(name="codigo", referencedColumnName="codigo", updatable = false),
+		@JoinColumn(name="descripcion", referencedColumnName="descripcion",  updatable = false),
+		@JoinColumn(name="pais", referencedColumnName="pais", updatable = false)
+		})
+	private Rodamiento rodamiento;
 	private Integer cantidad;
 	
-	public ItemRodamiento getItemRodamiento() {
-		return itemRodamiento;
+	public Rodamiento getRodamiento() {
+		return rodamiento;
 	}
-	public void setItemRodamiento(ItemRodamiento itemRodamiento) {
-		this.itemRodamiento = itemRodamiento;
+	public void setRodamiento(Rodamiento Rodamiento) {
+		this.rodamiento = Rodamiento;
 	}
 	public Integer getCantidad() {
 		return cantidad;

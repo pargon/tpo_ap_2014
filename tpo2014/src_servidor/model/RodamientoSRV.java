@@ -6,6 +6,7 @@ import java.util.List;
 
 import model.Marca.MarcaId;
 import model.Rodamiento.RodamientoId;
+import beans.BeanMarca;
 import beans.BeanRodamiento;
 
 public class RodamientoSRV {
@@ -26,13 +27,8 @@ public class RodamientoSRV {
 	public Rodamiento fromBean(BeanRodamiento beanRodamiento) {
 		Rodamiento rodamiento = new Rodamiento();
 		RodamientoId rodamientoId = new RodamientoId();
-//		Rodamiento.RodamientoId rodamientoId = new Rodamiento.RodamientoId();
 		rodamientoId.setCodigo(beanRodamiento.getCodigo());
 		Marca marca = new Marca();
-//		marca.setDescripcion(beanRodamiento.getBeanMarca().getDescripcion());
-//		marca.setPais(beanRodamiento.getBeanMarca().getPais());
-//		marca.setId(beanRodamiento.getBeanMarca().getId());
-//		rodamiento.setMarca(marca);
 		MarcaId mId = new MarcaId();
 		mId.setDescripcion(beanRodamiento.getBeanMarca().getDescripcion());
 		mId.setPais(beanRodamiento.getBeanMarca().getPais());
@@ -42,9 +38,20 @@ public class RodamientoSRV {
 		rodamiento.setCaracteristicas(beanRodamiento.getCaracteristicas());
 		rodamiento.setMedida(beanRodamiento.getMedida());
 		rodamiento.setRodamientoId(rodamientoId);
-//		if (0 != beanRodamiento.getId())
-//			rodamiento.setId(beanRodamiento.getId());
 		return rodamiento;
+	}
+	
+	public BeanRodamiento toBean(Rodamiento rodamiento) {
+		BeanRodamiento brodamiento = new BeanRodamiento();
+		brodamiento.setCodigo(rodamiento.getRodamientoId().getCodigo());
+		BeanMarca bmarca = new BeanMarca();
+		bmarca.setDescripcion(rodamiento.getRodamientoId().getMarca().getMarcaId().getDescripcion());
+		bmarca.setPais(rodamiento.getRodamientoId().getMarca().getMarcaId().getPais());
+		brodamiento.setBeanMarca(bmarca);
+		brodamiento.setTipo(rodamiento.getTipo());
+		brodamiento.setCaracteristicas(rodamiento.getCaracteristicas());
+		brodamiento.setMedida(String.valueOf(rodamiento.getMedida()));
+		return brodamiento;
 	}
 	
 	public List<Rodamiento> levantarRodamientos() {
@@ -62,4 +69,8 @@ public class RodamientoSRV {
 	public void actualizarRodamiento (Rodamiento rNuevo){
 		HibernateRodamientoDAO.getInstancia().actualizarRodamiento(rNuevo);
 	}
+	
+
+	
+
 }

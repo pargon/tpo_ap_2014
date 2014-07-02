@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.*;
 
@@ -20,9 +21,31 @@ public class ListaPrecios implements Serializable {
 	private List<ItemRodamiento> itemsRodamiento = new ArrayList<ItemRodamiento>();
 	@ManyToOne
 	private Proveedor proveedor;
+	private int descuento;
+	private List<Map<Integer,Float>> financiacion;
 	
 	
 	
+	
+	
+	public int getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(int descuento) {
+		this.descuento = descuento;
+	}
+
+
+
+	public List<Map<Integer, Float>> getFinanciacion() {
+		return financiacion;
+	}
+
+	public void setFinanciacion(List<Map<Integer, Float>> financiacion) {
+		this.financiacion = financiacion;
+	}
+
 	public ListaPrecios() {
 		this.itemsRodamiento = new ArrayList<ItemRodamiento>();
 	}
