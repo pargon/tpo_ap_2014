@@ -18,7 +18,7 @@ public class CotizacionRodamiento implements Serializable{
 	private int id;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	private List<ItemCotizacion> itemsCot = new ArrayList<ItemCotizacion>();
+	private List<ItemRodamiento> itemsRodamiento = new ArrayList<ItemRodamiento>();
 	
 	@OneToOne
 	@PrimaryKeyJoinColumn
@@ -67,11 +67,11 @@ public class CotizacionRodamiento implements Serializable{
 	public void setActiva(Integer activa) {
 		this.activa = activa;
 	}
-	public List<ItemCotizacion> getItemsRodamiento() {
-		return itemsCot;
+	public List<ItemRodamiento> getItemsRodamiento() {
+		return itemsRodamiento;
 	}
-	public void setItemsRodamiento(List<ItemCotizacion> itemsCot) {
-		this.itemsCot = itemsCot;
+	public void setItemsRodamiento(List<ItemRodamiento> itemsRod) {
+		this.itemsRodamiento = itemsRod;
 	}
 	public float getPrecioFinal() {
 		return precioFinal;

@@ -25,7 +25,16 @@ public class ItemRodamiento {
 	private Rodamiento rodamiento;
 	private float precio;
 	private int cantidad;
+	@OneToOne(cascade=CascadeType.ALL)
+	private Proveedor proveedor;
 	
+	
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
 	public Integer getId() {
 		return id;
 	}

@@ -107,15 +107,18 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 						itemRoda.setRodamiento(liscaux.get(i).getRodamiento());
 						itemRoda.setPrecio(irs.get(j).getPrecio());
 						itemRoda.setCantidad(liscaux.get(i).getCantidad());
+						itemRoda.setProveedor(irs.get(j).getProveedor());
 						//ItemCotizacion itcot = new ItemCotizacion();
 						//itcot.setItemRodamiento(itemRoda);
 						
 						//si es la primera vez que colecto los items no los puedo comparar, los agrego directamente
 						if(lraux.get(j) == null)
-							lraux.add(itcot);
+							lraux.add(itemRoda);
 						else
-							if(itemRoda.getPrecio() < lraux.get(i).getItemRodamiento().getPrecio())
-								lraux.get(i).getItemRodamiento().setPrecio(itemRoda.getPrecio());
+							if(itemRoda.getPrecio() < lraux.get(i).getPrecio()){
+								lraux.get(i).setPrecio(itemRoda.getPrecio());
+								lraux.get(i).setProveedor(itemRoda.getProveedor());
+							}
 						j=irs.size();
 						
 						
