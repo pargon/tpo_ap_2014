@@ -94,7 +94,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		archivos.add("C:\\ListaPrecio1.xml");
 		archivos.add("C:\\ListaPrecio2.xml");
 		List<ListaPrecios> lprecios = new ListaPreciosSRV().getinstancia().getListas(archivos);
-		List<ItemCotizacion> lraux = new ArrayList<ItemCotizacion>();
+		List<ItemRodamiento> lraux = new ArrayList<ItemRodamiento>();
 		List<ItemSolicitudCotizacion> liscaux = solicitudCotizacion.getItemsSolicitudCotizacion();
 		for(ListaPrecios lp : lprecios){
 			List<ItemRodamiento> irs = lp.getItemsRodamiento();
@@ -106,8 +106,9 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 						ItemRodamiento itemRoda = new ItemRodamiento();
 						itemRoda.setRodamiento(liscaux.get(i).getRodamiento());
 						itemRoda.setPrecio(irs.get(j).getPrecio());
-						ItemCotizacion itcot = new ItemCotizacion();
-						itcot.setItemRodamiento(itemRoda);
+						itemRoda.setCantidad(liscaux.get(i).getCantidad());
+						//ItemCotizacion itcot = new ItemCotizacion();
+						//itcot.setItemRodamiento(itemRoda);
 						
 						//si es la primera vez que colecto los items no los puedo comparar, los agrego directamente
 						if(lraux.get(j) == null)
