@@ -118,7 +118,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 						
 						if(itemRoda.getPrecio() > irs.get(j).getPrecio() || itemRoda.getPrecio() == 0){
 							lraux.get(i).setPrecio(irs.get(j).getPrecio());
-							lraux.get(i).setProveedor(irs.get(j).getProveedor());
+							lraux.get(i).setProveedor(lp.getProveedor());
 						}
 						j=irs.size();
 						
@@ -132,10 +132,6 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		
 		new HibernateCotizacionRodamientoDAO().guardarCotizacionRodamiento(cotizacionRodamiento);
 		
-		// guarda lista  
-	    for (ListaPrecios lpre: lprecios)
-	    	ListaPreciosSRV.getinstancia().guardarLista(lpre);
-
 		System.out.println("Crea Cotización: "+ cotizacionRodamiento.getId());
 		
 		return cotizacionRodamiento.getId();	
@@ -188,7 +184,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			oc.setEstado("PEN");
 			HibernateDAO.getInstancia().persistir(oc);
 			
-			System.out.println("Crea O.Compra: " +oc.getId() + " Proveedor: "+ oc.getProveedor().getRazonSocial());
+			System.out.println("Crea O.Compra: " +oc.getId()+ " Proveedor: "+ oc.getProveedor().getRazonSocial());
 			/*
 			 * persistir en xml de proveedor y lista de precios
 			 * 
@@ -213,6 +209,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			Remito rem = new Remito();
 			rem.setCliente(op.getCliente());
 			rem.setFecha(fecha);
+			rem.setEstado("PEN");
 			
 			// copia detalle de la OC al remito 
 			List<ItemRodamiento> lro =oc.getItemsOC();
@@ -226,8 +223,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 				
 				lro2.add(nitr);
 			}
-			rem.setItems(lro2);
-			
+			rem.setItems(lro2);			
 			
 			HibernateDAO.getInstancia().persistir(rem);
 			
@@ -264,7 +260,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		// recorre remitos pendientes
 		String query = "Select r from Remito r where r.estado = 'PEN'";
 		lr = (List<Remito>) new HibernateDAO().getInstancia().getlista(query);	
-		Date fecha = new java.util.Date();
+
 		List<Factura> lfacturas = new ArrayList<Factura>();
 		// recorre los remitos pendientes
 		for(Remito remito: lr){

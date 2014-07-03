@@ -19,7 +19,7 @@ public class ListaPrecios implements Serializable {
 	@OneToMany
 	@PrimaryKeyJoinColumn
 	private List<ItemRodamiento> itemsRodamiento = new ArrayList<ItemRodamiento>();
-	@ManyToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Proveedor proveedor;
 	private int descuento;
 	private int financiacion_dias;

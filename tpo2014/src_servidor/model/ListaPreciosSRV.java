@@ -11,7 +11,10 @@ import java.util.Map;
 import beans.BeansListaPrecios;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+
+
 
 
 import javax.xml.parsers.DocumentBuilder;
@@ -29,6 +32,7 @@ import org.jdom2.Document;         // |
 import org.jdom2.Element;          // |\ Librerías
 import org.jdom2.JDOMException;    // |/ JDOM
 import org.jdom2.input.SAXBuilder; // |
+import org.jdom2.output.XMLOutputter;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -151,12 +155,52 @@ public class ListaPreciosSRV {
 	return listaPosta;
 	}
 	
+	public void actualizarListas(String filepath, String codRod, int cantidad){
+		//Se crea un SAXBuilder para poder parsear el archivo
+	    SAXBuilder builder = new SAXBuilder();
+    
+
+    	File xmlFile = new File(filepath );
+
+	    try
+	    {
+	        //Se crea el documento a traves del archivo
+	        Document document = (Document) builder.build( xmlFile );
+	 
+	        //Se obtiene la raiz 'tables'
+	        Element rootNode = document.getRootElement(); 
+	        Element Rodamiento = rootNode.getChild("Rodamientos");
+			List<Element> items = Rodamiento.getChildren("Item");
+			
+			// busca el que quiere actualizar
+			for(Element eit: items){
+				if (eit.getChildTextTrim("Codigo").equals( codRod) )
+					eit.getChild("Cantidad").setText(String.valueOf(cantidad));
+			}
+			
+			XMLOutputter xmloutput = new XMLOutputter();
+			xmloutput.output(document, new FileWriter(filepath));
+			
+			
+			
+	      
+	    }catch ( IOException io ) {
+	        System.out.println( io.getMessage() );
+	    }catch ( Exception jdomex ) {
+	        System.out.println( jdomex.getMessage() );
+	    }
+
+	}
+	
 	public void actualizarCantidad(String filepath, String codRod, int cantidad){
 	 try {
+		 	SAXBuilder builder = new SAXBuilder();
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-			Document doc = (Document) docBuilder.parse(filepath);
-	 
+			//Document doc = (Document) docBuilder.parse(filepath);
+			
+	        Document doc = (Document) builder.build( filepath );
+
 			Element rootNode = doc.getRootElement();
 			Element Rodamiento = rootNode.getChild("Rodamientos");
 			List<Element> items = Rodamiento.getChildren("Item"); 
@@ -185,7 +229,7 @@ public class ListaPreciosSRV {
 			tfe.printStackTrace();
 		   } catch (IOException ioe) {
 			ioe.printStackTrace();
-		   } catch (SAXException sae) {
+		   } catch (Exception sae) {
 			sae.printStackTrace();
 		   }
 	}

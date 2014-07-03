@@ -13,9 +13,10 @@ public class Factura {
 	private Integer nroFactura;
 	private Date fecha;
 	private Float total;
-	@OneToOne
-	@PrimaryKeyJoinColumn
+	
+	@OneToOne(cascade=CascadeType.ALL)
 	private Cliente cliente;
+	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="fac_rem",joinColumns=@JoinColumn(name="idFactura"),inverseJoinColumns=@JoinColumn(name="idRemito") )
 	//@JoinColumn(name="idRemi")

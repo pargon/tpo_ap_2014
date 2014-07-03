@@ -22,7 +22,6 @@ public class OrdenCompra {
 	private Date fecha;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn 
 	private Proveedor proveedor;
 	
 	private float total;

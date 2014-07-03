@@ -30,7 +30,7 @@ public interface InterfazRMI extends Remote {
 	public abstract void crearOrdenPedido(int idCotizacion) throws RemoteException;
 	
 	//--Facturar--//
-		public abstract void facturar() throws RemoteException;
+	public abstract void facturar() throws RemoteException;
 		
 	
 	public abstract int guardarSolicitudCotizacion(BeanSolicitudCotizacion beanSolicitudCotizacion) throws RemoteException;

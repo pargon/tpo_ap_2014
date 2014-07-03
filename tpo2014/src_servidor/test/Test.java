@@ -21,6 +21,7 @@ import model.Factura;
 import model.ItemCotizacion;
 import model.ItemRodamiento;
 import model.ItemSolicitudCotizacion;
+import model.ListaPreciosSRV;
 import model.Marca;
 import model.OrdenCompraSRV;
 import model.Marca.MarcaId;
@@ -49,8 +50,12 @@ public class Test {
 	
 	public static void main(String[] args) {
 
+		//testXML();
+		
+		//System.exit(1);
 		
 		//AltaDatos();
+		
 		BeanSolicitudCotizacion bsc = CrearBeanSolCot();
 		
 		try {
@@ -64,12 +69,19 @@ public class Test {
 			
 			new RMIController().recepcionMercaderia(ocnro);
 			
+			new RMIController().facturar();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		System.exit(0);
+	}
+
+	private static void testXML() {
+		new ListaPreciosSRV().actualizarListas("c:\\ListaPrecio1.xml", "1", 1542);
+		
 	}
 
 	private static int get1erOC() {
