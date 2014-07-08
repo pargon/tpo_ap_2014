@@ -49,7 +49,7 @@ public class OrdenCompraSRV {
 	
 	
 	
-	public void newDomXML(String archivo) {
+	public void newDomXML(OrdenCompra oc) {
 		// "OrdenCompra.xml";
 	
 	    try{
@@ -67,24 +67,24 @@ public class OrdenCompraSRV {
 	           root.appendChild(comment);
 	           doc.appendChild(root);
 	        //agrega un atributo al elemento y le asigna un valor
-	            root.setAttribute("numero","Nro de la orden de compra");
+	            root.setAttribute("numero",String.valueOf(oc.getId()));
 	         //   hijo.setAttribute("valor","valor del atributo");
 	          //  root.appendChild(hijo);
      
 		        //crea elemento hijo
 	            Element emision = doc.createElement("Emision");
-	            emision.setTextContent("fecha de emision");
+	            emision.setTextContent(String.valueOf(oc.getFecha()));
 	            root.appendChild(emision);
 	            
 	            Element cliente = doc.createElement("Cliente");
 	            root.appendChild(cliente);
 	           
 	            Element cuil = doc.createElement("Cuil");
-	            cuil.setTextContent("Nro de cuil del Proveedor");
+	            cuil.setTextContent(String.valueOf(oc.getProveedor().getCuit()));
 	            cliente.appendChild(cuil);
 	            
 	            Element razonsoc = doc.createElement("RazonSocial");
-	            razonsoc.setTextContent("Razon Social del Proveedor");
+	            razonsoc.setTextContent(String.valueOf(oc.getProveedor().getRazonSocial()));
 	            cliente.appendChild(razonsoc);
 	            
 	            Element rodamiento = doc.createElement("Rodamiento");
@@ -134,10 +134,11 @@ public class OrdenCompraSRV {
 		} 
 	}
 	
+	/*
 	public static void main(String[] args) {
 		OrdenCompraSRV ins = new OrdenCompraSRV();
-		ins.newDomXML("C:\\Lenguajes Visuales\\OrdenCompra.xml");
+		ins.newDomXML(OrdenCompra oc);
 		ins.saveDomXML("C:\\Lenguajes Visuales\\OrdenCompra.xml");
-	}
+	}*/
 
 }
