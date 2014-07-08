@@ -4,6 +4,9 @@ import hbt.dao.HibernateDAO;
 import hbt.dao.HibernateOPedidoDAO;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
@@ -134,11 +137,20 @@ public class OrdenCompraSRV {
 		} 
 	}
 	
-	/*
-	public static void main(String[] args) {
+	
+	public static void main(String[] args) throws ParseException {
 		OrdenCompraSRV ins = new OrdenCompraSRV();
-		ins.newDomXML(OrdenCompra oc);
+		OrdenCompra oc = new OrdenCompra();
+		oc.setId(1);
+		SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/mm/dd");
+		oc.setFecha(dt1.parse("2014/07/08"));
+		Proveedor prov = new Proveedor();
+		oc.setProveedor(prov);
+		oc.getProveedor().setCuit("32-9483924-9");
+		oc.getProveedor().setRazonSocial("CEM SRL");
+		oc.getProveedor().setDireccion("Independencia 323");
+		oc.getProveedor().setTelefono("324234");
+		ins.newDomXML(oc);
 		ins.saveDomXML("C:\\Lenguajes Visuales\\OrdenCompra.xml");
-	}*/
-
+	}
 }
