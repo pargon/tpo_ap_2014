@@ -229,16 +229,30 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			// guarda el remito
 			HibernateDAO.getInstancia().persistir(rem);
 			
-			// chequea si se cumplió la orden de pedido
-			if(RemitoSRV.getinstancia().cumplenOPedido(rem)){
-				// emite remitos;
+			// obtiene OPs que aún no se satisfacen
+			boolean exportarRem = true;
+			List<OrdenPedido> lop = RemitoSRV.getinstancia().cumplenOPedido(rem);
+			for (OrdenPedido itop: lop ){
+				
+				// encontro la OP entre las pendientes
+				if(itop.getId().equals(op.getId())){
+					exportarRem = false;
+					break;
+				}	
+			}
+			if (exportarRem){
+				
+				// cambia estado remito para poder facturarse
+				rem.setEstado("PEN");
+				HibernateDAO.getInstancia().persistir(rem);
+					
+				lop = new ArrayList<OrdenPedido>();
+				lop.add(op);
+				RemitoSRV.getinstancia().newDomXML(rem, lop);
+				RemitoSRV.getinstancia().saveDomXML("d:\\remito"+rem.getId() +".xml"  );
+				
+				// emite remitos
 				System.out.println("Crea remito: " + rem.getId() + " Cliente: " + rem.getCliente().getRazonSocial());
-			
-			/*
-			 * persistir en xml los remitos
-			 * 
-			 * 			
-			 */	
 			}
 		}
 	}

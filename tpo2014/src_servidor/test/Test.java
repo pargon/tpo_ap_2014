@@ -1,13 +1,10 @@
 package test;
 
 import hbt.dao.HibernateDAO;
-import hbt.dao.HibernetCasaDAO;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import beans.BeanItemSolicitudCotizacion;
 import beans.BeanMarca;
@@ -17,19 +14,14 @@ import beans.BeansCliente;
 import RMI.controller.RMIController;
 import model.Cliente;
 import model.CotizacionRodamiento;
-import model.Factura;
-import model.ItemCotizacion;
 import model.ItemRodamiento;
 import model.ItemSolicitudCotizacion;
 import model.ListaPreciosSRV;
 import model.Marca;
-import model.OrdenCompraSRV;
 import model.Marca.MarcaId;
 import model.OrdenCompra;
 import model.OrdenPedido;
-import model.OrdenPedidoSRV;
 import model.Proveedor;
-import model.Remito;
 import model.Rodamiento;
 import model.Rodamiento.RodamientoId;
 import model.SolicitudCotizacion;
@@ -37,7 +29,6 @@ import model.SolicitudCotizacion;
 
 public class Test {
 	
-	private static RMIController rmic;
 	private static HibernateDAO hdao;
 	
 	public Test() {
