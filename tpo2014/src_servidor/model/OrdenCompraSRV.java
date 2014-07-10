@@ -7,6 +7,7 @@ import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
@@ -93,25 +94,30 @@ public class OrdenCompraSRV {
 	            Element rodamiento = doc.createElement("Rodamiento");
 	            root.appendChild(rodamiento);
 	           
-	            Element item = doc.createElement("Item");
-	            rodamiento.appendChild(item);
-	            item.setAttribute("serie","Nro de serie");
+	            // recorre los items de la OC
+	            List<ItemRodamiento> ldetoc = oc.getItemsOC();
+	            for(ItemRodamiento itr: ldetoc){
+	            	
+	            	Element item = doc.createElement("Item");
+	            	rodamiento.appendChild(item);
+	            	item.setAttribute("serie", itr.getRodamiento().getRodamientoId().getCodigo());
 	            
-	            Element sufijo = doc.createElement("Sufijo");
-	            sufijo.setTextContent("Sufijo del codigo");
-	            item.appendChild(sufijo);
+	            	Element sufijo = doc.createElement("Sufijo");
+	            	sufijo.setTextContent(itr.getRodamiento().getTipo());
+	            	item.appendChild(sufijo);
 	            
-	            Element marca = doc.createElement("Marca");
-	            marca.setTextContent("Marca del fabricante");
-	            item.appendChild(marca);
+	            	Element marca = doc.createElement("Marca");
+	            	marca.setTextContent(itr.getRodamiento().getRodamientoId().getMarca().getMarcaId().getDescripcion());
+	            	item.appendChild(marca);
 	            
-	            Element origen = doc.createElement("Origen");
-	            origen.setTextContent("Pais de fabricacion");
-	            item.appendChild(origen);
+	            	Element origen = doc.createElement("Origen");
+	            	origen.setTextContent(itr.getRodamiento().getRodamientoId().getMarca().getMarcaId().getPais());
+	            	item.appendChild(origen);
 	            
-	            Element cantidad = doc.createElement("Cantidad");
-	            cantidad.setTextContent("Cantidad de unidades");
-	            item.appendChild(cantidad);
+	            	Element cantidad = doc.createElement("Cantidad");
+	            	cantidad.setTextContent(String.valueOf( itr.getCantidad()));
+	            	item.appendChild(cantidad);
+	            }
 	            
 	    }catch(Exception e){
 	    	System.out.println(e.getMessage());
@@ -131,26 +137,9 @@ public class OrdenCompraSRV {
 		    Result dest = new StreamResult(new FileWriter(new File(archivo)));
 		    //método transform que enlaza el documento con el stream
 		    tran.transform(src, dest); 
-		    System.out.print("archivo creado");
+		    System.out.println("archivo creado");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-	}
-	
-	
-	public static void main(String[] args) throws ParseException {
-		OrdenCompraSRV ins = new OrdenCompraSRV();
-		OrdenCompra oc = new OrdenCompra();
-		oc.setId(1);
-		SimpleDateFormat dt1 = new SimpleDateFormat("yyyy/mm/dd");
-		oc.setFecha(dt1.parse("2014/07/08"));
-		Proveedor prov = new Proveedor();
-		oc.setProveedor(prov);
-		oc.getProveedor().setCuit("32-9483924-9");
-		oc.getProveedor().setRazonSocial("CEM SRL");
-		oc.getProveedor().setDireccion("Independencia 323");
-		oc.getProveedor().setTelefono("324234");
-		ins.newDomXML(oc);
-		ins.saveDomXML("C:\\Lenguajes Visuales\\OrdenCompra.xml");
 	}
 }

@@ -43,6 +43,7 @@ public class SolicitudCotizacionSRV {
 			rodamientoId.setCodigo(beanItemSolicitudCotizacion.getBeanRodamiento().getCodigo());
 			rodamientoId.setMarca(marca);
 			rodamiento.setRodamientoId(rodamientoId);
+			rodamiento.setTipo(beanItemSolicitudCotizacion.getBeanRodamiento().getTipo());
 			
 			itemSolicitudCotizacion.setRodamiento(rodamiento);
 			itemSolicitudCotizacions.add(itemSolicitudCotizacion);

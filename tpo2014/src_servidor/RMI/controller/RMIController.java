@@ -33,6 +33,7 @@ import model.OrdenPedido;
 import model.OrdenPedidoSRV;
 import model.Proveedor;
 import model.Remito;
+import model.RemitoSRV;
 import model.SolicitudCotizacion;
 import model.SolicitudCotizacionSRV;
 
@@ -185,11 +186,11 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			HibernateDAO.getInstancia().persistir(oc);
 			
 			System.out.println("Crea O.Compra: " +oc.getId()+ " Proveedor: "+ oc.getProveedor().getRazonSocial());
-			/*
-			 * persistir en xml de proveedor y lista de precios
-			 * 
-			 * 			
-			 */
+			
+			// persistir en xml x cada proveedor
+			OrdenCompraSRV.getinstancia().newDomXML(oc);
+			OrdenCompraSRV.getinstancia().saveDomXML("d:\\ordencompra.xml");
+			
 		}
 	}
 	
@@ -208,8 +209,8 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			// crea remitos en funcion de la OC para ser enviados a la ODV
 			Remito rem = new Remito();
 			rem.setCliente(op.getCliente());
-			rem.setFecha(fecha);
-			rem.setEstado("PEN");
+			rem.setFecha(fecha); 
+			rem.setEstado("PAR"); //Deja parcial, si es q el pedido aun no se completa
 			
 			// copia detalle de la OC al remito 
 			List<ItemRodamiento> lro =oc.getItemsOC();
@@ -225,15 +226,20 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			}
 			rem.setItems(lro2);			
 			
+			// guarda el remito
 			HibernateDAO.getInstancia().persistir(rem);
 			
-			System.out.println("Crea remito: " + rem.getId() + " Cliente: " + rem.getCliente().getRazonSocial());
+			// chequea si se cumplió la orden de pedido
+			if(RemitoSRV.getinstancia().cumplenOPedido(rem)){
+				// emite remitos;
+				System.out.println("Crea remito: " + rem.getId() + " Cliente: " + rem.getCliente().getRazonSocial());
 			
 			/*
 			 * persistir en xml los remitos
 			 * 
 			 * 			
-			 */			
+			 */	
+			}
 		}
 	}
 
