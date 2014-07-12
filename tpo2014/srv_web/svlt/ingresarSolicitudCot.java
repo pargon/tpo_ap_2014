@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-@WebServlet(name = "ingSolCot", urlPatterns = {"/ingSolCot"})
+@WebServlet(name = "ingSolCot", urlPatterns = {"/jsp/ingSolCot"})
 @MultipartConfig(location = "/tmp")
 public class ingresarSolicitudCot extends HttpServlet {
 
@@ -54,7 +54,7 @@ public class ingresarSolicitudCot extends HttpServlet {
         */
 
 		
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/ingresoSolicitudCot.jsp");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/jsp/ingresoSolicitudCot.jsp");
 		rd.forward(req, resp);
 		
 		
