@@ -212,8 +212,13 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			rem.setFecha(fecha); 
 			rem.setEstado("PAR"); //Deja parcial, si es q el pedido aun no se completa
 			
-			// copia detalle de la OC al remito 
-			List<ItemRodamiento> lro =oc.getItemsOC();
+			// asocia remito a la OP
+			rem.setOp(op);
+			
+			// obtiene los itemRodamientos que estan en la OC y pertenecen a la OP
+			List<ItemRodamiento> lro = OrdenCompraSRV.getinstancia().PedidoVSCompra(oc, op);
+						
+			// copia detalle al remito el detalle que coincide entre pedido y compra
 			List<ItemRodamiento> lro2 = new ArrayList<ItemRodamiento>(); 
 			for(ItemRodamiento itr: lro){
 				ItemRodamiento nitr = new ItemRodamiento();
@@ -228,33 +233,36 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			
 			// guarda el remito
 			HibernateDAO.getInstancia().persistir(rem);
-			
-			// obtiene OPs que aún no se satisfacen
-			boolean exportarRem = true;
-			List<OrdenPedido> lop = RemitoSRV.getinstancia().cumplenOPedido(rem);
-			for (OrdenPedido itop: lop ){
-				
-				// encontro la OP entre las pendientes
-				if(itop.getId().equals(op.getId())){
-					exportarRem = false;
-					break;
-				}	
-			}
-			if (exportarRem){
-				
-				// cambia estado remito para poder facturarse
-				rem.setEstado("PEN");
-				HibernateDAO.getInstancia().persistir(rem);
-					
-				lop = new ArrayList<OrdenPedido>();
-				lop.add(op);
-				RemitoSRV.getinstancia().newDomXML(rem, lop);
-				RemitoSRV.getinstancia().saveDomXML("d:\\remito"+rem.getId() +".xml"  );
-				
-				// emite remitos
-				System.out.println("Crea remito: " + rem.getId() + " Cliente: " + rem.getCliente().getRazonSocial());
-			}
+
 		}
+		
+		// chequea OP de la OC, y cambia estado si se completo. Si se completó exporta remitos asociados
+		IntentaEmitirRemitos(oc);			
+	}
+
+	private void IntentaEmitirRemitos(OrdenCompra oc) {
+		
+		// actualiza pedidos completos
+		OrdenCompraSRV.getinstancia().cumplimientoOPedido(oc);
+		
+		// obtiene remitos de las OP de la OC, que aún no se hayan emitido
+		List<Remito> lrem = OrdenCompraSRV.getinstancia().remitosParaEmitir(oc);
+		
+		for(Remito rem: lrem){
+						
+			// cambia estado remito para poder facturarse
+			rem.setEstado("PEN");
+			HibernateDAO.getInstancia().persistir(rem);
+				
+			List<OrdenPedido> lop = new ArrayList<OrdenPedido>();
+			lop.add(rem.getOp());
+			
+			RemitoSRV.getinstancia().newDomXML(rem, lop);
+			RemitoSRV.getinstancia().saveDomXML("d:\\remito"+rem.getId() +".xml"  );
+			
+			// emite remitos
+			System.out.println("Crea remito: " + rem.getId() + " Cliente: " + rem.getCliente().getRazonSocial());
+		}		
 	}
 
 	@Override

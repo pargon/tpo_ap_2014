@@ -37,10 +37,12 @@ public class RemitoSRV {
 
 	public List<OrdenPedido> cumplenOPedido(Remito r){
 		
+		// busca pedidos que partieron en OC, del cliente y aún no están completos
 		String sql = "select p from OrdenPedido p "
 				+ " join p.cot c"
 				+ " join c.itemsRodamiento it"
 				+ " where CAST(p.cliente.id as string) =:cli"
+				+ " and p.estado = 'OC'"
 				+ " and it.cantidad < ( select sum(itr.cantidad) from Remito r"
 				+ "					join r.items itr"
 				+ "					where itr.rodamiento.rodamientoId.codigo = it.rodamiento.rodamientoId.codigo)";
@@ -154,6 +156,7 @@ public class RemitoSRV {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-	}	
+	}
+
 }
 

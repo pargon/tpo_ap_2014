@@ -31,7 +31,11 @@ public class Remito extends PersistentObject{
 	@OneToMany(cascade=CascadeType.ALL)
 	private List<ItemRodamiento> items = new ArrayList<ItemRodamiento>();
 	
+	@OneToOne(cascade=CascadeType.ALL)
+	private OrdenPedido op;
+	
 	private String estado;
+	
 	
 	public Date getFecha() {
 		return fecha;
@@ -56,6 +60,12 @@ public class Remito extends PersistentObject{
 	}
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+	public OrdenPedido getOp() {
+		return op;
+	}
+	public void setOp(OrdenPedido op) {
+		this.op = op;
 	}
 	
 	

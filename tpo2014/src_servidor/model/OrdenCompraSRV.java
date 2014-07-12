@@ -141,6 +141,68 @@ public class OrdenCompraSRV {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
+	}
+
+	public List<ItemRodamiento> PedidoVSCompra(OrdenCompra oc, OrdenPedido op) {
+		String sql = "select itroc from OrdenCompra c"
+				+ " join c.pedidos p"
+				+ " join p.cot.itemsRodamiento itroc"
+				+ " join c.itemsOC"
+				+ " where CAST(c.id as string) = :idoc"
+				+ " and CAST(p.id as string) = :idop";
+		
+		return (List<ItemRodamiento> )HibernateDAO.getInstancia().parametros2(sql, "idoc", String.valueOf(oc.getId()) , "idop", String.valueOf(op.getId() ));
+	}
+
+	public void cumplimientoOPedido(OrdenCompra oc) {
+		
+		// busca pedidos que partieron en OC, del cliente y aún no están completos
+		String sql = "select p from OrdenCompra oc "
+				+ "	join oc.pedidos p "
+				+ " join p.cot c"
+				+ " join c.itemsRodamiento it"
+				+ " where p.estado = 'OC'"
+				+ " and it.cantidad < ( select sum(itr.cantidad) from Remito r"
+				+ "					join r.items itr"
+				+ "					where itr.rodamiento.rodamientoId.codigo = it.rodamiento.rodamientoId.codigo)";
+		
+		List<OrdenPedido> lop = (List<OrdenPedido>) HibernateDAO.getInstancia().getlista(sql);	
+		
+		boolean aunPendiente;
+		
+		// pedidos de la Oc
+		List<OrdenPedido> lpoc = oc.getPedidos();
+		for(OrdenPedido opc: lpoc){
+			aunPendiente = false;
+			
+			// pedidos aún pendientes en la OC
+			for(OrdenPedido op: lop){
+				if (opc.getId().equals(op.getId())){
+					aunPendiente = true;
+					break;
+				}
+			}
+			// Si ya está completo, el pedido está listo, lo marca como COMPLETO 
+			if (!aunPendiente ){
+				opc.setEstado("COM");
+				HibernateDAO.getInstancia().persistir(opc);
+			}
+		}
+			
+	}
+
+	public List<Remito> remitosParaEmitir(OrdenCompra oc) {
+		
+		// busca remitos en estado PAR, los cuales tengan su pedido perteneciente a la OC, pero estos deben estar completos
+		String sql = "select r from Remito r"
+				+ " where r.op.estado = 'COM'"
+				+ "	and r.estado = 'PAR'"
+				+ " and exists(select c from OrdenCompra c"
+				+ "			join c.pedidos p"
+				+ "			where p.id = r.op.id"
+				+ "			and CAST(c.id as string) = :idoc)";
+		return (List<Remito>) HibernateDAO.getInstancia().parametros(sql, "idoc", String.valueOf( oc.getId()));
+		
 	}	
 	
 }
