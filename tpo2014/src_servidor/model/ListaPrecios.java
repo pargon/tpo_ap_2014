@@ -14,15 +14,18 @@ public class ListaPrecios implements Serializable {
 	private static final long serialVersionUID = 1581747666183346205L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	//@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	@OneToMany
 	@PrimaryKeyJoinColumn
 	private List<ItemRodamiento> itemsRodamiento = new ArrayList<ItemRodamiento>();
 	@OneToOne(cascade=CascadeType.ALL)
 	private Proveedor proveedor;
+	@Column
 	private int descuento;
+	@Column
 	private int financiacion_dias;
+	@Column
 	private int financiacion_dto;
 	
 

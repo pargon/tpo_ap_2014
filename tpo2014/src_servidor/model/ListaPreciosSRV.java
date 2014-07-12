@@ -1,6 +1,7 @@
 package model;
 
 
+import hbt.dao.HibernateDAO;
 import hbt.dao.HibernateListaPreciosDAO;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import beans.BeansListaPrecios;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 
 
 
@@ -86,6 +88,7 @@ public class ListaPreciosSRV {
 		        String rz = proveedor.getChildTextTrim("RazonSocial");
 		        prov.setRazonSocial(rz);
 		        lista.setProveedor(prov);
+		        ProveedorSRV.getinstancia().guardarProveedor(prov);
 		        Element condVenta = rootNode.getChild("CondicionesDeVenta");
 		        Element contado = condVenta.getChild("PagoContado");
 		        String descuento = contado.getChildTextTrim("Descuento");
@@ -128,6 +131,7 @@ public class ListaPreciosSRV {
 		        	marcaId.setPais(origen);
 		        	marca2.setMarcaId(marcaId);
 		        	ri.setMarca(marca2);
+		        	HibernateDAO.getInstancia().persistir(marca2);
 		        	roda.setRodamientoId(ri);
 		        	ItemRodamiento itemRoda = new ItemRodamiento();
 		        	//SUPER HARDCODE HERE
@@ -135,6 +139,8 @@ public class ListaPreciosSRV {
 		        	itemRoda.setPrecio(Float.valueOf(precio));
 		        	itemRoda.setRodamiento(roda);
 		        	ir.add(itemRoda);
+		        	RodamientoSRV.getinstancia().guardar(roda);
+		        	ItemRodamientoSRV.getinstancia().guardar(itemRoda);
 		        }
 		        lista.setItemsRodamiento(ir);
 		        System.out.println("***********************Lista "+j+"*************************");
@@ -150,6 +156,7 @@ public class ListaPreciosSRV {
 		        System.out.println( jdomex.getMessage() );
 		    }
 		    listaPosta.add(lista);
+		    guardarLista(lista);
 	    }//del for archivos
 	    
 	return listaPosta;
