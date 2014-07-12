@@ -12,8 +12,8 @@ import Interfaz.InterfazRMI;
 
 
 public class RemotoClient {
+	
 	private static RemotoClient instancia;
-	private static String hostname = "localhost";
 	InterfazRMI rmiController;
 
 	public static void main(String[] args)
@@ -35,7 +35,8 @@ public class RemotoClient {
 
 	private boolean getStub() {
 		try {
-			rmiController = (InterfazRMI)Naming.lookup ("//"+hostname+"/rmiController");
+			System.getProperty("java.security.policy");
+			rmiController = (InterfazRMI)Naming.lookup ("//localhost:1099/rmiController");
 			System.out.println("GetStub");
 			return true;
 		} catch (Exception e) {
@@ -60,6 +61,17 @@ public class RemotoClient {
 		}
 		return null;
 		
+	}
+	
+	public String confirmaCotizacion(int idCot){
+		try {
+			rmiController.crearOrdenPedido(idCot);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "Exito";
 	}
 	
 }
