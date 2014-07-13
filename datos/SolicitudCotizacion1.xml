@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SOLICITUD DE COTIZACION -->
+<SolicitudCotizacion numero="1" fecha="12/07/2014">
+<Cliente>
+<Cuil>23-98378293-9</Cuil>
+<RazonSocial>Ahmat SA</RazonSocial>
+</Cliente>
+<Rodamientos>
+<Item>
+<Codigo>7</Codigo>
+<Sufijo>AR</Sufijo>
+<Marca>SKF</Marca>
+<Origen>Suecia</Origen>
+<Cantidad>10</Cantidad>
+</Item>
+<Codigo>18</Codigo>
+<Sufijo>PS</Sufijo>
+<Marca>NTN</Marca>
+<Origen>China</Origen>
+<Cantidad>5</Cantidad>
+</Item>
+<Codigo>12</Codigo>
+<Sufijo>MN</Sufijo>
+<Marca>FAG</Marca>
+<Origen>Rumania</Origen>
+<Cantidad>3</Cantidad>
+</Item>
+</Rodamientos>
+</SolicitudCotizacion>

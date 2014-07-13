@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<OrdenDeCompra numero="1">
+<!--ORDEN DE COMPRA-->
+<Emision>Wed Jan 08 00:07:00 ART 2014</Emision>
+<Cliente><Cuil>32-9483924-9</Cuil>
+<RazonSocial>CEM SRL</RazonSocial>
+</Cliente>
+<Rodamiento><Item serie="Nro de serie">
+<Sufijo>Sufijo del codigo</Sufijo
+Marca>Marca del fabricante</Marca>
+<Origen>Pais de fabricacion</Origen>
+<Cantidad>Cantidad de unidades</Cantidad>
+</Item>
+</Rodamiento>
+</OrdenDeCompra>
