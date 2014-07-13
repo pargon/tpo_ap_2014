@@ -21,7 +21,14 @@ public class TestNano {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
+		List<String> archivos = new ArrayList<String>();
+		archivos.add("C:\\Lenguajes Visuales\\ListaPrecio1.xml");
+	//	archivos.add("C:\\ListaPrecio2.xml");
 		
+		new ListaPreciosSRV().getinstancia().getListas(archivos);
+
+	/*	
 		Marca mar = new Marca();
 		MarcaId marid= new MarcaId();
 		marid.setDescripcion("SDK");
@@ -64,7 +71,8 @@ public class TestNano {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		//new ListaPreciosSRV().getinstancia().actualizarCantidad("C:\\ListaPrecio1.xml", "3", 200);
+*/
 	}
 
 }
