@@ -13,11 +13,13 @@
 <Origen>Suecia</Origen>
 <Cantidad>10</Cantidad>
 </Item>
+<Item>
 <Codigo>18</Codigo>
 <Sufijo>PS</Sufijo>
 <Marca>NTN</Marca>
 <Origen>China</Origen>
 <Cantidad>5</Cantidad>
+<Item>
 </Item>
 <Codigo>12</Codigo>
 <Sufijo>MN</Sufijo>
