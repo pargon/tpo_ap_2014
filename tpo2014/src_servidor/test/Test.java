@@ -41,14 +41,17 @@ public class Test {
 	
 	public static void main(String[] args) {
 
+		//altaListaPrecios();
+		
+		
 		//testXML();
 		
 		//System.exit(1);
 		
-		//AltaDatos();
+		AltaDatos();
 		
-		BeanSolicitudCotizacion bsc = CrearBeanSolCot();
-		
+		//BeanSolicitudCotizacion bsc = CrearBeanSolCot();
+		/*
 		try {
 			int cot = new RMIController().guardarSolicitudCotizacion(bsc);
 			
@@ -66,8 +69,19 @@ public class Test {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 		
 		System.exit(0);
+	}
+
+	private static void altaListaPrecios() {
+		List<String> archivos = new ArrayList<String>();
+		archivos.add("c:\\ListaPrecio1.xml");
+		archivos.add("C:\\ListaPrecio2.xml");
+		
+		new ListaPreciosSRV().getinstancia().getListas(archivos);
+
+		
 	}
 
 	private static void testXML() {
@@ -144,6 +158,7 @@ public class Test {
 		mId.setPais("argen");
 		
 		marc.setMarcaId(mId);
+		//HibernateDAO.getInstancia().persistir(marc);
 		rodid.setCodigo("codigo1");
 		rodid.setMarca(marc);
 		rod.setRodamientoId(rodid);

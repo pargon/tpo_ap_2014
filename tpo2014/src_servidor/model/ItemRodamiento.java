@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,17 +19,13 @@ public class ItemRodamiento {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-/*	@JoinColumns({
-		@JoinColumn(name="codigo", referencedColumnName="codigo", updatable = false),
-		@JoinColumn(name="descripcion", referencedColumnName="descripcion",  updatable = false),
-		@JoinColumn(name="pais", referencedColumnName="pais", updatable = false)
-		})*/
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Rodamiento rodamiento;
+	
 	private float precio;
 	private int cantidad;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Proveedor proveedor;
 	
 	

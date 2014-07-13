@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class SolicitudCotizacion {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	//@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	@OneToMany(cascade=CascadeType.ALL)
 	private List<ItemSolicitudCotizacion> itemsSolicitudCotizacion = new ArrayList<ItemSolicitudCotizacion>();

@@ -67,7 +67,6 @@ public class ListaPreciosSRV {
 	    List<ListaPrecios> listaPosta = new ArrayList<ListaPrecios>();
 	    for(int j=0;j<archivos.size();j++){
 	    	
-		    //File xmlFile = new File( "C:\\ListaPrecio1.xml" );
 	    	File xmlFile = new File(archivos.get(j) );
 		    ListaPrecios lista = new ListaPrecios();
 		    Proveedor prov = new Proveedor();
@@ -131,7 +130,7 @@ public class ListaPreciosSRV {
 		        	marcaId.setPais(origen);
 		        	marca2.setMarcaId(marcaId);
 		        	ri.setMarca(marca2);
-		        	HibernateDAO.getInstancia().persistir(marca2);
+//		        	HibernateDAO.getInstancia().persistir(marca2);
 		        	roda.setRodamientoId(ri);
 		        	ItemRodamiento itemRoda = new ItemRodamiento();
 		        	//SUPER HARDCODE HERE

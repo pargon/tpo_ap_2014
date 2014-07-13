@@ -89,8 +89,8 @@ public class ingresarSolicitudCot extends HttpServlet {
         */
 
 		BeanSolicitudCotizacion solcot ;
-//		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion1.xml");
-//		RemotoClient.getInstancia().guardarCotizacion(solcot);
+		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion1.xml");
+		RemotoClient.getInstancia().guardarCotizacion(solcot);
 		
 		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion2.xml");
 		RemotoClient.getInstancia().guardarCotizacion(solcot);
