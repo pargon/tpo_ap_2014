@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>TPWeb</display-name>
+	<welcome-file-list>
+		<welcome-file>/jsp/index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>IngresarSolicitud</servlet-name>
+		<servlet-class>org.com.lvtpo.servlets.IngresarSolicitud</servlet-class>
+	</servlet>
+	<servlet>
+	<servlet-name>CotizacionServlet</servlet-name>
+		<servlet-class>org.com.lvtpo.servlets.CotizacionServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>BusquedaClienteServlet</servlet-name>
+		<servlet-class>org.com.lvtpo.servlets.BusquedaClienteServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>BusquedaClienteCotizacionServlet</servlet-name>
+		<servlet-class>org.com.lvtpo.servlets.BusquedaClienteCotizacionServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ConfirmarCotizacionServlet</servlet-name>
+		<servlet-class>org.com.lvtpo.servlets.ConfirmarCotizacionServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>BuscarOPServlet</servlet-name>
+		<servlet-class>svlt.BuscarOPServlet</servlet-class>
+	</servlet>
+	
+	
+
+	<servlet-mapping>
+		<servlet-name>IngresarSolicitud</servlet-name>
+		<url-pattern>/IngresarSolicitud.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CotizacionServlet</servlet-name>
+		<url-pattern>/CotizacionServlet.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>BusquedaClienteServlet</servlet-name>
+		<url-pattern>/BusquedaCliente.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>BusquedaClienteCotizacionServlet</servlet-name>
+		<url-pattern>/BusquedaClienteCotizacion.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ConfirmarCotizacionServlet</servlet-name>
+		<url-pattern>/ConfirmarCotizacion.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>BuscarOPServlet</servlet-name>
+		<url-pattern>/BuscarOP.do</url-pattern>
+	</servlet-mapping>
+
+
+</web-app>
