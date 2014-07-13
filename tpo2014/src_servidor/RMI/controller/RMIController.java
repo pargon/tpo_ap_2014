@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import beans.BeanCotizacionRodamiento;
+import beans.BeanOP;
 import beans.BeanSolicitudCotizacion;
 import beans.BeansCliente;
 import beans.BeansFactura;
@@ -322,6 +323,23 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		for(Factura f3 : lfacturas){
 			new HibernateDAO().getInstancia().persistir(f3);
 		}
+	}
+	
+	@Override
+	public List<BeanOP> buscarOP() throws RemoteException {
+		@SuppressWarnings("unchecked")
+		List<OrdenPedido> ops = (List<OrdenPedido>) HibernateDAO.getInstancia().getlista("Select op from OrdenPedido op where op.estado = 'PEND'");
+		List<BeanOP> bops = new ArrayList<BeanOP>();		
+		for(OrdenPedido op: ops){
+			BeanOP bop = new BeanOP();
+			bop.setClienteID(op.getCliente().getId());
+			bop.setEstado(op.getEstado());
+			bop.setFecha(op.getFecha());
+			bop.setId(op.getId());
+			bop.setRazonSocial(op.getCliente().getRazonSocial());
+			bops.add(bop);
+		}
+		return bops;
 	}
 
 }

@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import beans.BeanCotizacionRodamiento;
+import beans.BeanOP;
 import beans.BeanSolicitudCotizacion;
 import Interfaz.InterfazRMI;
 
@@ -62,6 +63,15 @@ public class RemotoClient {
 		return null;
 		
 	}
+	public List<BeanOP> buscarOP() {
+		try{
+			return  rmiController.buscarOP();
+		}catch (RemoteException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	
 	public String confirmaCotizacion(int idCot){
 		try {
