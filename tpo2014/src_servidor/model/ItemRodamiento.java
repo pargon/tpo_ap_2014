@@ -17,15 +17,17 @@ public class ItemRodamiento {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	@OneToOne
-	@JoinColumns({
+	
+	@OneToOne(cascade=CascadeType.ALL)
+/*	@JoinColumns({
 		@JoinColumn(name="codigo", referencedColumnName="codigo", updatable = false),
 		@JoinColumn(name="descripcion", referencedColumnName="descripcion",  updatable = false),
 		@JoinColumn(name="pais", referencedColumnName="pais", updatable = false)
-		})
+		})*/
 	private Rodamiento rodamiento;
 	private float precio;
 	private int cantidad;
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	private Proveedor proveedor;
 	

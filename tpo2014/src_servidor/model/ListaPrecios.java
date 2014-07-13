@@ -16,11 +16,13 @@ public class ListaPrecios implements Serializable {
 	@Id
 	//@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	@OneToMany
-	@PrimaryKeyJoinColumn
+	
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<ItemRodamiento> itemsRodamiento = new ArrayList<ItemRodamiento>();
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	private Proveedor proveedor;
+	
 	@Column
 	private int descuento;
 	@Column

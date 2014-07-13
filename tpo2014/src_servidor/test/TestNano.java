@@ -23,7 +23,7 @@ public class TestNano {
 		// TODO Auto-generated method stub
 
 		List<String> archivos = new ArrayList<String>();
-		archivos.add("C:\\Lenguajes Visuales\\ListaPrecio1.xml");
+		archivos.add("c:\\ListaPrecio1.xml");
 	//	archivos.add("C:\\ListaPrecio2.xml");
 		
 		new ListaPreciosSRV().getinstancia().getListas(archivos);

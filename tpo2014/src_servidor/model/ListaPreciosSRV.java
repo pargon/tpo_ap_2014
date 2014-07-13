@@ -88,7 +88,7 @@ public class ListaPreciosSRV {
 		        String rz = proveedor.getChildTextTrim("RazonSocial");
 		        prov.setRazonSocial(rz);
 		        lista.setProveedor(prov);
-		        ProveedorSRV.getinstancia().guardarProveedor(prov);
+//		        ProveedorSRV.getinstancia().guardarProveedor(prov);
 		        Element condVenta = rootNode.getChild("CondicionesDeVenta");
 		        Element contado = condVenta.getChild("PagoContado");
 		        String descuento = contado.getChildTextTrim("Descuento");
@@ -135,12 +135,14 @@ public class ListaPreciosSRV {
 		        	roda.setRodamientoId(ri);
 		        	ItemRodamiento itemRoda = new ItemRodamiento();
 		        	//SUPER HARDCODE HERE
-		        	itemRoda.setId(20+i);
+		        	//itemRoda.setId(20+i);
 		        	itemRoda.setPrecio(Float.valueOf(precio));
 		        	itemRoda.setRodamiento(roda);
+		        	itemRoda.setProveedor(prov);
+		        	itemRoda.setCantidad(Integer.valueOf( cant));
 		        	ir.add(itemRoda);
-		        	RodamientoSRV.getinstancia().guardar(roda);
-		        	ItemRodamientoSRV.getinstancia().guardar(itemRoda);
+//		        	RodamientoSRV.getinstancia().guardar(roda);
+//		        	ItemRodamientoSRV.getinstancia().guardar(itemRoda);
 		        }
 		        lista.setItemsRodamiento(ir);
 		        System.out.println("***********************Lista "+j+"*************************");
