@@ -13,6 +13,7 @@
 <ul>
   <li><a href="ingresoSolicitudCot.jsp">Ingresar</a> Ingresar Sol.</li>
   <li><a href="confirmarCotizacion.jsp">Confirmar</a> Confirmar Cot.</li>
+  <li><a href="mostrarOrdenPedido.jsp">Mostrar O.P.P</a> Orden Pedido Pendientes</li>  
 </ul>
 </fieldset>
 <p/>
