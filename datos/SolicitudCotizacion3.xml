@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- SOLICITUD DE COTIZACION -->
-<SolicitudCotizacion numero="2" fecha="10/07/2014">
+<SolicitudCotizacion numero="3" fecha="10/07/2014">
 <Cliente>
 <Cuil>20-3478234-9</Cuil>
 <RazonSocial>TIMQUEN SA</RazonSocial>
