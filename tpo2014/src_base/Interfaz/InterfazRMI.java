@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import beans.BeanCotizacionRodamiento;
+import beans.BeanFacturaSmall;
 import beans.BeanOP;
 import beans.BeanRemito;
 import beans.BeanSolicitudCotizacion;
@@ -37,6 +38,8 @@ public interface InterfazRMI extends Remote {
 	public abstract List<BeanOP> buscarOP() throws RemoteException;
 	
 	public abstract List<BeanRemito> buscarRemitos() throws RemoteException;
+	
+	public abstract List<BeanFacturaSmall> buscarFacturas() throws RemoteException;
 		
 	
 	public abstract int guardarSolicitudCotizacion(BeanSolicitudCotizacion beanSolicitudCotizacion) throws RemoteException;

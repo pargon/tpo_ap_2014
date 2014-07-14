@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import beans.BeanCotizacionRodamiento;
+import beans.BeanFacturaSmall;
 import beans.BeanOP;
 import beans.BeanRemito;
 import beans.BeanSolicitudCotizacion;
@@ -76,6 +77,15 @@ public class RemotoClient {
 	public List<BeanRemito> buscarRemitos() {
 		try{
 			return  rmiController.buscarRemitos();
+		}catch (RemoteException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<BeanFacturaSmall> buscarFacturas() {
+		try{
+			return  rmiController.buscarFacturas();
 		}catch (RemoteException e){
 			e.printStackTrace();
 		}
