@@ -13,6 +13,7 @@ import java.util.List;
 
 import beans.BeanCotizacionRodamiento;
 import beans.BeanOP;
+import beans.BeanRemito;
 import beans.BeanSolicitudCotizacion;
 import beans.BeansCliente;
 import beans.BeansFactura;
@@ -340,6 +341,23 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			bops.add(bop);
 		}
 		return bops;
+	}
+
+	@Override
+	public List<BeanRemito> buscarRemitos() throws RemoteException {
+		@SuppressWarnings("unchecked")
+		List<Remito> remitos = (List<Remito>) HibernateDAO.getInstancia().getlista("Select r from Remito r where r.estado = 'PEND'");
+		List<BeanRemito> brs = new ArrayList<BeanRemito>();		
+		for(Remito r: remitos){
+			BeanRemito br = new BeanRemito();
+			br.setClienteID(r.getCliente().getId());
+			br.setEstado(r.getEstado());
+			br.setFecha(r.getFecha());
+			br.setId(r.getId());
+			br.setRazonSocial(r.getCliente().getRazonSocial());
+			brs.add(br);
+		}
+		return brs;
 	}
 
 }
