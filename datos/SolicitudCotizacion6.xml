@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- SOLICITUD DE COTIZACION -->
-<SolicitudCotizacion numero="6" fecha="12/07/2014">
+<SolicitudCotizacion numero="6" fecha="10/07/2014">
 <Cliente>
 <Cuil>23-77582954-9</Cuil>
 <RazonSocial>FEDEX SA</RazonSocial>
 </Cliente>
 <Rodamientos>
 <Item>
-<Codigo>17</Codigo>
+<Codigo>2</Codigo>
 <Sufijo>SAS</Sufijo>
 <Marca>Bones</Marca>
 <Origen>Escocia</Origen>
@@ -22,7 +22,7 @@
 </Item>
 <Item>
 <Codigo>4</Codigo>
-<Sufijo>MN</Sufijo>
+<Sufijo>PS</Sufijo>
 <Marca>NTN</Marca>
 <Origen>China</Origen>
 <Cantidad>3</Cantidad>

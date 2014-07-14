@@ -7,7 +7,7 @@
 </Cliente>
 <Rodamientos>
 <Item>
-<Codigo>6</Codigo>
+<Codigo>1</Codigo>
 <Marca>SDK</Marca>
 <Origen>Suecia</Origen>
 <Cantidad>4</Cantidad>
@@ -19,7 +19,7 @@
 <Cantidad>9</Cantidad>
 </Item>
 <Item>
-<Codigo>17</Codigo>
+<Codigo>2</Codigo>
 <Marca>Bones</Marca>
 <Origen>Escocia</Origen>
 <Cantidad>5</Cantidad>
