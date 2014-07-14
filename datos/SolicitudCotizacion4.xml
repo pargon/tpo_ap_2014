@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SOLICITUD DE COTIZACION -->
+<SolicitudCotizacion numero="4" fecha="12/07/2014">
+<Cliente>
+<Cuil>23-98378293-9</Cuil>
+<RazonSocial>Mustang SA</RazonSocial>
+</Cliente>
+<Rodamientos>
+<Item>
+<Codigo>7</Codigo>
+<Sufijo>FG</Sufijo>
+<Marca>HMX</Marca>
+<Origen>Holanda</Origen>
+<Cantidad>14</Cantidad>
+</Item>
+<Item>
+<Codigo>11</Codigo>
+<Sufijo>PS</Sufijo>
+<Marca>GRTN</Marca>
+<Origen>Marruecos</Origen>
+<Cantidad>4</Cantidad>
+</Item>
+<Item>
+<Codigo>4</Codigo>
+<Sufijo>MN</Sufijo>
+<Marca>NTN</Marca>
+<Origen>China</Origen>
+<Cantidad>6</Cantidad>
+</Item>
+</Rodamientos>
+</SolicitudCotizacion>
