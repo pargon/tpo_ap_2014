@@ -86,53 +86,30 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 	@Override
 	public int guardarSolicitudCotizacion(BeanSolicitudCotizacion beanSolicitudCotizacion)
 	throws RemoteException {
+		
 		SolicitudCotizacion solicitudCotizacion = SolicitudCotizacionSRV.getinstancia().fromBean(beanSolicitudCotizacion);
 		new HibernateSolicitudCotizacionDAO().guardarSolicitudCotizacion(solicitudCotizacion);
+		
+		// crea una cotizacion de hoy, en base a la solicitud
 		CotizacionRodamiento cotizacionRodamiento = new CotizacionRodamiento();
 		cotizacionRodamiento.setActiva(1);
 		cotizacionRodamiento.setFechaCotizacion(new Date());
 		cotizacionRodamiento.setTermino(30);
 		cotizacionRodamiento.setSolicitudCotizacion(solicitudCotizacion);
-		//Tengo que levantar las listas de precios, asi puedo buscar el mejor precio para cada rodamiento
-		List<String> archivos = new ArrayList<String>();
-		archivos.add("C:\\ListaPrecio1.xml");
-		archivos.add("C:\\ListaPrecio2.xml");
-		List<ListaPrecios> lprecios = new ListaPreciosSRV().getinstancia().getListas(archivos);
-		List<ItemRodamiento> lraux = new ArrayList<ItemRodamiento>();
-		List<ItemSolicitudCotizacion> liscaux = solicitudCotizacion.getItemsSolicitudCotizacion();
-		
-		for(int i=0;i<liscaux.size();i++){
-			
-			//el id de itemRoda se tiene q generar automaticamente
-			ItemRodamiento itemRoda = new ItemRodamiento();
-			itemRoda.setRodamiento(liscaux.get(i).getRodamiento());
-			itemRoda.setCantidad(liscaux.get(i).getCantidad());
-			itemRoda.setPrecio(0);
-			
-			lraux.add(itemRoda);
-			
-			for(ListaPrecios lp : lprecios){
-				List<ItemRodamiento> irs = lp.getItemsRodamiento();
-					
 
-				for(int j=0;j<irs.size();j++){
-					if(liscaux.get(i).getRodamiento().getRodamientoId().getCodigo().equals( irs.get(j).getRodamiento().getRodamientoId().getCodigo() )){
-						
-						
-						if(itemRoda.getPrecio() > irs.get(j).getPrecio() || itemRoda.getPrecio() == 0){
-							lraux.get(i).setPrecio(irs.get(j).getPrecio());
-							lraux.get(i).setProveedor(lp.getProveedor());
-						}
-						j=irs.size();
-						
-						
-					}
-				}	
-			}
-		}
-		cotizacionRodamiento.setItemsRodamiento(lraux);
-		//Falta calcular el precio total...aunque en el xml no lo indica. Creo que lo sacamos a la mierda mejor...
+		List<ItemSolicitudCotizacion> litsol = solicitudCotizacion.getItemsSolicitudCotizacion();
+		List<ItemRodamiento> litrod = new ArrayList<ItemRodamiento>();
 		
+		// recorro los rodamientos de la solicitud, y obtengo mejor precio con su prv
+		for(ItemSolicitudCotizacion itsol: litsol){
+			ItemRodamiento irod = ListaPreciosSRV.getinstancia().mejorPrecioPrv(itsol.getRodamiento(), itsol.getCantidad() );
+			litrod.add(irod);
+		}
+		
+		// agrego la lista con los precios y prv de cada rodamiento a la cotizacion
+		cotizacionRodamiento.setItemsRodamiento(litrod);
+
+		// persiste la cotizacion
 		new HibernateCotizacionRodamientoDAO().guardarCotizacionRodamiento(cotizacionRodamiento);
 		
 		System.out.println("Crea Cotización: "+ cotizacionRodamiento.getId());

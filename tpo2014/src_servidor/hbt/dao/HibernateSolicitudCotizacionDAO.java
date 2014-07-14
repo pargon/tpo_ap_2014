@@ -13,7 +13,7 @@ private HibernateDAO hdao;
 	}
 	
 	public void guardarSolicitudCotizacion(SolicitudCotizacion solicitudCotizacion){
-		 hdao.getInstancia().persistir(solicitudCotizacion);
+		 hdao.getInstancia().guardar(solicitudCotizacion);
 	}
 
 }

@@ -3,6 +3,8 @@ package hbt.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import model.SolicitudCotizacion;
+
 import org.hibernate.*;
 
 public class HibernateDAO {
@@ -60,6 +62,14 @@ public class HibernateDAO {
 	public Object get (Class c, Object o) {
 		Session session = getSession();
 		return session.get(c, (Serializable) o);
+	}
+
+	public void guardar(Object o){
+		Session ses = getSession();
+		ses.beginTransaction();
+		ses.saveOrUpdate(o);
+		ses.flush();
+		ses.getTransaction().commit();
 	}
 	
 }

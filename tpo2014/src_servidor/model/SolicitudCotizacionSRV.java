@@ -4,7 +4,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Marca.MarcaId;
 import model.Rodamiento.RodamientoId;
 import beans.BeanItemSolicitudCotizacion;
 import beans.BeanSolicitudCotizacion;
@@ -34,10 +33,9 @@ public class SolicitudCotizacionSRV {
 			rodamiento.setMedida(beanItemSolicitudCotizacion.getBeanRodamiento().getMedida());
 			
 			Marca marca = new Marca();
-			MarcaId marcaId = new MarcaId();
-			marcaId.setDescripcion(beanItemSolicitudCotizacion.getBeanRodamiento().getBeanMarca().getDescripcion());
-			marcaId.setPais(beanItemSolicitudCotizacion.getBeanRodamiento().getBeanMarca().getPais());
-			marca.setMarcaId(marcaId);
+			marca.setDescripcion(beanItemSolicitudCotizacion.getBeanRodamiento().getBeanMarca().getDescripcion());
+			marca.setPais(beanItemSolicitudCotizacion.getBeanRodamiento().getBeanMarca().getPais());
+			
 			
 			RodamientoId rodamientoId = new RodamientoId();
 			rodamientoId.setCodigo(beanItemSolicitudCotizacion.getBeanRodamiento().getCodigo());
@@ -55,6 +53,7 @@ public class SolicitudCotizacionSRV {
 		cliente.setPorcentajeDesc(beanSolicitudCotizacion.getBeansCliente().getPorcentajeDesc());
 		cliente.setRazonSocial(beanSolicitudCotizacion.getBeansCliente().getRazonSocial());
 		cliente.setTelefono(beanSolicitudCotizacion.getBeansCliente().getTelefono());
+		solicitudCotizacion.setId(beanSolicitudCotizacion.getId());
 		solicitudCotizacion.setCliente(cliente);
 		solicitudCotizacion.setFecha(beanSolicitudCotizacion.getFecha());
 		solicitudCotizacion.setItemsSolicitudCotizacion(itemSolicitudCotizacions);

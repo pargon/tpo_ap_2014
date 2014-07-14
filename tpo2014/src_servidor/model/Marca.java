@@ -4,59 +4,33 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-@Entity
-@Table (name = "marcas")
+@Embeddable
 public class Marca implements Serializable{
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 716011125681681386L;
-
-	@EmbeddedId
-	private MarcaId marcaId;
-	
+	private static final long serialVersionUID = 1L;
+		
+	@Column(columnDefinition="char(30)",nullable=false)
+	private String descripcion;
+	@Column(columnDefinition="char(30)",nullable=false)
+	private String pais;
+		
 	public Marca (){}
 	
-	@Override
-	public String toString() {
-		return ""+this.marcaId.getDescripcion()+", "+ this.marcaId.getPais();
+			
+	public String getDescripcion() {
+		return descripcion;
 	}
-	
-	@Embeddable
-	public static class MarcaId implements Serializable{
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = -7438282727038230331L;
-		@Column(name="descripcion")
-		private String descripcion;
-		@Column(name="pais")
-		private String pais;
-		
-		public MarcaId (){}
-		
-		public String getDescripcion() {
-			return descripcion;
-		}
-		public void setDescripcion(String descripcion) {
-			this.descripcion = descripcion;
-		}
-		public String getPais() {
-			return pais;
-		}
-		public void setPais(String pais) {
-			this.pais = pais;
-		}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
-
-	public MarcaId getMarcaId() {
-		return marcaId;
+	public String getPais() {
+		return pais;
 	}
-
-	public void setMarcaId(MarcaId marcaId) {
-		this.marcaId = marcaId;
+	public void setPais(String pais) {
+		this.pais = pais;
 	}
-	
-	
 	
 }

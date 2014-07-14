@@ -18,7 +18,7 @@ import model.ItemRodamiento;
 import model.ItemSolicitudCotizacion;
 import model.ListaPreciosSRV;
 import model.Marca;
-import model.Marca.MarcaId;
+
 import model.OrdenCompra;
 import model.OrdenPedido;
 import model.Proveedor;
@@ -41,14 +41,14 @@ public class Test {
 	
 	public static void main(String[] args) {
 
-		//altaListaPrecios();
+		altaListaPrecios();
 		
 		
 		//testXML();
 		
 		//System.exit(1);
 		
-		AltaDatos();
+		//AltaDatos();
 		
 		//BeanSolicitudCotizacion bsc = CrearBeanSolCot();
 		/*
@@ -96,10 +96,9 @@ public class Test {
 
 	private static BeanSolicitudCotizacion CrearBeanSolCot() {
 		Marca mar = new Marca();
-		MarcaId marid= new MarcaId();
-		marid.setDescripcion("SDK");
-		marid.setPais("Suecia");
-		mar.setMarcaId(marid);
+		mar.setDescripcion("SDK");
+		mar.setPais("Suecia");
+		
 		HibernateDAO.getInstancia().persistir(mar);
 		System.out.println("marca");
 		
@@ -148,17 +147,17 @@ public class Test {
 		CotizacionRodamiento cot = new CotizacionRodamiento();
 		cot.setFechaCotizacion(new Date());
 		List<ItemRodamiento> lrod = new ArrayList<ItemRodamiento>();
+		
 		Rodamiento rod = new Rodamiento();
 		ItemRodamiento irod = new ItemRodamiento();
 		Proveedor prv = new Proveedor();
 		RodamientoId rodid = new RodamientoId();
 		Marca marc = new Marca();
-		MarcaId mId = new MarcaId();
-		mId.setDescripcion("marcadesc");
-		mId.setPais("argen");
+		marc.setDescripcion("marcadesc");
+		marc.setPais("argen");
 		
-		marc.setMarcaId(mId);
-		//HibernateDAO.getInstancia().persistir(marc);
+		
+		HibernateDAO.getInstancia().persistir(marc);
 		rodid.setCodigo("codigo1");
 		rodid.setMarca(marc);
 		rod.setRodamientoId(rodid);
@@ -171,6 +170,25 @@ public class Test {
 		irod.setProveedor(prv);
 		
 		lrod.add(irod);
+		
+		
+		//item2
+		rod = new Rodamiento();
+		irod = new ItemRodamiento();
+		rodid = new RodamientoId();
+		
+		rodid.setCodigo("codigo2");
+		rodid.setMarca(marc);
+		rod.setRodamientoId(rodid);
+		
+		irod.setCantidad(1);
+		irod.setPrecio(14);
+		irod.setRodamiento(rod);
+		irod.setProveedor(prv);
+
+		lrod.add(irod);
+		
+		
 		
 		Cliente cli = new Cliente();
 		cli.setCuit("33444555");

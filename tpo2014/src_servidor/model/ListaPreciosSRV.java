@@ -19,6 +19,7 @@ import java.io.IOException;
 
 
 
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -27,7 +28,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import model.Marca.MarcaId;
 import model.Rodamiento.RodamientoId;
 
 import org.jdom2.Document;         // |
@@ -124,13 +124,15 @@ public class ListaPreciosSRV {
 		        	roda.setTipo(tipo);
 		        	RodamientoId ri = new RodamientoId();
 		        	ri.setCodigo(codigo);
+		        	
 		        	Marca marca2 = new Marca();
-		        	MarcaId marcaId = new MarcaId();
-		        	marcaId.setDescripcion(marca);
-		        	marcaId.setPais(origen);
-		        	marca2.setMarcaId(marcaId);
+		        	marca2.setDescripcion(marca);
+		        	marca2.setPais(origen);
+		        	
 		        	ri.setMarca(marca2);
-//		        	HibernateDAO.getInstancia().persistir(marca2);
+		        	
+		        	//HibernateDAO.getInstancia().persistir(marca2);
+		        	
 		        	roda.setRodamientoId(ri);
 		        	ItemRodamiento itemRoda = new ItemRodamiento();
 		        	//SUPER HARDCODE HERE
@@ -149,7 +151,7 @@ public class ListaPreciosSRV {
 		        System.out.println("Id: "+lista.getId());
 		        //System.out.println("Financiacion: "+lista.getFinanciacion().toString());
 		        System.out.println("Proveedor: "+lista.getProveedor().getRazonSocial());
-		        System.out.println("ItemsRod: Precio= "+lista.getItemsRodamiento().get(0).getPrecio()+" Marca= "+lista.getItemsRodamiento().get(0).getRodamiento().getRodamientoId().getMarca().getMarcaId().getDescripcion());
+		        System.out.println("ItemsRod: Precio= "+lista.getItemsRodamiento().get(0).getPrecio()+" Marca= "+lista.getItemsRodamiento().get(0).getRodamiento().getRodamientoId().getMarca().getDescripcion());
 		        
 		    }catch ( IOException io ) {
 		        System.out.println( io.getMessage() );
@@ -240,5 +242,11 @@ public class ListaPreciosSRV {
 		   } catch (Exception sae) {
 			sae.printStackTrace();
 		   }
+	}
+
+	public ItemRodamiento mejorPrecioPrv(Rodamiento rod, int cantidad) {
+		
+		 HibernateListaPreciosDAO.getInstancia().getLista(sql);
+		 
 	}
 }

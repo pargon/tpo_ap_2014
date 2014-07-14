@@ -4,7 +4,6 @@ import hbt.dao.HibernateRodamientoDAO;
 
 import java.util.List;
 
-import model.Marca.MarcaId;
 import model.Rodamiento.RodamientoId;
 import beans.BeanMarca;
 import beans.BeanRodamiento;
@@ -29,10 +28,9 @@ public class RodamientoSRV {
 		RodamientoId rodamientoId = new RodamientoId();
 		rodamientoId.setCodigo(beanRodamiento.getCodigo());
 		Marca marca = new Marca();
-		MarcaId mId = new MarcaId();
-		mId.setDescripcion(beanRodamiento.getBeanMarca().getDescripcion());
-		mId.setPais(beanRodamiento.getBeanMarca().getPais());
-		marca.setMarcaId(mId);
+		marca.setDescripcion(beanRodamiento.getBeanMarca().getDescripcion());
+		marca.setPais(beanRodamiento.getBeanMarca().getPais());
+		
 		rodamientoId.setMarca(marca);
 		rodamiento.setTipo(beanRodamiento.getTipo());
 		rodamiento.setCaracteristicas(beanRodamiento.getCaracteristicas());
@@ -45,8 +43,8 @@ public class RodamientoSRV {
 		BeanRodamiento brodamiento = new BeanRodamiento();
 		brodamiento.setCodigo(rodamiento.getRodamientoId().getCodigo());
 		BeanMarca bmarca = new BeanMarca();
-		bmarca.setDescripcion(rodamiento.getRodamientoId().getMarca().getMarcaId().getDescripcion());
-		bmarca.setPais(rodamiento.getRodamientoId().getMarca().getMarcaId().getPais());
+		bmarca.setDescripcion(rodamiento.getRodamientoId().getMarca().getDescripcion());
+		bmarca.setPais(rodamiento.getRodamientoId().getMarca().getPais());
 		brodamiento.setBeanMarca(bmarca);
 		brodamiento.setTipo(rodamiento.getTipo());
 		brodamiento.setCaracteristicas(rodamiento.getCaracteristicas());

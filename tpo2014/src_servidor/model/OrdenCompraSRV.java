@@ -107,11 +107,11 @@ public class OrdenCompraSRV {
 	            	item.appendChild(sufijo);
 	            
 	            	Element marca = doc.createElement("Marca");
-	            	marca.setTextContent(itr.getRodamiento().getRodamientoId().getMarca().getMarcaId().getDescripcion());
+	            	marca.setTextContent(itr.getRodamiento().getRodamientoId().getMarca().getDescripcion());
 	            	item.appendChild(marca);
 	            
 	            	Element origen = doc.createElement("Origen");
-	            	origen.setTextContent(itr.getRodamiento().getRodamientoId().getMarca().getMarcaId().getPais());
+	            	origen.setTextContent(itr.getRodamiento().getRodamientoId().getMarca().getPais());
 	            	item.appendChild(origen);
 	            
 	            	Element cantidad = doc.createElement("Cantidad");

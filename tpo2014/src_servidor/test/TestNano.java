@@ -15,7 +15,6 @@ import beans.BeanSolicitudCotizacion;
 import beans.BeansCliente;
 import model.ListaPreciosSRV;
 import model.Marca;
-import model.Marca.MarcaId;
 
 public class TestNano {
 

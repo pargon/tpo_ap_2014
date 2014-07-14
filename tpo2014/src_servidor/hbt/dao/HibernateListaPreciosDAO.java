@@ -46,4 +46,8 @@ public class HibernateListaPreciosDAO {
 		List<ListaPrecios> listasPrecios = query.list();
 		return listasPrecios.get(0);
 	}
+	
+	public List<?> getLista(String sql){
+		return HibernateDAO.getInstancia().getlista(sql);
+	}
 }

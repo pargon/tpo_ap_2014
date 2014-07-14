@@ -6,11 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="rodamientos")
-public class Rodamiento implements Serializable{
+public class Rodamiento{
 	
-	private static final long serialVersionUID = 1L;
 	@EmbeddedId
 	private RodamientoId rodamientoId; 
+	
 	private String tipo;
 	private float medida;
 	private String caracteristicas;
@@ -48,11 +48,8 @@ public class Rodamiento implements Serializable{
 		private static final long serialVersionUID = 2939343529393414696L;
 		@Column(name="codigo", nullable=false, updatable=false)
 		private String codigo;
-		@ManyToOne
-		@JoinColumns({
-			@JoinColumn(name="descripcion", referencedColumnName="descripcion", nullable=false, updatable=false),
-			@JoinColumn(name="pais", referencedColumnName="pais", nullable=false, updatable=false)
-			})
+		
+		@Embedded
 		private Marca marca;
 		
 		public String getCodigo() {

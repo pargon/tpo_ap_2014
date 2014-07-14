@@ -20,7 +20,7 @@ private HibernateDAO hdao;
 	}
 	
 	public void guardarCotizacionRodamiento(CotizacionRodamiento cotizacion){
-		 hdao.getInstancia().persistir(cotizacion);
+		 hdao.getInstancia().guardar(cotizacion);
 	}
 
 }

@@ -50,8 +50,8 @@ public class HibernateRodamientoDAO {
 		if (cantCriterios>0){
 			hql.append(" WHERE ");
 //			if (null != rodamiento.getBeanMarca().g.getId()){
-			if (null != rodamiento.getRodamientoId().getMarca().getMarcaId().getDescripcion()
-					|| null != rodamiento.getRodamientoId().getMarca().getMarcaId().getPais()){
+			if (null != rodamiento.getRodamientoId().getMarca().getDescripcion()
+					|| null != rodamiento.getRodamientoId().getMarca().getPais()){
 //				hql.append(" r.marca.id = :marcaId");
 				hql.append(" r.rodamientoId.marca = :marca");
 				cantCriterios--;
@@ -71,8 +71,8 @@ public class HibernateRodamientoDAO {
 		try{
 		Query query = session.createQuery(hql.toString());
 //		if (null != rodamiento.getBeanMarca().getId())
-		if (null != rodamiento.getRodamientoId().getMarca().getMarcaId().getDescripcion()
-				|| null != rodamiento.getRodamientoId().getMarca().getMarcaId().getPais())
+		if (null != rodamiento.getRodamientoId().getMarca().getDescripcion()
+				|| null != rodamiento.getRodamientoId().getMarca().getPais())
 //			query.setParameter("marcaId", rodamiento.getBeanMarca().getId());
 			query.setEntity("marca", rodamiento.getRodamientoId().getMarca());
 		if (!rodamiento.getRodamientoId().getCodigo().isEmpty())
@@ -89,8 +89,8 @@ public class HibernateRodamientoDAO {
 	
 	private int hayCriterio(Rodamiento rodamiento, int cantCriterios){
 //		if (null != rodamiento.getBeanMarca().getId()){
-		if (null != rodamiento.getRodamientoId().getMarca().getMarcaId().getDescripcion()
-				|| null != rodamiento.getRodamientoId().getMarca().getMarcaId().getPais()){
+		if (null != rodamiento.getRodamientoId().getMarca().getDescripcion()
+				|| null != rodamiento.getRodamientoId().getMarca().getPais()){
 			cantCriterios ++;
 		}
 		if (!rodamiento.getRodamientoId().getCodigo().isEmpty()){
