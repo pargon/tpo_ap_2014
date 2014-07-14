@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- SOLICITUD DE COTIZACION -->
-<SolicitudCotizacion numero="4" fecha="12/07/2014">
+<SolicitudCotizacion numero="5" fecha="12/07/2014">
 <Cliente>
 <Cuil>23-3458295-9</Cuil>
 <RazonSocial>MARFRIG SA</RazonSocial>

@@ -4,38 +4,22 @@ package svlt;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.jdom2.Document;         // |
 import org.jdom2.Element;          // |\ Librerías
-import org.jdom2.JDOMException;    // |/ JDOM
 import org.jdom2.input.SAXBuilder; // |
-import org.jdom2.output.XMLOutputter;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import beans.BeanItemSolicitudCotizacion;
 import beans.BeanMarca;
@@ -98,6 +82,20 @@ public class ingresarSolicitudCot extends HttpServlet {
 		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion3.xml");
 		RemotoClient.getInstancia().guardarCotizacion(solcot);
 		
+		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion4.xml");
+		RemotoClient.getInstancia().guardarCotizacion(solcot);
+		
+		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion5.xml");
+		RemotoClient.getInstancia().guardarCotizacion(solcot);
+		
+		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion6.xml");
+		RemotoClient.getInstancia().guardarCotizacion(solcot);
+		
+		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion7.xml");
+		RemotoClient.getInstancia().guardarCotizacion(solcot);
+		
+		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion8.xml");
+		RemotoClient.getInstancia().guardarCotizacion(solcot);
 		
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/jsp/ingresoSolicitudCot.jsp");
 		rd.forward(req, resp);						

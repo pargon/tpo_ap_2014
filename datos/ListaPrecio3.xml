@@ -1,10 +1,14 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- LISTA DE PRECIOS -->
 <ListaPrecios numero="3">
 <Proveedor>
 <Cuil>6233</Cuil>
 <RazonSocial>DXTV SRL</RazonSocial>
 </Proveedor>
+<Vigencia>
+<Fecha>01/06/2014</Fecha>
+<Termino>60</Termino>
+</Vigencia>
 <CondicionesDeVenta>
 <PagoContado>
 <Descuento>23</Descuento>

@@ -29,47 +29,12 @@ import model.SolicitudCotizacion;
 
 public class Test {
 	
-	private static HibernateDAO hdao;
-	
 	public Test() {
-	}
-	
-	public static void persistirObj(Object c){
-		hdao.getInstancia().persistir(c);
-	}
-	
+	}	
 	
 	public static void main(String[] args) {
 
 		altaListaPrecios();
-		
-		
-		//testXML();
-		
-		//System.exit(1);
-		
-		//AltaDatos();
-		
-		//BeanSolicitudCotizacion bsc = CrearBeanSolCot();
-		/*
-		try {
-			int cot = new RMIController().guardarSolicitudCotizacion(bsc);
-			
-			new RMIController().crearOrdenPedido(cot);
-			
-			new RMIController().crearOrdenCompra();
-
-			int ocnro = get1erOC();
-			
-			new RMIController().recepcionMercaderia(ocnro);
-			
-			new RMIController().facturar();
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
 		
 		System.exit(0);
 	}
@@ -78,61 +43,18 @@ public class Test {
 		List<String> archivos = new ArrayList<String>();
 		archivos.add("c:\\ListaPrecio1.xml");
 		archivos.add("C:\\ListaPrecio2.xml");
+		archivos.add("C:\\ListaPrecio3.xml");
+		archivos.add("C:\\ListaPrecio4.xml");
 		
 		new ListaPreciosSRV().getinstancia().getListas(archivos);
-
 		
 	}
 
-	private static void testXML() {
-		new ListaPreciosSRV().actualizarListas("c:\\ListaPrecio1.xml", "1", 1542);
-		
-	}
-
-	private static int get1erOC() {
-		OrdenCompra oc = (OrdenCompra)HibernateDAO.getInstancia().get(OrdenCompra.class, 1) ;
-		return oc.getId();
-	}
-
-	private static BeanSolicitudCotizacion CrearBeanSolCot() {
-		Marca mar = new Marca();
-		mar.setDescripcion("SDK");
-		mar.setPais("Suecia");
-		
-		HibernateDAO.getInstancia().persistir(mar);
-		System.out.println("marca");
-		
-		
-		BeanSolicitudCotizacion bsc = new BeanSolicitudCotizacion();
-		BeanItemSolicitudCotizacion bisc = new BeanItemSolicitudCotizacion();
-		BeansCliente bc = new BeansCliente();
-		bc.setContacto("Contacto PEPE");
-		bc.setCuit("123");
-		bc.setPorcentajeDesc((float) 10.00);
-		bc.setRazonSocial("Razon social SRL");
-		bc.setTelefono("42064885");
-		bsc.setBeansCliente(bc);
-		bisc.setCantidad(5);
-		
-		BeanRodamiento br = new BeanRodamiento();
-		br.setTipo("Bolilla");
-		br.setCodigo("1");
-		br.setCaracteristicas("456");
-		
-		BeanMarca bm = new BeanMarca();
-		bm.setDescripcion("SDK");
-		bm.setPais("Suecia");
-		
-		
-		br.setBeanMarca(bm);
-		bisc.setBeanRodamiento(br);
-		List<BeanItemSolicitudCotizacion> blisc = new ArrayList<BeanItemSolicitudCotizacion>();
-		blisc.add(bisc);
-		bsc.setBeanItemsSolicitudCotizacion(blisc);
-		bsc.setFecha(new Date());
-		return bsc;
-
-				
+	
+	
+	
+	public static void persistirObj(Object c){
+		HibernateDAO.getInstancia().persistir(c);
 	}
 
 	private static void AltaDatos() {

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controlador.RemotoClient;
 import beans.BeanFacturaSmall;
-import beans.BeanOP;
+
 
 public class BuscarFacturasServlet extends HttpServlet{
 

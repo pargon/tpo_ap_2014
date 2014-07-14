@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controlador.RemotoClient;
-import beans.BeanOP;
 import beans.BeanRemito;
 
 

@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.sound.midi.SysexMessage;
+
+import org.hibernate.criterion.ExistsSubqueryExpression;
+
 import beans.BeanCotizacionRodamiento;
 import beans.BeanFacturaSmall;
 import beans.BeanOP;
@@ -104,6 +108,10 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		// recorro los rodamientos de la solicitud, y obtengo mejor precio con su prv
 		for(ItemSolicitudCotizacion itsol: litsol){
 			ItemRodamiento irod = ListaPreciosSRV.getinstancia().mejorPrecioPrv(itsol.getRodamiento(), itsol.getCantidad() );
+			if (irod == null){
+				System.out.println("Error: No hay precio para Rodamiento");
+				System.exit(1);
+			}
 			ItemRodamiento irod2 = new ItemRodamiento();
 			irod2.setCantidad(irod.getCantidad());
 			irod2.setPrecio(irod.getPrecio());
