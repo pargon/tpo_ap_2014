@@ -6,7 +6,9 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import beans.BeanCotizacionRodamiento;
+
+
+
 import beans.BeanFacturaSmall;
 import beans.BeanOP;
 import beans.BeanRemito;
@@ -96,6 +98,39 @@ public class RemotoClient {
 	public String confirmaCotizacion(int idCot){
 		try {
 			rmiController.crearOrdenPedido(idCot);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "Exito";
+	}
+	
+	public String crearOCompras(){
+		try {
+			rmiController.crearOrdenCompra();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "Exito";
+	}
+
+	public String recepcionarMercaderia(int idOC) {
+		try {
+			rmiController.recepcionMercaderia(idOC);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "Exito";
+	}
+
+	public String facturar() {
+		try {
+			rmiController.facturar();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

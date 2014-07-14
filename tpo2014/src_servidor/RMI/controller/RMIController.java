@@ -106,7 +106,6 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			ItemRodamiento irod = ListaPreciosSRV.getinstancia().mejorPrecioPrv(itsol.getRodamiento(), itsol.getCantidad() );
 			ItemRodamiento irod2 = new ItemRodamiento();
 			irod2.setCantidad(irod.getCantidad());
-			irod2.setId(irod.getId());
 			irod2.setPrecio(irod.getPrecio());
 			irod2.setProveedor(irod.getProveedor());
 			irod2.setRodamiento(irod.getRodamiento());

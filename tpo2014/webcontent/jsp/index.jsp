@@ -9,11 +9,21 @@
 <body>
 <p/>
 <fieldset>
-<legend>Menu</legend>
+<legend>Procesos</legend>
+<ul >
+  <li><a href="ingresoSolicitudCot.jsp">Ingresar Solicitud</a></li>
+  <li><a href="confirmarCotizacion.jsp">Confirmar Cotización</a></li>
+  <li><a href="crearOCompras.jsp">Generar O.Compras</a></li>
+  <li><a href="recepMercaderia.jsp">Recep. Mercadería</a></li>
+  <li><a href="facturar.jsp">Facturar</a></li>
+</ul>
+</fieldset>
+<fieldset>
+<legend>Consultas</legend>
 <ul>
-  <li><a href="ingresoSolicitudCot.jsp">Ingresar</a> Ingresar Sol.</li>
-  <li><a href="confirmarCotizacion.jsp">Confirmar</a> Confirmar Cot.</li>
-  <li><a href="mostrarOrdenPedido.jsp">Mostrar O.P.P</a> Orden Pedido Pendientes</li>  
+  <li><a href="mostrarOrdenPedido.jsp">O. Pedido Pendientes</a> </li>
+  <li><a href="mostrarRemitos.jsp">Remitos</a></li>
+  <li><a href="mostrarFacturas.jsp">Facturas</a></li>  
 </ul>
 </fieldset>
 <p/>
