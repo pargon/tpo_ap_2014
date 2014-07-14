@@ -183,7 +183,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			
 			// persistir en xml x cada proveedor
 			OrdenCompraSRV.getinstancia().newDomXML(oc);
-			OrdenCompraSRV.getinstancia().saveDomXML("d:\\ordencompra.xml");
+			OrdenCompraSRV.getinstancia().saveDomXML("d:\\ordencompra"+ oc.getId() + ".xml");
 			
 		}
 	}
@@ -293,6 +293,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 				f.setFecha(new Date());
 				f.setRemitoSolo(remito);
 				lfacturas.add(f);
+				remito.setEstado("FAC");
 			}
 			else
 			{
@@ -308,6 +309,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 					f2.setFecha(new Date());
 					f2.setRemitoSolo(remito);
 					lfacturas.add(f2);
+					remito.setEstado("FAC");
 				}
 				entro = false;
 			}
@@ -321,7 +323,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 	@Override
 	public List<BeanOP> buscarOP() throws RemoteException {
 		@SuppressWarnings("unchecked")
-		List<OrdenPedido> ops = (List<OrdenPedido>) HibernateDAO.getInstancia().getlista("Select op from OrdenPedido op where op.estado = 'PEND'");
+		List<OrdenPedido> ops = (List<OrdenPedido>) HibernateDAO.getInstancia().getlista("Select op from OrdenPedido op where op.estado = 'PEN'");
 		List<BeanOP> bops = new ArrayList<BeanOP>();		
 		for(OrdenPedido op: ops){
 			BeanOP bop = new BeanOP();
@@ -350,7 +352,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 	@Override
 	public List<BeanRemito> buscarRemitos() throws RemoteException {
 		@SuppressWarnings("unchecked")
-		List<Remito> remitos = (List<Remito>) HibernateDAO.getInstancia().getlista("Select r from Remito r where r.estado = 'PEND'");
+		List<Remito> remitos = (List<Remito>) HibernateDAO.getInstancia().getlista("Select r from Remito r");
 		List<BeanRemito> brs = new ArrayList<BeanRemito>();		
 		for(Remito r: remitos){
 			BeanRemito br = new BeanRemito();
@@ -366,7 +368,10 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 
 	@Override
 	public List<BeanFacturaSmall> buscarFacturas() throws RemoteException {
+<<<<<<< .mine
+=======
 		@SuppressWarnings("unchecked")
+>>>>>>> .r134
 		List<Factura> facturas = (List<Factura>) HibernateDAO.getInstancia().getlista("Select f from Factura f");
 		List<BeanFacturaSmall> bfs = new ArrayList<BeanFacturaSmall>();		
 		for(Factura f: facturas){
@@ -377,6 +382,9 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			bf.setId(f.getNroFactura());
 			bf.setRazonSocial(f.getCliente().getRazonSocial());
 			bfs.add(bf);
+<<<<<<< .mine
+		}
+=======
 		}
 		/*
 		List<BeanFacturaSmall> bfs = new ArrayList<BeanFacturaSmall>();
@@ -387,6 +395,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		bf.setId(1);
 		bf.setRazonSocial("Santos SRL");
 		bfs.add(bf);
+>>>>>>> .r134
 		return bfs;
 		*/
 		return bfs;

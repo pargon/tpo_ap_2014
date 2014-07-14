@@ -144,12 +144,14 @@ public class OrdenCompraSRV {
 	}
 
 	public List<ItemRodamiento> PedidoVSCompra(OrdenCompra oc, OrdenPedido op) {
+
 		String sql = "select itroc from OrdenCompra c"
 				+ " join c.pedidos p"
-				+ " join p.cot.itemsRodamiento itroc"
-				+ " join c.itemsOC"
+				+ " join p.cot.itemsRodamiento itroc"				
 				+ " where CAST(c.id as string) = :idoc"
-				+ " and CAST(p.id as string) = :idop";
+				+ " and CAST(p.id as string) = :idop"
+				+ " and exists( select itc from c.itemsOC itc"
+				+ "             where itc.rodamiento.rodamientoId.codigo = itroc.rodamiento.rodamientoId.codigo)";
 		
 		return (List<ItemRodamiento> )HibernateDAO.getInstancia().parametros2(sql, "idoc", String.valueOf(oc.getId()) , "idop", String.valueOf(op.getId() ));
 	}
@@ -164,7 +166,9 @@ public class OrdenCompraSRV {
 				+ " where p.estado = 'OC'"
 				+ " and it.cantidad < ( select sum(itr.cantidad) from Remito r"
 				+ "					join r.items itr"
-				+ "					where itr.rodamiento.rodamientoId.codigo = it.rodamiento.rodamientoId.codigo)";
+				+ "					where r.op.id = p.id"
+				+ "					and r.estado = 'PAR'"
+				+ "					and itr.rodamiento.rodamientoId.codigo = it.rodamiento.rodamientoId.codigo)";
 		
 		List<OrdenPedido> lop = (List<OrdenPedido>) HibernateDAO.getInstancia().getlista(sql);	
 		

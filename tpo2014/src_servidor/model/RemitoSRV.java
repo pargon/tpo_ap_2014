@@ -152,7 +152,7 @@ public class RemitoSRV {
 		    Result dest = new StreamResult(new FileWriter(new File(archivo)));
 		    //método transform que enlaza el documento con el stream
 		    tran.transform(src, dest); 
-		    System.out.println("archivo creado");
+		    
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
