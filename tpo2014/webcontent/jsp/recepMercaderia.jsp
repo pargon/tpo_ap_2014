@@ -11,7 +11,7 @@
 <fieldset>
 <legend>Ingresar Id Orden de Compra</legend>
 
-        <form action="recMerc" enctype="multipart/form-data" method="GET">
+        <form action="recMerc.do" enctype="multipart/form-data" method="GET">
             <input type="TEXT" name="idOC" >
  
             <input type="Submit" value="Confirmar">

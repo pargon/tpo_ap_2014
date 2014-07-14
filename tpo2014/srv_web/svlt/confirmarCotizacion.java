@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controlador.RemotoClient;
 
-
-@WebServlet(name = "cnfCot", urlPatterns = {"/jsp/cnfCot"})
+//@WebServlet(name = "cnfCot", urlPatterns = {"/jsp/cnfCot"})
 public class confirmarCotizacion extends HttpServlet{
 
 	/**

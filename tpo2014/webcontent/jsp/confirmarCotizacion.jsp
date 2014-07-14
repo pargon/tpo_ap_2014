@@ -11,7 +11,7 @@
 <fieldset>
 <legend>Ingresar Id Cotización</legend>
 
-        <form action="cnfCot" enctype="multipart/form-data" method="GET">
+        <form action="cnfCot.do" enctype="multipart/form-data" method="GET">
             <input type="TEXT" name="idCot" >
  
             <input type="Submit" value="Confirmar">

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import controlador.RemotoClient;
 
 
-@WebServlet(name = "crearOC", urlPatterns = {"/jsp/crearOC"})
+//@WebServlet(name = "crearOC", urlPatterns = {"/jsp/crearOC"})
 public class crearOCompras extends HttpServlet{
 
 	/**

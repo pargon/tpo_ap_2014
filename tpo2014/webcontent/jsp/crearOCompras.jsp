@@ -11,7 +11,7 @@
 <fieldset>
 <legend>Se tomarán todas las O.Pedido Pendientes</legend>
 
-        <form action="crearOC" enctype="multipart/form-data" method="GET">
+        <form action="crearOC.do" enctype="multipart/form-data" method="GET">
          
             <input type="Submit" value="Confirmar">
   

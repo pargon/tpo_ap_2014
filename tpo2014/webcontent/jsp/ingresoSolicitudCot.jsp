@@ -11,7 +11,7 @@
 <fieldset>
 <legend>Subir archivo XML con Solicitud</legend>
 
-        <form action="ingSolCot" enctype="multipart/form-data" method="POST">
+        <form action="ingSolCot.do" enctype="multipart/form-data" method="POST">
             <input type="file" name="file">
  
             <input type="Submit" value="Upload File">

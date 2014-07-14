@@ -44,7 +44,7 @@ import beans.BeanSolicitudCotizacion;
 import beans.BeansCliente;
 import controlador.RemotoClient;
 
-@WebServlet(name = "ingSolCot", urlPatterns = {"/jsp/ingSolCot"})
+//@WebServlet(name = "ingSolCot", urlPatterns = {"/jsp/ingSolCot"})
 @MultipartConfig(location = "/tmp")
 public class ingresarSolicitudCot extends HttpServlet {
 

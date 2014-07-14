@@ -11,7 +11,7 @@
 <fieldset>
 <legend>Se tomarán todos los Remitos de las OP completas</legend>
 
-        <form action="facturar" enctype="multipart/form-data" method="GET">
+        <form action="facturar.do" enctype="multipart/form-data" method="GET">
          
             <input type="Submit" value="Confirmar">
   
