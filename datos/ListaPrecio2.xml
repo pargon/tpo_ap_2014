@@ -28,7 +28,7 @@
 </CondicionesDeVenta>
 <Rodamientos>
 <Item>
-<Codigo>6</Codigo>
+<Codigo>1</Codigo>
 <Sufijo>MN</Sufijo>
 <Marca>SDK</Marca>
 <Origen>Suiza</Origen>
@@ -59,6 +59,17 @@
 <Caracteristica>412</Caracteristica>
 <Precio>55.00</Precio>
 <Cantidad>48</Cantidad>
+</Item>
+<Item>
+<Codigo>15</Codigo>
+<Sufijo>MN</Sufijo>
+<Marca>GTR</Marca>
+<Origen>Japon</Origen>
+<Tipo>Tuerca</Tipo>
+<Medida>0.3</Medida>
+<Caracteristica>242</Caracteristica>
+<Precio>85.00</Precio>
+<Cantidad>57</Cantidad>
 </Item>
 </Rodamientos>
 </ListaPrecios>
