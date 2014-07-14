@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- LISTA DE PRECIOS -->
-<ListaPrecios numero="4">
+<ListaPrecios numero="2">
 <Proveedor>
 <Cuil>32452</Cuil>
 <RazonSocial>TVP SRL</RazonSocial>
 </Proveedor>
-<Vigencia>
-<Fecha>01/06/2014</Fecha>
-<Termino>60</Termino>
-</Vigencia>
 <CondicionesDeVenta>
 <PagoContado>
 <Descuento>10</Descuento>
@@ -28,7 +24,7 @@
 </CondicionesDeVenta>
 <Rodamientos>
 <Item>
-<Codigo>13</Codigo>
+<Codigo>12</Codigo>
 <Sufijo>MN</Sufijo>
 <Marca>MGK</Marca>
 <Origen>Suecia</Origen>
@@ -61,7 +57,7 @@
 <Cantidad>67</Cantidad>
 </Item>
 <Item>
-<Codigo>16</Codigo>
+<Codigo>7</Codigo>
 <Sufijo>MN</Sufijo>
 <Marca>HMX</Marca>
 <Origen>Holanda</Origen>
@@ -72,7 +68,7 @@
 <Cantidad>100</Cantidad>
 </Item>
 <Item>
-<Codigo>17</Codigo>
+<Codigo>2</Codigo>
 <Sufijo>MN</Sufijo>
 <Marca>Bones</Marca>
 <Origen>Escocia</Origen>
