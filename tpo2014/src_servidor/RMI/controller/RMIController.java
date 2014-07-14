@@ -109,7 +109,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		for(ItemSolicitudCotizacion itsol: litsol){
 			ItemRodamiento irod = ListaPreciosSRV.getinstancia().mejorPrecioPrv(itsol.getRodamiento(), itsol.getCantidad() );
 			if (irod == null){
-				System.out.println("Error: No hay precio para Rodamiento");
+				System.out.println("Error: No hay precio para Rodamiento " + itsol.getRodamiento().getRodamientoId().getCodigo());
 				System.exit(1);
 			}
 			ItemRodamiento irod2 = new ItemRodamiento();
