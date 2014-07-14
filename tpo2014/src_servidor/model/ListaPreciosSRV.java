@@ -274,10 +274,13 @@ public class ListaPreciosSRV {
 
 	public ItemRodamiento mejorPrecioPrv(Rodamiento rod, int cantidad) {
 		
-		String sql = "select lpitrod from ListaPrecios lp"
+		String sql = "select lp from ListaPrecios lp"
 				+ " join lp.itemsRodamiento lpitrod"
 				+ " where "
-				+ " lpitrod.rodamiento.rodamientoId.codigo = :rod";
+				+ " lpitrod.rodamiento.rodamientoId.codigo = :rod "
+				+ " and lpitrod.precio = (select min(lpi.precio) from "
+				+ " ListaPrecios lp1 join lp1.itemsRodamiento lpi "
+				+ " where lpi.rodamiento.rodamientoId.codigo = :rod)";
 		Date now = new Date();
 		
 		List<ItemRodamiento> lirod= (List<ItemRodamiento>) 
