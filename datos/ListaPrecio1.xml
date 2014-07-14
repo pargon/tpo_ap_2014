@@ -2,7 +2,7 @@
 <!-- LISTA DE PRECIOS -->
 <ListaPrecios numero="1">
 <Proveedor>
-<Cuil>96</Cuil>
+<Cuil>96432</Cuil>
 <RazonSocial>JuanSRL</RazonSocial>
 </Proveedor>
 <Vigencia>
@@ -39,6 +39,7 @@
 </Item>
 <Item>
 <Codigo>2</Codigo>
+<Sufijo>MN</Sufijo>
 <Marca>Bones</Marca>
 <Origen>Escocia</Origen>
 <Tipo>Bolilla</Tipo>
@@ -48,7 +49,7 @@
 <Cantidad>100</Cantidad>
 </Item>
 <Item>
-<Codigo>7</Codigo>
+<Codigo>3</Codigo>
 <Sufijo>AR</Sufijo>
 <Marca>SKF</Marca>
 <Origen>Suecia</Origen>
@@ -59,7 +60,7 @@
 <Cantidad>16</Cantidad>
 </Item>
 <Item>
-<Codigo>18</Codigo>
+<Codigo>4</Codigo>
 <Sufijo>PS</Sufijo>
 <Marca>NTN</Marca>
 <Origen>China</Origen>
@@ -70,7 +71,7 @@
 <Cantidad>45</Cantidad>
 </Item>
 <Item>
-<Codigo>12</Codigo>
+<Codigo>5</Codigo>
 <Sufijo>MN</Sufijo>
 <Marca>FAG</Marca>
 <Origen>Rumania</Origen>
