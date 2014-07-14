@@ -71,5 +71,16 @@
 <Precio>80.00</Precio>
 <Cantidad>170</Cantidad>
 </Item>
+<Item>
+<Codigo>5</Codigo>
+<Sufijo>MN</Sufijo>
+<Marca>FAG</Marca>
+<Origen>Rumania</Origen>
+<Tipo>Rueda</Tipo>
+<Medida>2.7</Medida>
+<Caracteristica>434</Caracteristica>
+<Precio>60.00</Precio>
+<Cantidad>46</Cantidad>
+</Item>
 </Rodamientos>
 </ListaPrecios>
