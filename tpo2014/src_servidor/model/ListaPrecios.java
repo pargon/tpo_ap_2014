@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,10 @@ public class ListaPrecios implements Serializable {
 	private int financiacion_dias;
 	@Column
 	private int financiacion_dto;
+	@Column
+	private Date publica;
+	@Column
+	private Date termina;
 	
 
 	
@@ -71,6 +76,18 @@ public class ListaPrecios implements Serializable {
 	}
 	
 	public void setFinanciacion(List<Map<Integer,Float>> financiacion) {
+	}
+	public Date getPublica() {
+		return publica;
+	}
+	public void setPublica(Date publica) {
+		this.publica = publica;
+	}
+	public Date getTermina() {
+		return termina;
+	}
+	public void setTermina(Date termina) {
+		this.termina = termina;
 	}
 	
 	

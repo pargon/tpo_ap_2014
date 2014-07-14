@@ -1,6 +1,7 @@
 package hbt.dao;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import model.SolicitudCotizacion;
@@ -54,7 +55,12 @@ public class HibernateDAO {
 	}
 	public List<?> parametros2(String query, String prmName1, String prm1, String prmName2, String prm2) {
 		Session session = getSession();
-		List<?> lista = session.createQuery(query).setParameter(prmName1, prm1).setParameter(prmName2, prm2) .list();
+		List<?> lista = session.createQuery(query).setParameter(prmName1, prm1).setParameter(prmName2, prm2).list();
+		return lista;
+	}
+	public List<?> parametros3(String query, String prmName1, Date prm1, String prmName2, String prm2) {
+		Session session = getSession();
+		List<?> lista = session.createQuery(query).setDate(prmName1, prm1).setParameter(prmName2, prm2).list();
 		return lista;
 	}
 	

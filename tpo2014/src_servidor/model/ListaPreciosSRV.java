@@ -4,7 +4,11 @@ package model;
 import hbt.dao.HibernateDAO;
 import hbt.dao.HibernateListaPreciosDAO;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +18,10 @@ import beans.BeansListaPrecios;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+
+
+
 
 
 
@@ -81,17 +89,31 @@ public class ListaPreciosSRV {
 		        lista.setId(Integer.parseInt(rootNode.getAttributeValue("numero")));
 		        System.out.println(lista.getId());
 		        
+		        // NODO PROVEEDOR
 		        Element proveedor = rootNode.getChild("Proveedor");
-		        String cuil = proveedor.getChildTextTrim("Cuil");
-		        prov.setCuit(cuil);
-		        String rz = proveedor.getChildTextTrim("RazonSocial");
-		        prov.setRazonSocial(rz);
+		        prov.setCuit(proveedor.getChildTextTrim("Cuil"));
+		        prov.setRazonSocial( proveedor.getChildTextTrim("RazonSocial"));
+		        
 		        lista.setProveedor(prov);
-//		        ProveedorSRV.getinstancia().guardarProveedor(prov);
+		        
+		        // NODO VIGENCIA
+		        Element vigencia = rootNode.getChild("Vigencia");
+		        String fecpublica = vigencia.getChildTextTrim("Fecha");
+		        String diastermina = vigencia.getChildTextTrim("Termino");
+
+		        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		        Date fechapub = formatter.parse(fecpublica);
+		        Date fechater = sumaDias(fechapub, Integer.valueOf(diastermina));
+		        lista.setPublica(fechapub);
+		        lista.setTermina(fechater);
+		        
+		        // NODO COND. VENTA
 		        Element condVenta = rootNode.getChild("CondicionesDeVenta");
 		        Element contado = condVenta.getChild("PagoContado");
 		        String descuento = contado.getChildTextTrim("Descuento");
 		        lista.setDescuento(Integer.valueOf(descuento));
+		        
+		        // NODO FINANCIACION
 		        List financ =condVenta.getChildren("Financiacion");
 		        List<Map<Integer, Float>> listaMapas = new ArrayList<Map<Integer, Float>>();
 		        for(int i = 0; i < financ.size();i++){
@@ -153,10 +175,8 @@ public class ListaPreciosSRV {
 		        System.out.println("Proveedor: "+lista.getProveedor().getRazonSocial());
 		        System.out.println("ItemsRod: Precio= "+lista.getItemsRodamiento().get(0).getPrecio()+" Marca= "+lista.getItemsRodamiento().get(0).getRodamiento().getRodamientoId().getMarca().getDescripcion());
 		        
-		    }catch ( IOException io ) {
-		        System.out.println( io.getMessage() );
-		    }catch ( JDOMException jdomex ) {
-		        System.out.println( jdomex.getMessage() );
+		    }catch ( Exception io ) {
+		        io.printStackTrace();
 		    }
 		    listaPosta.add(lista);
 		    guardarLista(lista);
@@ -165,6 +185,14 @@ public class ListaPreciosSRV {
 	return listaPosta;
 	}
 	
+	private Date sumaDias(Date fecha, int dias) {
+		
+       Calendar calendar = Calendar.getInstance();
+       calendar.setTime(fecha); // Configuramos la fecha que se recibe
+       calendar.add(Calendar.DAY_OF_YEAR, dias);  // numero de días a añadir, o restar en caso de días<0
+       return calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
+	}
+
 	public void actualizarListas(String filepath, String codRod, int cantidad){
 		//Se crea un SAXBuilder para poder parsear el archivo
 	    SAXBuilder builder = new SAXBuilder();
@@ -246,7 +274,22 @@ public class ListaPreciosSRV {
 
 	public ItemRodamiento mejorPrecioPrv(Rodamiento rod, int cantidad) {
 		
-		 HibernateListaPreciosDAO.getInstancia().getLista(sql);
+		String sql = "select lpitrod from ListaPrecios lp"
+				+ " join lp.itemsRodamiento lpitrod"
+				+ " where "
+				+ " lpitrod.rodamiento.rodamientoId.codigo = :rod";
+		Date now = new Date();
+		
+		List<ItemRodamiento> lirod= (List<ItemRodamiento>) 
+									HibernateDAO.getInstancia().parametros(sql, "rod", rod.getRodamientoId().getCodigo());
+									//HibernateDAO.getInstancia().parametros3(sql, "now", now, "rod", rod.getRodamientoId().getCodigo());
+		ItemRodamiento itr = null;
+		
+		if (lirod.size() > 0){
+			itr = lirod.get(0);
+			itr.setCantidad(cantidad);
+		}
 		 
+		return itr;
 	}
 }

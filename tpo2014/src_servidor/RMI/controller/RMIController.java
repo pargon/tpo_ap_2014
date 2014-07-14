@@ -104,7 +104,14 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 		// recorro los rodamientos de la solicitud, y obtengo mejor precio con su prv
 		for(ItemSolicitudCotizacion itsol: litsol){
 			ItemRodamiento irod = ListaPreciosSRV.getinstancia().mejorPrecioPrv(itsol.getRodamiento(), itsol.getCantidad() );
-			litrod.add(irod);
+			ItemRodamiento irod2 = new ItemRodamiento();
+			irod2.setCantidad(irod.getCantidad());
+			irod2.setId(irod.getId());
+			irod2.setPrecio(irod.getPrecio());
+			irod2.setProveedor(irod.getProveedor());
+			irod2.setRodamiento(irod.getRodamiento());
+			
+			litrod.add(irod2);
 		}
 		
 		// agrego la lista con los precios y prv de cada rodamiento a la cotizacion
