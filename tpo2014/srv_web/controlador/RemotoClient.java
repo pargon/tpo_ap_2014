@@ -33,6 +33,10 @@ public class RemotoClient {
 		return instancia;
 	}
 
+	public void algo(){
+		System.out.println("algo");
+	}
+	
 	public RemotoClient(){
 		instancia = this;
 		getStub();
@@ -42,7 +46,7 @@ public class RemotoClient {
 		try {
 			System.getProperty("java.security.policy");
 			rmiController = (InterfazRMI)Naming.lookup ("//localhost:1099/rmiController");
-			System.out.println("GetStub");
+			System.out.println("Conectado");
 			return true;
 		} catch (Exception e) {
 			System.out.println("No me puedo conectar al server");

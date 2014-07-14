@@ -177,7 +177,7 @@ public class RMIController extends UnicastRemoteObject implements InterfazRMI {
 			
 			// quedan pendientes de recepción de mercadería
 			oc.setEstado("PEN");
-			HibernateDAO.getInstancia().persistir(oc);
+			HibernateDAO.getInstancia().guardar(oc);
 			
 			System.out.println("Crea O.Compra: " +oc.getId()+ " Proveedor: "+ oc.getProveedor().getRazonSocial());
 			

@@ -3,8 +3,8 @@ package svlt;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +16,9 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
+
 
 import org.jdom2.Document;         // |
 import org.jdom2.Element;          // |\ Librerías
@@ -71,34 +74,24 @@ public class ingresarSolicitudCot extends HttpServlet {
         -------------------- SUBIR Y DESCOMPONER EN BEAN SOLICITUD ----------------------
         
         */
-
-		BeanSolicitudCotizacion solcot ;
-		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion1.xml");
-		RemotoClient.getInstancia().guardarCotizacion(solcot);
+		String valor = req.getParameter("idSol");
 		
-		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion2.xml");
-		RemotoClient.getInstancia().guardarCotizacion(solcot);
+		int idSol = Integer.valueOf( valor );
 		
-		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion3.xml");
-		RemotoClient.getInstancia().guardarCotizacion(solcot);
-		
-		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion4.xml");
-		RemotoClient.getInstancia().guardarCotizacion(solcot);
-		
-		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion5.xml");
-		RemotoClient.getInstancia().guardarCotizacion(solcot);
-		
-		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion6.xml");
-		RemotoClient.getInstancia().guardarCotizacion(solcot);
-		
-		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion7.xml");
-		RemotoClient.getInstancia().guardarCotizacion(solcot);
-		
-		solcot = CrearBeanDDeXML("c:\\SolicitudCotizacion8.xml");
-		RemotoClient.getInstancia().guardarCotizacion(solcot);
-		
+		creaSolicitud("c:\\SolicitudCotizacion" + idSol + ".xml");
+			
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/jsp/ingresoSolicitudCot.jsp");
 		rd.forward(req, resp);						
+	}
+
+	private void creaSolicitud(String archivo) {
+		BeanSolicitudCotizacion solcot ;
+		
+		System.out.println( "comienza sol");
+		solcot = CrearBeanDDeXML(archivo);
+		System.out.println( RemotoClient.getInstancia().guardarCotizacion(solcot) );
+
+		
 	}
 
 	private BeanSolicitudCotizacion CrearBeanDDeXML(String archivo) {
@@ -136,11 +129,12 @@ public class ingresarSolicitudCot extends HttpServlet {
 	        solcot.setId(numSol);
 	        
 	        //Nodo Rodamientos
-	        List<Element> rods = rootNode.getChildren("Rodamientos");
-	        for(Element erod: rods){
+	        Element nrod = rootNode.getChild("Rodamientos");
+	        List<Element> rods = nrod.getChildren("Item");
+	        for(Element item: rods){
 	        	
 		        //Nodo Rodamientos/Items
-		        Element item = erod.getChild("Item");
+		        //Element item = erod.getChild("Item");
 		        
 		        BeanItemSolicitudCotizacion itemSolCot = new BeanItemSolicitudCotizacion();
 		        BeanRodamiento rod = new BeanRodamiento();

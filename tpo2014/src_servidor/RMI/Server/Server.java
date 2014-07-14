@@ -23,7 +23,6 @@ public class Server {
 
 	public void iniciar() {
 		//System.setSecurityManager(new RMISecurityManager());
-		
     	try {
     		System.getProperty("java.security.policy");
     		LocateRegistry.createRegistry(1099);	

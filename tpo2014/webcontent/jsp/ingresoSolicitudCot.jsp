@@ -9,12 +9,13 @@
 <body>
 <p/>
 <fieldset>
-<legend>Subir archivo XML con Solicitud</legend>
+<legend>Elegir archivo XML (1 al 8)</legend>
 
         <form action="ingSolCot.do" enctype="multipart/form-data" method="POST">
-            <input type="file" name="file">
+            <input type="TEXT" name="idSol" >
  
-            <input type="Submit" value="Upload File">
+            <input type="Submit" value="Confirmar">
+ 
   
         </form>
 </fieldset>

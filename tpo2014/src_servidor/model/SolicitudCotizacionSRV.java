@@ -1,6 +1,8 @@
 package model;
 
 
+import hbt.dao.HibernateClientesDAO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,9 +47,20 @@ public class SolicitudCotizacionSRV {
 			
 			itemSolicitudCotizacion.setRodamiento(rodamiento);
 			itemSolicitudCotizacions.add(itemSolicitudCotizacion);
+		
 		}
 		
-		Cliente cliente = new Cliente();
+		
+		Cliente cliente = null;
+		// busca cliente
+		List<Cliente> lcli = buscarCliente(beanSolicitudCotizacion.getBeansCliente().getRazonSocial(),
+											beanSolicitudCotizacion.getBeansCliente().getCuit());
+				
+		if (lcli.size()> 0)
+			cliente = lcli.get(0);
+		else
+			cliente = new Cliente();
+		
 		cliente.setContacto(beanSolicitudCotizacion.getBeansCliente().getContacto());
 		cliente.setCuit(beanSolicitudCotizacion.getBeansCliente().getCuit());
 		cliente.setPorcentajeDesc(beanSolicitudCotizacion.getBeansCliente().getPorcentajeDesc());
@@ -58,5 +71,11 @@ public class SolicitudCotizacionSRV {
 		solicitudCotizacion.setFecha(beanSolicitudCotizacion.getFecha());
 		solicitudCotizacion.setItemsSolicitudCotizacion(itemSolicitudCotizacions);
 		return solicitudCotizacion;
+	}
+
+
+	private List<Cliente> buscarCliente(String nom, String cuit) {
+		
+		return HibernateClientesDAO.getInstancia().buscarClientes(nom, cuit);
 	}
 }

@@ -20,9 +20,9 @@ public class CotizacionRodamiento implements Serializable{
 	@OneToMany(cascade=CascadeType.ALL)
 	private List<ItemRodamiento> itemsRodamiento = new ArrayList<ItemRodamiento>();
 	
-	@OneToOne
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade=CascadeType.ALL)
  	private SolicitudCotizacion solicitudCotizacion = new SolicitudCotizacion();
+	
 	private Date fechaCotizacion;
 	private int termino;
 	private Integer activa;
