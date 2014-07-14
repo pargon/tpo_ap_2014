@@ -33,7 +33,7 @@ public class HibernateListaPreciosDAO {
 	public void guardarListaPrecios(ListaPrecios listaPrecios) {
 		Session session = sf.openSession();
 		session.beginTransaction();
-		session.persist(listaPrecios);
+		session.saveOrUpdate(listaPrecios);
 		session.flush();
 		session.getTransaction().commit();
 		session.close();		

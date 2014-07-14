@@ -28,7 +28,7 @@ public class OrdenCompra {
 	
 	private String estado;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL)
 	private List<OrdenPedido> pedidos;
 	
 	
@@ -89,7 +89,8 @@ public class OrdenCompra {
 	}
 	
 	public void agregarOPedido(OrdenPedido op) {
-		pedidos.add(op);
+		if(!pedidos.contains(op))
+			pedidos.add(op);
 	}
 	public List<OrdenPedido> getPedidos() {
 		return pedidos;

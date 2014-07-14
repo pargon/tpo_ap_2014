@@ -78,4 +78,11 @@ public class HibernateDAO {
 		ses.getTransaction().commit();
 	}
 	
+	public void update(Object o){
+		Session ses = getSession();
+		ses.beginTransaction();
+		ses.update(o);
+		ses.flush();
+		ses.getTransaction().commit();
+	}
 }
