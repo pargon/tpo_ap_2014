@@ -21,9 +21,9 @@
 <fieldset>
 <legend>Consultas</legend>
 <ul>
-  <li><a href="mostrarOrdenPedido.jsp">O. Pedido Pendientes</a> </li>
-  <li><a href="mostrarRemitos.jsp">Remitos</a></li>
-  <li><a href="mostrarFacturas.jsp">Facturas</a></li>  
+  <li><a href="BuscarOP.do">O. Pedido Pendientes</a> </li>
+  <li><a href="BuscarRemitos.do">Remitos</a></li>
+  <li><a href="BuscarFacturas.do">Facturas</a></li>  
 </ul>
 </fieldset>
 <p/>

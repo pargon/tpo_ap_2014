@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class BeansFactura {
+public class BeansFactura implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private Integer nroFactura;
