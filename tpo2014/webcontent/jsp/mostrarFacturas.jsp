@@ -21,6 +21,10 @@
 	<form action="BuscarFacturas.do" method="post">
 		<input type="submit" value="Buscar Facturas" />
 	</form>
+									
+	<table width="40%" border="2" bordercolor="#00000"
+		   style="border-collapse: collapse;">
+	
 	<%if(request.getAttribute("Facturas")!= null){
 		List<BeanFacturaSmall> bfs = (List<BeanFacturaSmall>)request.getAttribute("Facturas");%>
 		<tbody>
@@ -39,6 +43,8 @@
 			}//Cierra el for
 		%>
 	</tbody>
+	</table>
+	
 	<%
 	}
 		

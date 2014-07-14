@@ -21,6 +21,9 @@
 	<form action="BuscarOP.do" method="post">
 		<input type="submit" value="Buscar OPP" />
 	</form>
+	<table width="40%" border="2" bordercolor="#00000"
+		   style="border-collapse: collapse;">
+	
 	<%if(request.getAttribute("OP")!= null){
 		List<BeanOP> bop = (List<BeanOP>)request.getAttribute("OP");%>
 		<tbody>
@@ -39,6 +42,8 @@
 			}//Cierra el for
 		%>
 	</tbody>
+	</table>
+	
 	<%
 	}
 		

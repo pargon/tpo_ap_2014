@@ -21,6 +21,9 @@
 	<form action="BuscarRemitos.do" method="post">
 		<input type="submit" value="Buscar Remitos" />
 	</form>
+	<table width="40%" border="2" bordercolor="#00000"
+		   style="border-collapse: collapse;">
+	
 	<%if(request.getAttribute("Remitos")!= null){
 		List<BeanRemito> brs = (List<BeanRemito>)request.getAttribute("Remitos");%>
 		<tbody>
@@ -39,6 +42,7 @@
 			}//Cierra el for
 		%>
 	</tbody>
+	</table>
 	<%
 	}
 		
