@@ -2,7 +2,7 @@
 <!-- LISTA DE PRECIOS -->
 <ListaPrecios numero="2">
 <Proveedor>
-<Cuil>2</Cuil>
+<Cuil>7211</Cuil>
 <RazonSocial>SantoSRL</RazonSocial>
 </Proveedor>
 <Vigencia>
@@ -28,7 +28,8 @@
 </CondicionesDeVenta>
 <Rodamientos>
 <Item>
-<Codigo>3</Codigo>
+<Codigo>6</Codigo>
+<Sufijo>MN</Sufijo>
 <Marca>SDK</Marca>
 <Origen>Suiza</Origen>
 <Tipo>Rodillo</Tipo>
@@ -38,7 +39,8 @@
 <Cantidad>100</Cantidad>
 </Item>
 <Item>
-<Codigo>4</Codigo>
+<Codigo>7</Codigo>
+<Sufijo>MN</Sufijo>
 <Marca>HMX</Marca>
 <Origen>Holanda</Origen>
 <Tipo>Bolilla</Tipo>
@@ -48,7 +50,8 @@
 <Cantidad>100</Cantidad>
 </Item>
 <Item>
-<Codigo>6</Codigo>
+<Codigo>8</Codigo>
+<Sufijo>MN</Sufijo>
 <Marca>NTN</Marca>
 <Origen>China</Origen>
 <Tipo>Tuerca</Tipo>
