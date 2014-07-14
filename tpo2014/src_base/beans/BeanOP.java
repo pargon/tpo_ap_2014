@@ -1,9 +1,14 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BeanOP {
+public class BeanOP implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private int clienteID;
 	private String razonSocial;

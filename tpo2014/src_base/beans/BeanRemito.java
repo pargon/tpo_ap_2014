@@ -1,9 +1,14 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BeanRemito {
+public class BeanRemito implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private int clienteID;
 	private String razonSocial;
