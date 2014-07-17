@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SOLICITUD DE COTIZACION -->
+<SolicitudCotizacion numero="3" fecha="10/07/2014">
+<Cliente>
+<Cuil>20-3478234-9</Cuil>
+<RazonSocial>TIMQUEN SA</RazonSocial>
+</Cliente>
+<Rodamientos>
+<Item>
+<Codigo>1</Codigo>
+<Marca>SDK</Marca>
+<Origen>Suecia</Origen>
+<Cantidad>4</Cantidad>
+</Item>
+<Item>
+<Codigo>7</Codigo>
+<Marca>HMX</Marca>
+<Origen>Holanda</Origen>
+<Cantidad>9</Cantidad>
+</Item>
+<Item>
+<Codigo>2</Codigo>
+<Marca>Bones</Marca>
+<Origen>Escocia</Origen>
+<Cantidad>5</Cantidad>
+</Item>
+</Rodamientos>
+</SolicitudCotizacion>

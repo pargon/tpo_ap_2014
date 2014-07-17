@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SOLICITUD DE COTIZACION -->
+<SolicitudCotizacion numero="8" fecha="12/07/2014">
+<Cliente>
+<Cuil>23-982986-9</Cuil>
+<RazonSocial>UPTI SA</RazonSocial>
+</Cliente>
+<Rodamientos>
+<Item>
+<Codigo>4</Codigo>
+<Sufijo>MN</Sufijo>
+<Marca>NTN</Marca>
+<Origen>China</Origen>
+<Cantidad>9</Cantidad>
+</Item>
+<Item>
+<Codigo>11</Codigo>
+<Sufijo>MN</Sufijo>
+<Marca>GRTN</Marca>
+<Origen>Marruecos</Origen>
+<Cantidad>7</Cantidad>
+</Item>
+<Item>
+<Codigo>2</Codigo>
+<Sufijo>MN</Sufijo>
+<Marca>Bones</Marca>
+<Origen>Escocia</Origen>
+<Cantidad>6</Cantidad>
+</Item>
+</Rodamientos>
+</SolicitudCotizacion>
